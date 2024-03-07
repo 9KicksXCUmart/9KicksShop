@@ -75,7 +75,10 @@ const config = {
 					900: '#c0f6f8'
 				},
 				fgray: {
-					DEFAULT: '#C1BDC7'
+					DEFAULT: '#F1F4F0',
+					100: '#203329',
+					200: '#283f34',
+					300: '#C1BDC7'
 				},
 				beige: {
 					DEFAULT: '#FFFFE8',
