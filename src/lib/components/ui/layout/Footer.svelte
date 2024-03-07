@@ -25,10 +25,7 @@
 			<div class="flex space-x-4">
 				<!-- <a href="#" class="text-neutral-800 hover:text-neutral-300"><i class="fab fa-facebook"></i></a>
 		  <a href="#" class="text-neutral-800 hover:text-neutral-300"><i class="fab fa-twitter"></i></a> -->
-				<a
-					href="https://www.instagram.com/sediment.art"
-					class="text-neutral-800 hover:text-neutral-300"
-				>
+				<a href="https://www.instagram.com" class="text-neutral-800 hover:text-neutral-300">
 					<Instagram class="w-4 h-4" />
 				</a>
 			</div>
