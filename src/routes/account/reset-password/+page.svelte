@@ -9,7 +9,7 @@
 	<div class="flex justify-start">
 		<div class="text-3xl font-bold">Reset Password</div>
 	</div>
-	<div class="mt-4">
+	<div class="flex justify-center mt-4 w-full">
 		<ResetForm data={data.form} />
 	</div>
 </div>

@@ -14,7 +14,7 @@
 	const { form: formData, enhance } = form;
 </script>
 
-<form class="max-w-xl" method="POST" use:enhance>
+<form class="max-w-lg w-full" method="POST" use:enhance>
 	<div class="flex flex-col gap-4">
 		<Form.Field {form} name="password">
 			<Form.Control let:attrs>
