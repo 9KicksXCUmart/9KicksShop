@@ -47,6 +47,6 @@
 		</Form.Field>
 	</div>
 	<div class="max-w-xl my-4 sm:flex sm:justify-end">
-		<Form.Button class="w-full sm:w-auto">Continue</Form.Button>
+		<Form.Button href="/account/create/almost-done" class="w-full sm:w-auto">Continue</Form.Button>
 	</div>
 </form>
