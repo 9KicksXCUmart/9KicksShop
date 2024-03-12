@@ -5,20 +5,17 @@
 	import SignInDialog from './account-dialog/SignInDialog.svelte';
 
 	let SignInOpen = false;
-	const close = () => {
-		SignInOpen = false;
-	};
 </script>
 
 <!-- Top NavBar -->
 <nav class="flex justify-center bg-fgray">
-	<div class="flex items-center justify-between font-roboto px-2 py-3 max-w-[1500px] w-full">
+	<div class="flex items-center justify-between px-2 py-3 max-w-[1500px] w-full">
 		<a href="/"
-			><img src={Logo} alt="9Kicks" class="h-[50px] hidden sm:flex" /><img
-				src={MobileLogo}
+			><img
+				src={Logo}
 				alt="9Kicks"
-				class="h-[30px] sm:hidden flex"
-			/></a
+				class="h-[73px] w-[214px] min-h-[73px] min-w-[214px] hidden sm:flex"
+			/><img src={MobileLogo} alt="9Kicks" class="h-[30px] sm:hidden flex" /></a
 		>
 
 		<form class="w-full ml-8 mr-5">
