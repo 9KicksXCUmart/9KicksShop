@@ -16,9 +16,9 @@
 	</div>
 	<!-- ShoppingCartItem/CartInfo -->
 	<div class="flex flex-col w-[370px] space-y-[16px]">
-		<div class="flex flex-row w-[260px] place-content-between">
+		<div class="flex flex-row w-[304px] place-content-between">
 			<div class="flex flex-col space-y-[8px]">
-				<span class="text-xl font-bold"> {productName} </span>
+				<span class="max-w-[200px] text-xl font-bold whitespace-nowrap truncate"> {productName} </span>
 				<span class="text-lg"> {gender} </span>
 			</div>
 			<span class="text-lg">US${price}</span>
