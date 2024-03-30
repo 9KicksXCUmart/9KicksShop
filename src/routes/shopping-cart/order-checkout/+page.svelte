@@ -10,16 +10,16 @@
 <div class="flex flex-col items-center w-full h-full">
 	<!-- 1920x1080 Container -->
 	<div class="flex flex-col items-center w-[1920px] h-fit">
-		<TextBanner text="Order Checkout"/>
+		<TextBanner text="Order Checkout" />
 		<!-- Return to Previous Page-->
 		<div class="flex w-full h-fit px-[17%]">
 			<div class="flex flex-row justify-start w-full -py-[30px]">
-				<LeftArrowButton
-					text="Previous Page"
-				/>
+				<LeftArrowButton text="Previous Page" />
 			</div>
 		</div>
-		<div class="flex flex-row justify-between items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]">
+		<div
+			class="flex flex-row justify-between items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]"
+		>
 			<!-- Checkout Info Panel -->
 			<div class="flex flex-col space-y-[15px] w-[60%] h-fit">
 				<div class="flex flex-col space-y-[20px] w-full">
@@ -33,7 +33,7 @@
 						longColumnName="Email Address*"
 						longColumnPrefilled="1155123456@link.cuhk.edu.hk"
 					/>
-					<hr>
+					<hr />
 
 					<!-- Shipping Information -->
 					<InputPanel
@@ -45,7 +45,7 @@
 						longColumnName="Street Address*"
 						longColumnPrefilled="The Chinese University of Hong Kong"
 					/>
-					<hr>
+					<hr />
 
 					<!-- Payment Information -->
 					<div class="flex flex-col space-y-[15px]">
@@ -53,27 +53,30 @@
 						<!-- Card Number -->
 						<div class="flex flex-col space-y-[10px]">
 							<span class="text-lg font-semibold"> Card Number* </span>
-							<Input class="w-[600px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="1234 4567 7890 1234"/>
+							<Input
+								class="w-[600px] h-[35px] text-lg bg-[#f8fbf6]"
+								placeholder="1234 4567 7890 1234"
+							/>
 						</div>
 						<div class="flex flex-row space-x-[60px]">
 							<!-- Expiry Month -->
 							<div class="flex flex-col space-y-[10px]">
 								<span class="text-lg font-semibold"> Expiry Month* </span>
-								<Input class="w-[80px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="MM"/>
+								<Input class="w-[80px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="MM" />
 							</div>
 							<!-- Expiry Year -->
 							<div class="flex flex-col space-y-[10px]">
 								<span class="text-lg font-semibold"> Expiry Year* </span>
-								<Input class="w-[80px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="YY"/>
+								<Input class="w-[80px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="YY" />
 							</div>
 							<!-- CVV -->
 							<div class="flex flex-col space-y-[10px]">
 								<span class="text-lg font-semibold"> CVV* </span>
-								<Input class="w-[100px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="CVV"/>
+								<Input class="w-[100px] h-[35px] text-lg bg-[#f8fbf6]" placeholder="CVV" />
 							</div>
 						</div>
 					</div>
-					<hr>
+					<hr />
 
 					<!-- Delivery Option -->
 					<div class="flex flex-col space-y-[15px]">
@@ -99,10 +102,11 @@
 				</div>
 			</div>
 			<!-- Summary -->
-			<SummaryPanel buttonText="Confirm" />	
+			<SummaryPanel buttonText="Confirm" />
 		</div>
 	</div>
 </div>
+
 <style lang="postcss">
 	:global(html) {
 		background-color: theme(colors.white);

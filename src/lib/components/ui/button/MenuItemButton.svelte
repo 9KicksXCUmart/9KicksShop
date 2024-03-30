@@ -4,6 +4,9 @@
 </script>
 
 <!-- MenuItem -->
-<button id={id} class="flex items-center transition duration-150 border-b-4 border-transparent hover:border-black hover:font-semibold px-0px py-10px w-fit">
+<button
+	{id}
+	class="flex items-center transition duration-150 border-b-4 border-transparent hover:border-black hover:font-semibold px-0px py-10px w-fit"
+>
 	{text}
 </button>

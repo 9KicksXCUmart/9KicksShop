@@ -35,7 +35,7 @@
 						<span class="text-lg text-[#7d7d7d]"> $345 </span>
 					</div>
 				</div>
-				<hr>
+				<hr />
 				<OrderItem
 					productImage={ProductImage}
 					productName="Nike Dunk Low B/W"
@@ -44,7 +44,7 @@
 					size="US 10"
 					quantity="1"
 				/>
-				<hr>
+				<hr />
 				<OrderItem
 					productImage={ProductImage}
 					productName="Nike Dunk Low B/W"
@@ -56,13 +56,12 @@
 			</div>
 			<!-- Return to Home Page-->
 			<div class="flex flex-row place-content-center w-full py-[20px]">
-				<RightArrowButton
-					text="Home Page"
-				/>
+				<RightArrowButton text="Home Page" />
 			</div>
 		</div>
 	</div>
 </div>
+
 <style lang="postcss">
 	:global(html) {
 		background-color: theme(colors.white);
