@@ -5,6 +5,7 @@
 	export let itemCount;
 	export let shippingFee;
 	export let totalPrice;
+	export let buttonText='Checkout';
 </script>
 
 
@@ -31,7 +32,7 @@
 		<span class="text-lg"> US${totalPrice} </span>
 	</div>
 	<div class="flex flex-row w-full place-content-center py-[20px]">
-		<RightArrowButton text="Checkout" scale="0.85"/>
+		<RightArrowButton text={buttonText} scale="0.85"/>
 	</div>
 
 </div>
