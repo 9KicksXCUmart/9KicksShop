@@ -5,13 +5,13 @@
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
 </script>
 
-<div class="flex flex-col items-center w-full h-fit">
+<div class="flex flex-col items-center w-full h-full">
 	<!-- 1920x1080 Container -->
 	<div class="flex flex-col items-center w-[1920px] h-fit">
 		<TextBanner text="Shopping Cart"/>
 		<div class="flex flex-row justify-between items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]">
 			<!-- Cart Item List -->
-			<div class="flex flex-col space-y-[15px] w-[40%] h-[1300px]">
+			<div class="flex flex-col space-y-[15px] w-[40%] h-screen">
 				<CartItem productName="NIKEFJDNFGKLJFHBGVSDFJKSFJKVBFDVS" productImage={ProductImage}/>
 
 				<CartItem productImage={ProductImage}/>
