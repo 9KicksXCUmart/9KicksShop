@@ -5,12 +5,21 @@
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
 	import OrderItem from '$lib/components/ui/order/OrderItem.svelte';
 	import RightArrowButton from '$lib/components/ui/button/RightArrowButton.svelte';
+	import LeftArrowButton from '$lib/components/ui/button/LeftArrowButton.svelte';
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
 	<!-- 1920x1080 Container -->
 	<div class="flex flex-col items-center w-[1920px] h-fit">
 		<TextBanner text="Order Checkout"/>
+		<!-- Return to Previous Page-->
+		<div class="flex w-full h-fit px-[17%]">
+			<div class="flex flex-row justify-start w-full -py-[30px]">
+				<LeftArrowButton
+					text="Previous Page"
+				/>
+			</div>
+		</div>
 		<div class="flex flex-col w-full h-fit px-[17%] py-[1%] space-y-[30px]">
 			<!-- Delivery Information -->
 			<div class="flex flex-col justify-start w-full p-[20px] space-y-[15px] bg-[#f8fbf6]">

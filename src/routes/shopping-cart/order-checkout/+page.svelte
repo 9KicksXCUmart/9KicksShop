@@ -4,12 +4,21 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import InputPanel from '$lib/components/ui/input/InputPanel_2S1L.svelte';
 	import DeliveryOptionButton from '$lib/components/ui/button/DeliveryOptionButton.svelte';
+	import LeftArrowButton from '$lib/components/ui/button/LeftArrowButton.svelte';
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
 	<!-- 1920x1080 Container -->
 	<div class="flex flex-col items-center w-[1920px] h-fit">
 		<TextBanner text="Order Checkout"/>
+		<!-- Return to Previous Page-->
+		<div class="flex w-full h-fit px-[17%]">
+			<div class="flex flex-row justify-start w-full -py-[30px]">
+				<LeftArrowButton
+					text="Previous Page"
+				/>
+			</div>
+		</div>
 		<div class="flex flex-row justify-between items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]">
 			<!-- Checkout Info Panel -->
 			<div class="flex flex-col space-y-[15px] w-[60%] h-fit">
