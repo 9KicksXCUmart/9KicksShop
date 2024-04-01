@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 	export let productImage: string;
 	export let productName: string;
 	export let productCategory: string;
@@ -6,6 +8,10 @@
 	export let size: string;
 	export let quantity: number;
 	export let id: string;
+
+	const handleClick = () => {
+		dispatch('deleteCartItem', { itemId: id });
+	};
 </script>
 
 <!-- ShoppingCartItem -->
@@ -41,7 +47,7 @@
 		</div>
 	</div>
 	<!-- ShoppingCartItem/DeleteItemButton-->
-	<button class="absolute top-[19px] right-[20px]">
+	<button class="absolute top-[19px] right-[20px]" on:click={handleClick}>
 		<svg
 			class="hover:stroke-[#6d7d7d]"
 			xmlns="http://www.w3.org/2000/svg"

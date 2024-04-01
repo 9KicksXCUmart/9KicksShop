@@ -1,10 +1,14 @@
 <script lang="ts">
-	import ProductImage from '$lib/client/images/dunklow_bw_preview.png';
+	// disable client side rendering
+	export const csr = false;
+	// server side rendering
+	export const ssr = true;
+
 	import TextBanner from '$lib/components/ui/banner/PageHeader.svelte';
 	import CartItem from '$lib/components/ui/shopping-cart/CartItem.svelte';
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
 	import { onMount } from 'svelte';
-
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	interface shoppingCartItemDetail {
 		shoppingCartItemDetail: {
 			imageUrl: string;
@@ -26,7 +30,7 @@
 
 	async function getShoppingCartItems() {
 		const response = await fetch(
-			'http://localhost:8080/api/v1/shopping-cart?' +
+			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart?` +
 				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
 			{
 				method: 'GET',
@@ -39,7 +43,7 @@
 
 	async function getOrderSummary() {
 		const response = await fetch(
-			'http://localhost:8080/api/v1/payment/order-summary?' +
+			`${PUBLIC_BACKEND_URL}/api/v1/payment/order-summary?` +
 				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
 			{
 				method: 'GET',
@@ -48,6 +52,22 @@
 		);
 		const result = await response.json();
 		return result.data;
+	}
+
+	async function deleteCartItem(e: CustomEvent<{ itemId: string }>) {
+		const response = await fetch(
+			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart/delete?` +
+				new URLSearchParams({
+					userId: '120499e3-fdfd-440c-1204-bdcd954f4891',
+					itemId: e.detail.itemId
+				}).toString(),
+			{
+				method: 'PATCH',
+				headers: { 'Content-Type': 'application/json' }
+			}
+		);
+		orderSummaryData = await getOrderSummary();
+		itemDatas = await getShoppingCartItems();
 	}
 </script>
 
@@ -61,6 +81,7 @@
 			<div class="flex flex-col space-y-[15px] w-[40%] h-[1300px]">
 				{#each Object.entries(itemDatas) as [id, itemDetail]}
 					<CartItem
+						on:deleteCartItem={deleteCartItem}
 						productImage={itemDetail.imageUrl}
 						price={itemDetail.price}
 						productName={itemDetail.productName}

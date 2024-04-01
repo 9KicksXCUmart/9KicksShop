@@ -22,8 +22,10 @@
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
 		<span class="text-xl font-bold"> Shipping </span>
-		{#if shippingFee}
+		{#if shippingFee != 0}
 			<span class="text-lg"> {shippingFee} </span>
+		{:else if !shippingFee}
+			<span class="text-lg">0</span>
 		{:else}
 			<span class="text-lg">TBC</span>
 		{/if}
