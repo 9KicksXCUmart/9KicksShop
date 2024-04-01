@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
 	import RightArrowButton from '$lib/components/ui/button/RightArrowButton.svelte';
-	export let id;
-	export let totalItemPrice;
-	export let itemCount;
-	export let shippingFee;
-	export let totalPrice;
-	export let buttonText = 'Checkout';
+	export let totalItemPrice: number;
+	export let itemCount: number;
+	export let shippingFee: number;
+	export let totalPrice: number;
+	export let discount: number;
 </script>
 
 <!-- ShoppingCartSummary -->
-<div {id} class="relative flex flex-col w-[411px] h-fit p-[20px] space-y-[15px] bg-[#f8fbf6]">
+<div class="relative flex flex-col w-[411px] h-fit p-[20px] space-y-[15px] bg-[#f8fbf6]">
+
 	<div class="flex pb-[10px]">
 		<span class="text-3xl font-extrabold"> Order Summary </span>
 	</div>
@@ -23,7 +23,19 @@
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
 		<span class="text-xl font-bold"> Shipping </span>
-		<span class="text-lg"> {shippingFee} </span>
+		{#if shippingFee != 0}
+			<span class="text-lg"> {shippingFee} </span>
+		{:else if !shippingFee}
+			<span class="text-lg">0</span>
+		{:else}
+			<span class="text-lg">TBC</span>
+		{/if}
+	</div>
+	<hr />
+	<div class="flex flex-row w-full place-content-between">
+		<span class="text-xl font-bold"> Discount </span>
+		<span class="text-lg"> {discount} </span>
+
 	</div>
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
@@ -31,6 +43,7 @@
 		<span class="text-lg"> US${totalPrice} </span>
 	</div>
 	<div class="flex flex-row w-full place-content-center py-[20px]">
-		<RightArrowButton text={buttonText} scale="0.85" />
+		<RightArrowButton text="Checkout" scale="0.85" />
+
 	</div>
 </div>
