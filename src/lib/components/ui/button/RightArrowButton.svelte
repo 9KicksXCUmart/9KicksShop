@@ -1,5 +1,6 @@
 <script>
-	export let text = 'undefined';
+	export let text = '';
+
 	export let id = 'undefined';
 	export let scale = '1';
 

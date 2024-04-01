@@ -2,7 +2,6 @@
 	export let text = 'undefined';
 	export let id = 'undefined';
 	export let scale = '1';
-
 	let styling = `transform: scale(${scale})`;
 </script>
 

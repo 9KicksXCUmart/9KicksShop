@@ -1,11 +1,17 @@
-<script>
-	export let productImage;
-	export let productName;
-	export let gender;
-	export let price;
-	export let size;
-	export let quantity;
-	export let id;
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+	export let productImage: string;
+	export let productName: string;
+	export let productCategory: string;
+	export let price: number;
+	export let size: string;
+	export let quantity: number;
+	export let id: string;
+
+	const handleClick = () => {
+		dispatch('deleteCartItem', { itemId: id });
+	};
 </script>
 
 <!-- ShoppingCartItem -->
@@ -24,7 +30,7 @@
 				<span class="max-w-[200px] text-xl font-bold whitespace-nowrap truncate">
 					{productName}
 				</span>
-				<span class="text-lg"> {gender} </span>
+				<span class="text-lg"> {productCategory} </span>
 			</div>
 			<span class="text-lg">US${price}</span>
 		</div>
@@ -41,7 +47,7 @@
 		</div>
 	</div>
 	<!-- ShoppingCartItem/DeleteItemButton-->
-	<button class="absolute top-[19px] right-[20px]">
+	<button class="absolute top-[19px] right-[20px]" on:click={handleClick}>
 		<svg
 			class="hover:stroke-[#6d7d7d]"
 			xmlns="http://www.w3.org/2000/svg"
