@@ -9,7 +9,6 @@
 
 <!-- ShoppingCartSummary -->
 <div class="relative flex flex-col w-[411px] h-fit p-[20px] space-y-[15px] bg-[#f8fbf6]">
-
 	<div class="flex pb-[10px]">
 		<span class="text-3xl font-extrabold"> Order Summary </span>
 	</div>
@@ -35,7 +34,6 @@
 	<div class="flex flex-row w-full place-content-between">
 		<span class="text-xl font-bold"> Discount </span>
 		<span class="text-lg"> {discount} </span>
-
 	</div>
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
@@ -44,6 +42,5 @@
 	</div>
 	<div class="flex flex-row w-full place-content-center py-[20px]">
 		<RightArrowButton text="Checkout" scale="0.85" />
-
 	</div>
 </div>
