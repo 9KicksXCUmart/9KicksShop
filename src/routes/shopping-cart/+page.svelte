@@ -101,7 +101,6 @@
 					discount={orderSummaryData.discount}
 				/>
 			{/if}
-
 		</div>
 	</div>
 </div>

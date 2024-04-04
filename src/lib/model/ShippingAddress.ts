@@ -1,4 +1,4 @@
 export type ShippingAddress = {
-    streetAddress: string,
-    district: string
-}
+	streetAddress: string;
+	district: string;
+};

@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	const orderId = $page.params.orderId;
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import type { OrderDetail } from '$lib/model/OrderDetail';
 	import SummaryCard from '$lib/components/ui/account-summary/SummaryCard.svelte';
 	import OrderProductList from '$lib/components/ui/account-summary/OrderProductList.svelte';
-
+	import { Circle } from 'svelte-loading-spinners';
+	
+	const orderId: string = $page.params.orderId;
 	export let data: PageData;
 
-	data.jwtToken =
-		'';
+	// data.jwtToken =
+	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTIyMzEwMzAsImVtYWlsIjoibG9jb2xpbjk5QGdtYWlsLmNvbSIsInVzZXJJRCI6ImM3YWNlNDdhLWFkZjktNDE4Mi05YWRmLTk0YTI0YWE0YjRkYyJ9.kIKEqeC6T579RwDcBYXsHZoEFfwA4UEjbhL0HBfCPTI';
 
 	let orderDetails: OrderDetail;
 
@@ -51,8 +52,7 @@
 				headers: {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${data.jwtToken}`
-				},
-				credentials: 'include'
+				}
 			}
 		);
 		const result = await response.json();
@@ -78,16 +78,18 @@
 		<div class="flex flex-col justify-center items-center gap-5 flex-grow self-stretch mb-5">
 			{#if orderDetails}
 				<SummaryCard
+					isLoading={false}
 					isEditable={false}
 					cardTitle=""
 					cardItemMap={new Map([
-						['Order No.', orderDetails.orderId.replace("ORDER", "")],
-						['Order Date', orderDetails.orderDate.replace("T", " ")],
+						['Order No.', orderDetails.orderId.replace('ORDER', '')],
+						['Order Date', orderDetails.orderDate.replace('T', ' ')],
 						['Delivery Status', orderDetails.deliveryStatus],
 						['Total Price', orderDetails.totalPrice]
 					])}
 				/>
 				<SummaryCard
+					isLoading={false}
 					isEditable={false}
 					cardTitle="Delivery Info"
 					cardItemMap={new Map([
@@ -96,9 +98,10 @@
 					])}
 				/>
 				<!-- <OrderProductList products={orderDetails.orderItemDetail} /> -->
-                {/if}
-
 				<OrderProductList products={testingProductDetail} />
+			{:else}
+				<Circle size="40" color="#d2e8c3" unit="px" duration="1s" />
+			{/if}
 		</div>
 	</div>
 </div>

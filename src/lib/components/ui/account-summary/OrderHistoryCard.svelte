@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
 	export let cardTitle: string;
 	export let subTitleList: string[];
 	export let orderList: any;
-    
-    function handleClick(orderId: string){
-        dispatch('routeToOrderDetail',{
-            orderId: orderId.replace("ORDER#", ''),
-            replaceState: false
-        })
-    }
+
+	function handleClick(orderId: string) {
+		dispatch('routeToOrderDetail', {
+			orderId: orderId.replace('ORDER#', ''),
+			replaceState: false
+		});
+	}
 </script>
 
 <div class="flex p-5 flex-col items-start gap-4 self-stretch bg-[#f8fbf6]">
@@ -30,14 +30,17 @@
 		<div class="flex flex-col items-start gap-0.5">
 			{#each orderList as orderItem}
 				<div class="flex flex-row gap-5 items-baseline">
-					<div on:click={() => handleClick(orderItem.orderId)} class="text-xs w-[16.5rem] inline-block">
+					<button
+						on:click={() => handleClick(orderItem.orderId)}
+						class="text-xs w-[16.5rem] inline-block"
+					>
 						<div class="w-max group text-sky-600 transition duration-300 cursor-pointer">
 							{orderItem.orderId.replace('ORDER#', '')}
 							<span
 								class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"
 							></span>
 						</div>
-					</div>
+					</button>
 					<div class="text-lg w-[16.5rem]">{orderItem.orderDate.replace('T', ' ')}</div>
 					<div class="text-lg w-[16.5rem]">{orderItem.orderStatus}</div>
 					<div class="text-lg w-[16.5rem]">{orderItem.totalPrice}</div>

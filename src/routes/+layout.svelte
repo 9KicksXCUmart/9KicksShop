@@ -5,7 +5,9 @@
 	import '../app.css';
 </script>
 
-<UpperNavBar />
-<LowerNavBar />
-<slot />
+<div class="min-h-screen">
+	<UpperNavBar />
+	<LowerNavBar />
+	<slot />
+</div>
 <Footer />
