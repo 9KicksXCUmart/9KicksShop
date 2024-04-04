@@ -1,22 +1,26 @@
 <script lang="ts">
-	import type { K, V } from 'vitest/dist/reporters-MmQN-57K.js';
-
+	import EditButton from '../button/EditButton.svelte';
 	export let cardTitle: string;
-	export let cardItemMap: Map<string, string>;
+	export let cardItemMap: Map<string, any>;
+	export let isEditable: boolean;
 </script>
 
-<div class="relative flex flex-row items-center w-[775px] px-[17px] space-x-[75px] bg-[#f8fbf6] my-[10px]">
-	<div class="flex flex-col w-[370px] space-y-[16px]">
-		<span class="max-w-[200px] text-xl font-bold whitespace-nowrap truncate">{cardTitle}</span>
-		<div class="flex flex-col space-y-[8px] py-[8px]">
-			<div class="flex flex-row space-x-[25px]">
-				{#each cardItemMap as [key, value]}
-					<div>
-						<div class="text-lg">{key}</div>
-						<div class="text-lg">{value}</div>
-					</div>
-				{/each}
-			</div>
+<div class="flex p-5 flex-col items-start gap-4 self-stretch bg-[#f8fbf6]">
+	{#if cardTitle !== ''}
+		<div class="flex w-[279px] py-1.5 items-center gap-2 items-baseline">
+			<span class="max-w-[200px] text-xl font-bold whitespace-nowrap truncate">{cardTitle}</span>
+			{#if isEditable}
+				<EditButton />
+			{/if}
 		</div>
+	{/if}
+
+	<div class="flex items-start gap-5">
+		{#each cardItemMap as [key, value]}
+			<div class="flex w-[16.5rem] flex-col justify-center items-start gap-0.5">
+				<div class="text-base text-[#7D7D7D]">{key}</div>
+				<div class="text-lg">{value}</div>
+			</div>
+		{/each}
 	</div>
 </div>
