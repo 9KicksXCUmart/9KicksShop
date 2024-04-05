@@ -6,10 +6,7 @@
 	import PreviewItemCarousel from '$lib/components/ui/product/PreviewItemCarousel.svelte';
 	import ProductImage from '$lib/client/images/dunklow_bw_preview.png';
 
-	const images = [
-		MainBannerImage1,
-		MainBannerImage2
-	];
+	const images = [MainBannerImage1, MainBannerImage2];
 
 	const products = Array(10).fill({
 		productImage: ProductImage,
@@ -20,35 +17,23 @@
 		ratingCount: '84',
 		scale: '0.97'
 	});
-
 </script>
 
 <div class="flex flex-col items-center w-full h-full">
 	<!-- 1920x1080 Container -->
 	<div class="flex flex-col items-center w-[1920px] h-fit">
-		<ImageBannerCarousel
-			id="BannerCarousel"
-			bannerImages={images}
-		/>
-		<SectionHeader
-			text="New Arrivals"
-		/>
+		<ImageBannerCarousel id="BannerCarousel" bannerImages={images} />
+		<SectionHeader text="New Arrivals" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[20px]">
-			<PreviewItemCarousel
-				products={products}
-			/>
+			<PreviewItemCarousel {products} />
 		</div>
 		<!-- Subsection Image Banner -->
 		<div class="w-full h-[472px] overflow-hidden py-[20px]">
-			<img src={MainBannerImage2} alt="Banner" align="center" class="-mt-[120px]">
+			<img src={MainBannerImage2} alt="Banner" align="center" class="-mt-[120px]" />
 		</div>
-		<SectionHeader
-			text="Most Popular"
-		/>
+		<SectionHeader text="Most Popular" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[50px]">
-			<PreviewItemCarousel 
-				products={products}
-			/>
+			<PreviewItemCarousel {products} />
 		</div>
 	</div>
 </div>
