@@ -45,7 +45,7 @@
 		<SectionHeader
 			text="Most Popular"
 		/>
-		<div class="flex flex-col items-center w-full px-[17%] pb-[20px]">
+		<div class="flex flex-col items-center w-full px-[17%] pb-[50px]">
 			<PreviewItemCarousel 
 				products={products}
 			/>

@@ -7,7 +7,7 @@
 </script>
 
 <!-- Main Banner -->
-<div id={id} class="flex items-center w-full h-[486px]">
+<div id={id} class="flex items-center w-full h-[500px]">
 	{#if browser}
 		<Carousel
 			arrows={false}
@@ -18,7 +18,7 @@
 		>
 			<!-- Carousel Items -->
 			{#each bannerImages as url}
-				<div class="w-full h-[486px] overflow-hidden">
+				<div class="w-full h-[500px] overflow-hidden">
 					<img src={url} alt={url} align="center"/>
 				</div>
 			{/each}

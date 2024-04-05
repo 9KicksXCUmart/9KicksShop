@@ -14,7 +14,7 @@
 <!-- Product Preview Item-->
 <div id={id} class="flex flex-col" style={styling}>
 	<!-- Product Image -->
-	<div class="flex flex-col place-items-center h-[200px] w-[210px] bg-[#ffffff]">
+	<div class="flex flex-col place-content-center h-[200px] w-[210px] bg-[#ffffff]">
 		<img src={productImage} alt="Dunk Low">
 	</div>
 	<div class="flex flex-col place-items-start space-y-[6px] pt-[8px] pb-[20px] px-[10px] bg-[#f8fbf6]">
