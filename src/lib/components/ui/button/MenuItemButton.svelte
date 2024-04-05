@@ -1,6 +1,6 @@
 <script>
 	export let id='undefined';
-	export let text='undefined':
+	export let text='undefined';
 </script>
 
 <!-- MenuItem -->
