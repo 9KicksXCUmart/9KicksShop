@@ -3,10 +3,13 @@
 	import ProductPreviewItem from '$lib/components/ui/product/PreviewItem.svelte';
 	import Carousel from 'svelte-carousel';
 	import { browser } from '$app/environment';
+	
+	export let id='undefined';
+	export let products;
 </script>
 
 <!-- Product Preview Carousel -->
-<div id="assburger" class="flex items-center w-full">
+<div id={id} class="flex items-center w-full">
 	{#if browser}
 		<Carousel
 			particlesToShow={5}
@@ -16,51 +19,25 @@
 			<div slot="dots" class="custom-dots"></div>
 
 			<!-- Carousel Items -->
-			<ProductPreviewItem
-				productImage={ProductImage}
-				productName="Dunk Low B/W 1"
-				gender="Men's"
-				price="US$115"
-				rating=4
-				ratingCount="84"
-				scale="0.97"
-			/>
-			<ProductPreviewItem
-				productImage={ProductImage}
-				productName="Dunk Low B/W 2"
-				gender="Men's"
-				price="US$115"
-				rating=4
-				ratingCount="84"
-				scale="0.97"
-			/>
-			<ProductPreviewItem
-				productImage={ProductImage}
-				productName="Dunk Low B/W 3"
-				gender="Men's"
-				price="US$115"
-				rating=4
-				ratingCount="84"
-				scale="0.97"
-			/>
-			<ProductPreviewItem
-				productImage={ProductImage}
-				productName="Dunk Low B/W 4"
-				gender="Men's"
-				price="US$115"
-				rating=4
-				ratingCount="84"
-				scale="0.97"
-			/>					
-			<ProductPreviewItem
-				productImage={ProductImage}
-				productName="Dunk Low B/W 5"
-				gender="Men's"
-				price="US$115"
-				rating=4
-				ratingCount="84"
-				scale="0.97"
-			/>
+			{#each products as {
+				productImage,
+				productName,
+				gender,
+				price,
+				rating,
+				ratingCount,
+				scale
+			}}
+				<ProductPreviewItem
+					productImage={productImage}
+					productName={productName}
+					gender={gender}
+					price={price}
+					rating={rating}
+					ratingCount={ratingCount}
+					scale={scale}
+				/>
+			{/each}
 		</Carousel>
 	{/if}
 </div>
