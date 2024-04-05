@@ -3,13 +3,11 @@
 	import { browser } from '$app/environment';
 
 	export let id='undefined';
-	export let bannerImage1;
-	export let bannerImage2;
-
+	export let bannerImages;
 </script>
 
 <!-- Main Banner -->
-<div id={id} class="flex items-center w-full h-fit">
+<div id={id} class="flex items-center w-full h-[486px]">
 	{#if browser}
 		<Carousel
 			arrows={false}
@@ -19,12 +17,12 @@
 			autoplayProgressVisible
 		>
 			<!-- Carousel Items -->
-			<div class="w-full overflow-hidden">
-				<img src={bannerImage1} alt="Product" align="center"/>
-			</div>
-			<div class="w-full overflow-hidden">
-				<img src={bannerImage2} alt="Product" align="center">
-			</div>
+			{#each bannerImages as url}
+				<div class="w-full h-[486px] overflow-hidden">
+					<img src={url} alt={url} align="center"/>
+				</div>
+			{/each}
+
 		</Carousel>
 	{/if}
 </div>

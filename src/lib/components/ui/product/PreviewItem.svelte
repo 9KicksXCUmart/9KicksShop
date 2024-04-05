@@ -6,10 +6,13 @@
 	export let price;
 	export let rating;
 	export let ratingCount;
+	export let scale;
+
+	let styling = `transform:scale(${scale})`; 
 </script>
 
 <!-- Product Preview Item-->
-<div id={id} class="flex flex-col">
+<div id={id} class="flex flex-col" style={styling}>
 	<!-- Product Image -->
 	<div class="flex flex-col place-items-center h-[200px] w-[210px] bg-[#ffffff]">
 		<img src={productImage} alt="Dunk Low">

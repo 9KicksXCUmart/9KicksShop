@@ -23,6 +23,7 @@
 				price="US$115"
 				rating=4
 				ratingCount="84"
+				scale="0.97"
 			/>
 			<ProductPreviewItem
 				productImage={ProductImage}
@@ -31,6 +32,7 @@
 				price="US$115"
 				rating=4
 				ratingCount="84"
+				scale="0.97"
 			/>
 			<ProductPreviewItem
 				productImage={ProductImage}
@@ -39,6 +41,7 @@
 				price="US$115"
 				rating=4
 				ratingCount="84"
+				scale="0.97"
 			/>
 			<ProductPreviewItem
 				productImage={ProductImage}
@@ -47,6 +50,7 @@
 				price="US$115"
 				rating=4
 				ratingCount="84"
+				scale="0.97"
 			/>					
 			<ProductPreviewItem
 				productImage={ProductImage}
@@ -55,6 +59,7 @@
 				price="US$115"
 				rating=4
 				ratingCount="84"
+				scale="0.97"
 			/>
 		</Carousel>
 	{/if}

@@ -1,9 +1,14 @@
 <script>
 	import ImageBannerCarousel from '$lib/components/ui/homepage/ImageBannerCarousel.svelte';
 	import SectionHeader from '$lib/components/ui/banner/SectionHeader.svelte';
-	import MainBannerImage1 from '$lib/client/images/red_jordan_1_banner.webp';
-	import MainBannerImage2 from '$lib/client/images/white_puma_banner.webp';
+	import MainBannerImage1 from '$lib/client/images/reebok_green_shoes_1.jpg';
+	import MainBannerImage2 from '$lib/client/images/reebok_green_shoes_2.jpg';
 	import PreviewItemCarousel from '$lib/components/ui/product/PreviewItemCarousel.svelte';
+
+	const images = [
+		MainBannerImage1,
+		MainBannerImage2
+	];
 </script>
 
 <div class="flex flex-col items-center w-full h-full">
@@ -11,8 +16,7 @@
 	<div class="flex flex-col items-center w-[1920px] h-fit">
 		<ImageBannerCarousel
 			id="BannerCarousel"
-			bannerImage1={MainBannerImage1}
-			bannerImage2={MainBannerImage2}
+			bannerImages={images}
 		/>
 		<SectionHeader
 			text="New Arrivals"
