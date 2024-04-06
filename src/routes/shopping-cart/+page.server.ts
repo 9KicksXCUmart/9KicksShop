@@ -17,17 +17,13 @@ export const load = (async ({ cookies }) => {
 	}
 
 	async function getShoppingCartItems() {
-		const response = await fetch(
-			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart?` +
-				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${jwtToken}`
-				}
+		const response = await fetch(`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${jwtToken}`
 			}
-		);
+		});
 		const result = await response.json();
 		return result.data.shoppingCartItemDetail;
 	}

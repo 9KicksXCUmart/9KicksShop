@@ -99,6 +99,10 @@
 	function onChange(event: any) {
 		deliverOpt = event.detail.value;
 	}
+
+	function handleBackPage() {
+		goto('/shopping-cart');
+	}
 </script>
 
 <div class="flex flex-col items-center w-full h-full">
@@ -108,7 +112,7 @@
 		<!-- Return to Previous Page-->
 		<div class="flex w-full h-fit px-[17%]">
 			<div class="flex flex-row justify-start w-full -py-[30px]">
-				<LeftArrowButton text="Previous Page" />
+				<LeftArrowButton buttonType="Previous Page" on:handleBackPage={handleBackPage} />
 			</div>
 		</div>
 		<div
@@ -120,22 +124,22 @@
 					<!-- Personal Information -->
 					<InputPanel
 						panelName="Personal Information"
-						shortColumnName_1="First Name*"
+						shortColumnName_1="First Name"
 						bind:shortColumnPrefilled_1={firstName}
-						shortColumnName_2="Last Name*"
+						shortColumnName_2="Last Name"
 						bind:shortColumnPrefilled_2={lastName}
-						longColumnName="Email Address*"
+						longColumnName="Email Address"
 						bind:longColumnPrefilled={email}
 					/>
 					<hr />
 					<!-- Shipping Information -->
 					<InputPanel
 						panelName="Shipping Information"
-						shortColumnName_1="Country*"
+						shortColumnName_1="Country"
 						bind:shortColumnPrefilled_1={country}
-						shortColumnName_2="State/District*"
+						shortColumnName_2="State/District"
 						bind:shortColumnPrefilled_2={district}
-						longColumnName="Street Address*"
+						longColumnName="Street Address"
 						bind:longColumnPrefilled={address}
 					/>
 					<hr />

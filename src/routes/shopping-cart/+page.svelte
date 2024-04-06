@@ -30,7 +30,6 @@
 		const response = await fetch(
 			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart/delete?` +
 				new URLSearchParams({
-					// TODO: change userId after integrate with auth
 					itemId: e.detail.itemId
 				}).toString(),
 			{

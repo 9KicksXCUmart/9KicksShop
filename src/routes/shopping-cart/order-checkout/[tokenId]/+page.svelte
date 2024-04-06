@@ -39,10 +39,10 @@
 		};
 		jwtToken: string;
 	}
-	console.log(data);
 	let orderItemDetail: Array<Object> = [];
 	let stripe: any = null;
 	let clientSecret: string = data.paymentDetail.client_secret;
+	let price: number;
 	async function handlePlaceOrder() {
 		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 		const stripeResponse = await stripe.confirmPayment({
@@ -64,6 +64,9 @@
 					productPrice: value.price
 				});
 			}
+			if (data.paymentDetail.line2 === 'Express Delivery')
+				price = data.orderSummaryDetail.totalPrice + 15;
+			else price = data.orderSummaryDetail.totalPrice;
 			const response = await fetch(`${PUBLIC_BACKEND_URL}/api/v1/payment/create-order-record`, {
 				method: 'POST',
 				headers: {
@@ -72,9 +75,9 @@
 				},
 				body: JSON.stringify({
 					orderId: stripeResponse.paymentIntent.id,
-					orderStatus: 'COMPLETED',
+					orderStatus: 'INCOMPLETE',
 					deliveryStatus: 'PENDING',
-					totalPrice: data.orderSummaryDetail.totalPrice,
+					totalPrice: price,
 					orderItemDetail: orderItemDetail,
 					shippingAddress: {
 						streetAddress: data.paymentDetail.line1,
@@ -92,6 +95,10 @@
 			invalidateAll();
 		}
 	}
+
+	function handleBackPage() {
+		goto('/shopping-cart/order-checkout');
+	}
 </script>
 
 <div class="flex flex-col items-center w-full h-full">
@@ -101,7 +108,7 @@
 		<!-- Return to Previous Page-->
 		<div class="flex w-full h-fit px-[17%]">
 			<div class="flex flex-row justify-start w-full -py-[30px]">
-				<LeftArrowButton text="Previous Page" />
+				<LeftArrowButton buttonType="Previous Page" on:handleBackPage={handleBackPage} />
 			</div>
 		</div>
 		<div class="flex flex-col w-full h-fit px-[17%] py-[1%] space-y-[30px]">
