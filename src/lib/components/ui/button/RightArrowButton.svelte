@@ -1,30 +1,114 @@
-<script>
-	export let text = '';
+<script lang="ts">
 
 	export let id = 'undefined';
 	export let scale = '1';
+	export let buttonType: string;
+	import { createEventDispatcher } from 'svelte';
 
 	let styling = `transform: scale(${scale})`;
+
+	const dispatch = createEventDispatcher();
+
+	const handleCheckOut = () => {
+		dispatch('processChcekOut');
+	};
+
+	const handleConfirm = () => {
+		dispatch('createConfirmToken');
+	};
+
+	const handlePlaceOrder = () => {
+		dispatch('handlePlaceOrder');
+	};
+
+	const handleGoHomePage = () => {
+		dispatch('handleGoHomePage');
+	};
 </script>
 
 <!-- RightArrowButton -->
-<button {id}>
-	<div
-		class="w-[200px] h-[60px] group flex flex-row place-content-center items-center px-[5px] transition duration-200 bg-[#ececec] hover:bg-[#a7a6a4] -space-x-[5px] hover:space-x-[5px]"
-		style={styling}
-	>
-		<span class="font-semibold text-lg text-black group-hover:text-white"> {text} </span>
-		<svg
-			class="flex place-items-center group-hover:stroke-white"
-			xmlns="http://www.w3.org/2000/svg"
-			width="40"
-			height="40"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="#000000"
-			stroke-width="1.2"
-			stroke-linecap="square"
-			stroke-linejoin="arcs"><path d="M9 18l6-6-6-6" /></svg
+{#if buttonType === 'checkout'}
+	<button {id} on:click={handleCheckOut}>
+		<div
+			class="w-[200px] h-[60px] group flex flex-row place-content-center items-center px-[5px] transition duration-200 bg-[#ececec] hover:bg-[#a7a6a4] -space-x-[5px] hover:space-x-[5px]"
+			style={styling}
 		>
-	</div>
-</button>
+			<span class="font-semibold text-lg text-black group-hover:text-white"> {buttonType} </span>
+			<svg
+				class="flex place-items-center group-hover:stroke-white"
+				xmlns="http://www.w3.org/2000/svg"
+				width="40"
+				height="40"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="#000000"
+				stroke-width="1.2"
+				stroke-linecap="square"
+				stroke-linejoin="arcs"><path d="M9 18l6-6-6-6" /></svg
+			>
+		</div>
+	</button>
+{:else if buttonType === 'confirm'}
+	<button {id} on:click={handleConfirm}>
+		<div
+			class="w-[200px] h-[60px] group flex flex-row place-content-center items-center px-[5px] transition duration-200 bg-[#ececec] hover:bg-[#a7a6a4] -space-x-[5px] hover:space-x-[5px]"
+			style={styling}
+		>
+			<span class="font-semibold text-lg text-black group-hover:text-white"> {buttonType} </span>
+			<svg
+				class="flex place-items-center group-hover:stroke-white"
+				xmlns="http://www.w3.org/2000/svg"
+				width="40"
+				height="40"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="#000000"
+				stroke-width="1.2"
+				stroke-linecap="square"
+				stroke-linejoin="arcs"><path d="M9 18l6-6-6-6" /></svg
+			>
+		</div>
+	</button>
+{:else if buttonType === 'Place Order'}
+	<button {id} on:click={handlePlaceOrder}>
+		<div
+			class="w-[200px] h-[60px] group flex flex-row place-content-center items-center px-[5px] transition duration-200 bg-[#ececec] hover:bg-[#a7a6a4] -space-x-[5px] hover:space-x-[5px]"
+			style={styling}
+		>
+			<span class="font-semibold text-lg text-black group-hover:text-white"> {buttonType} </span>
+			<svg
+				class="flex place-items-center group-hover:stroke-white"
+				xmlns="http://www.w3.org/2000/svg"
+				width="40"
+				height="40"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="#000000"
+				stroke-width="1.2"
+				stroke-linecap="square"
+				stroke-linejoin="arcs"><path d="M9 18l6-6-6-6" /></svg
+			>
+		</div>
+	</button>
+{:else}
+	<button {id} on:click={handleGoHomePage}>
+		<div
+			class="w-[200px] h-[60px] group flex flex-row place-content-center items-center px-[5px] transition duration-200 bg-[#ececec] hover:bg-[#a7a6a4] -space-x-[5px] hover:space-x-[5px]"
+			style={styling}
+		>
+			<span class="font-semibold text-lg text-black group-hover:text-white"> {buttonType} </span>
+			<svg
+				class="flex place-items-center group-hover:stroke-white"
+				xmlns="http://www.w3.org/2000/svg"
+				width="40"
+				height="40"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="#000000"
+				stroke-width="1.2"
+				stroke-linecap="square"
+				stroke-linejoin="arcs"><path d="M9 18l6-6-6-6" /></svg
+			>
+		</div>
+	</button>
+{/if}

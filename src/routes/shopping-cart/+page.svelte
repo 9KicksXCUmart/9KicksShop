@@ -1,74 +1,51 @@
 <script lang="ts">
-	// disable client side rendering
-	export const csr = false;
-	// server side rendering
-	export const ssr = true;
-
+	export let data: data;
 	import TextBanner from '$lib/components/ui/banner/PageHeader.svelte';
 	import CartItem from '$lib/components/ui/shopping-cart/CartItem.svelte';
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
-	import { onMount } from 'svelte';
-	import { PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
-  
-	interface shoppingCartItemDetail {
-		shoppingCartItemDetail: {
-			imageUrl: string;
-			price: number;
-			productName: string;
-			productCategory: string;
-			productSize: string;
-			productQuantity: number;
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
+	import { goto, invalidateAll } from '$app/navigation';
+	interface data {
+		jwtToken: string;
+		orderSummaryData: {
+			actualPrice: number;
+			itemCount: number;
+			shippingFee: number;
+			totalPrice: number;
+			discount: number;
 		};
-	}
-
-	let itemDatas = {} as shoppingCartItemDetail;
-	let orderSummaryData: any;
-
-	onMount(async () => {
-		orderSummaryData = await getOrderSummary();
-		itemDatas = await getShoppingCartItems();
-	});
-
-	async function getShoppingCartItems() {
-		const response = await fetch(
-			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart?` +
-				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
-			{
-				method: 'GET',
-				headers: { 'Content-Type': 'application/json' }
-			}
-		);
-		const result = await response.json();
-		return result.data.shoppingCartItemDetail;
-	}
-
-	async function getOrderSummary() {
-		const response = await fetch(
-			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/payment/order-summary?` +
-				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
-			{
-				method: 'GET',
-				headers: { 'Content-Type': 'application/json' }
-			}
-		);
-		const result = await response.json();
-		return result.data;
+		itemDatas: {
+			shoppingCartItemDetail: {
+				imageUrl: string;
+				productName: string;
+				productCategory: string;
+				price: number;
+				productSize: string;
+				productQuantity: number;
+			};
+		};
 	}
 
 	async function deleteCartItem(e: CustomEvent<{ itemId: string }>) {
 		const response = await fetch(
-			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/delete?` +
+			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart/delete?` +
 				new URLSearchParams({
-					userId: '120499e3-fdfd-440c-1204-bdcd954f4891',
 					itemId: e.detail.itemId
 				}).toString(),
 			{
 				method: 'PATCH',
-				headers: { 'Content-Type': 'application/json' }
+
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${data.jwtToken}`
+				}
 			}
 		);
-		orderSummaryData = await getOrderSummary();
-		itemDatas = await getShoppingCartItems();
+		invalidateAll();
+	}
+
+	function processChcekOut() {
+		goto('shopping-cart/order-checkout');
 	}
 </script>
 
@@ -78,9 +55,9 @@
 		<div
 			class="flex flex-row justify-between items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]"
 		>
-			<!-- Cart Item List -->
 			<div class="flex flex-col space-y-[15px] w-[40%] h-[1300px]">
-				{#each Object.entries(itemDatas) as [id, itemDetail]}
+				{#each Object.entries(data.itemDatas) as [id, itemDetail]}
+
 					<CartItem
 						on:deleteCartItem={deleteCartItem}
 						productImage={itemDetail.imageUrl}
@@ -93,15 +70,16 @@
 					/>
 				{/each}
 			</div>
-			{#if orderSummaryData}
-				<SummaryPanel
-					totalPrice={orderSummaryData.actualPrice}
-					itemCount={orderSummaryData.itemCount}
-					shippingFee={orderSummaryData.shippingFee}
-					totalItemPrice={orderSummaryData.totalPrice}
-					discount={orderSummaryData.discount}
-				/>
-			{/if}
+			<SummaryPanel
+				totalPrice={data.orderSummaryData.actualPrice}
+				itemCount={data.orderSummaryData.itemCount}
+				shippingFee={data.orderSummaryData.shippingFee}
+				totalItemPrice={data.orderSummaryData.totalPrice}
+				discount={data.orderSummaryData.discount}
+				buttonType="checkout"
+				on:processChcekOut={processChcekOut}
+			/>
+
 		</div>
 	</div>
 </div>
