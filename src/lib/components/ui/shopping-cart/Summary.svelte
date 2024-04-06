@@ -5,6 +5,7 @@
 	export let shippingFee: number;
 	export let totalPrice: number;
 	export let discount: number;
+	export let buttonType: string;
 </script>
 
 <!-- ShoppingCartSummary -->
@@ -23,17 +24,17 @@
 	<div class="flex flex-row w-full place-content-between">
 		<span class="text-xl font-bold"> Shipping </span>
 		{#if shippingFee != 0}
-			<span class="text-lg"> {shippingFee} </span>
+			<span class="text-lg"> US${shippingFee} </span>
 		{:else if !shippingFee}
-			<span class="text-lg">0</span>
+			<span class="text-lg">US$0</span>
 		{:else}
-			<span class="text-lg">TBC</span>
+			<span class="text-lg">US$ TBC</span>
 		{/if}
 	</div>
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
 		<span class="text-xl font-bold"> Discount </span>
-		<span class="text-lg"> {discount} </span>
+		<span class="text-lg"> US${discount} </span>
 	</div>
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
@@ -41,6 +42,10 @@
 		<span class="text-lg"> US${totalPrice} </span>
 	</div>
 	<div class="flex flex-row w-full place-content-center py-[20px]">
-		<RightArrowButton text="Checkout" scale="0.85" />
+		{#if buttonType === 'checkout'}
+			<RightArrowButton {buttonType} scale="0.85" on:processChcekOut />
+		{:else if buttonType === 'confirm'}
+			<RightArrowButton {buttonType} scale="0.85" on:createConfirmToken />
+		{/if}
 	</div>
 </div>

@@ -79,7 +79,7 @@
 			rating: userReviewMap[productId].rating,
 			anonymous: false
 		};
-		console.log(reviewDTO);
+
 		userReviewMap[productId].isLoading = true;
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/reviews/create`, {
 			method: 'POST',

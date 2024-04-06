@@ -9,9 +9,11 @@
 	let className: $$Props['class'] = undefined;
 	export let value: $$Props['value'] = undefined;
 	export { className as class };
+	export let error: string = '';
 </script>
 
 <input
+	class:error
 	class={cn(
 		'flex h-10 w-full bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-gray-400 disabled:cursor-not-allowed disabled:opacity-50',
 		className
@@ -33,3 +35,17 @@
 	on:input
 	{...$$restProps}
 />
+
+{#if error}
+	<span class="block error-text">{error}</span>
+{/if}
+
+<style>
+	.error {
+		border-color: rgb(221, 2, 2);
+	}
+
+	.error-text {
+		color: rgb(221, 2, 2);
+	}
+</style>
