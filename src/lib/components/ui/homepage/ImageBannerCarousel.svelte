@@ -22,6 +22,6 @@
 
 <style>
 	.banner-image {
-      transform: translateY(-250px);
+		transform: translateY(-250px);
 	}
 </style>

@@ -6,7 +6,6 @@
 	export let totalPrice: number;
 	export let discount: number;
 	export let buttonType: string;
-
 </script>
 
 <!-- ShoppingCartSummary -->
@@ -30,14 +29,12 @@
 			<span class="text-lg">US$0</span>
 		{:else}
 			<span class="text-lg">US$ TBC</span>
-
 		{/if}
 	</div>
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
 		<span class="text-xl font-bold"> Discount </span>
 		<span class="text-lg"> US${discount} </span>
-
 	</div>
 	<hr />
 	<div class="flex flex-row w-full place-content-between">
@@ -50,6 +47,5 @@
 		{:else if buttonType === 'confirm'}
 			<RightArrowButton {buttonType} scale="0.85" on:createConfirmToken />
 		{/if}
-
 	</div>
 </div>

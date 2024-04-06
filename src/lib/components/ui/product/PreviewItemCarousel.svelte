@@ -77,20 +77,20 @@
 
 <style>
 	.right-arrow {
-      transition: 0.75s;
+		transition: 0.75s;
 	}
 	.right-arrow:hover {
-      transform: translate(10px,0px);
-			transition: 0.5s;
-      opacity: 50%;
+		transform: translate(10px, 0px);
+		transition: 0.5s;
+		opacity: 50%;
 	}
 
-  .left-arrow {
-      transition: 0.75s;
-  }
-  .left-arrow:hover {
-      transform: translate(-10px,0px);
-			opacity: 50%;
-      transition: 0.5s;
-  }
+	.left-arrow {
+		transition: 0.75s;
+	}
+	.left-arrow:hover {
+		transform: translate(-10px, 0px);
+		opacity: 50%;
+		transition: 0.5s;
+	}
 </style>

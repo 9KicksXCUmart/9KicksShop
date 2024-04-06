@@ -57,7 +57,6 @@
 		>
 			<div class="flex flex-col space-y-[15px] w-[40%] h-[1300px]">
 				{#each Object.entries(data.itemDatas) as [id, itemDetail]}
-
 					<CartItem
 						on:deleteCartItem={deleteCartItem}
 						productImage={itemDetail.imageUrl}
@@ -79,7 +78,6 @@
 				buttonType="checkout"
 				on:processChcekOut={processChcekOut}
 			/>
-
 		</div>
 	</div>
 </div>
