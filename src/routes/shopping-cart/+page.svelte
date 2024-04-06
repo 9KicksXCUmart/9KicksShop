@@ -8,7 +8,8 @@
 	import CartItem from '$lib/components/ui/shopping-cart/CartItem.svelte';
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
 	import { onMount } from 'svelte';
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
+	import { PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
+  
 	interface shoppingCartItemDetail {
 		shoppingCartItemDetail: {
 			imageUrl: string;
@@ -30,7 +31,7 @@
 
 	async function getShoppingCartItems() {
 		const response = await fetch(
-			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart?` +
+			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart?` +
 				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
 			{
 				method: 'GET',
@@ -43,7 +44,7 @@
 
 	async function getOrderSummary() {
 		const response = await fetch(
-			`${PUBLIC_BACKEND_URL}/api/v1/payment/order-summary?` +
+			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/payment/order-summary?` +
 				new URLSearchParams({ userId: '120499e3-fdfd-440c-1204-bdcd954f4891' }).toString(),
 			{
 				method: 'GET',
@@ -56,7 +57,7 @@
 
 	async function deleteCartItem(e: CustomEvent<{ itemId: string }>) {
 		const response = await fetch(
-			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart/delete?` +
+			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/delete?` +
 				new URLSearchParams({
 					userId: '120499e3-fdfd-440c-1204-bdcd954f4891',
 					itemId: e.detail.itemId
