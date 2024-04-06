@@ -9,7 +9,7 @@
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
 	import { onMount } from 'svelte';
 	import { PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
-  
+
 	interface shoppingCartItemDetail {
 		shoppingCartItemDetail: {
 			imageUrl: string;

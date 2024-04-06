@@ -70,8 +70,8 @@
 	}
 
 	async function createReview(productId: string) {
-		let tokens = jwtToken.split(".");
-		const email = JSON.parse(atob(tokens[1])).email
+		let tokens = jwtToken.split('.');
+		const email = JSON.parse(atob(tokens[1])).email;
 		const reviewDTO: ReviewDTO = {
 			email: email,
 			productId: productId,
@@ -79,7 +79,7 @@
 			rating: userReviewMap[productId].rating,
 			anonymous: false
 		};
-		console.log(reviewDTO)
+		console.log(reviewDTO);
 		userReviewMap[productId].isLoading = true;
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/reviews/create`, {
 			method: 'POST',
