@@ -44,6 +44,10 @@
 						<span class="text-xl font-bold"> Total Price </span>
 						<span class="text-lg text-[#7d7d7d]"> ${data.orderDetailData.totalPrice}</span>
 					</div>
+					<div class="flex flex-col justify-start w-[300px] space-y-[10px]">
+						<span class="text-xl font-bold"> Delivery Type </span>
+						<span class="text-lg text-[#7d7d7d]"> {data.orderDetailData.deliveryType}</span>
+					</div>
 				</div>
 				<hr />
 				{#each data.orderDetailData.orderItemDetail as item}

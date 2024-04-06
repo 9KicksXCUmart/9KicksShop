@@ -43,6 +43,7 @@
 	let stripe: any = null;
 	let clientSecret: string = data.paymentDetail.client_secret;
 	let price: number;
+	let deliveryType: string;
 	async function handlePlaceOrder() {
 		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 		const stripeResponse = await stripe.confirmPayment({
@@ -64,9 +65,13 @@
 					productPrice: value.price
 				});
 			}
-			if (data.paymentDetail.line2 === 'Express Delivery')
+			if (data.paymentDetail.line2 === 'Express Delivery') {
 				price = data.orderSummaryDetail.totalPrice + 15;
-			else price = data.orderSummaryDetail.totalPrice;
+				deliveryType = 'EXPRESS';
+			} else {
+				price = data.orderSummaryDetail.totalPrice;
+				deliveryType = 'NORMAL';
+			}
 			const response = await fetch(`${PUBLIC_BACKEND_URL}/api/v1/payment/create-order-record`, {
 				method: 'POST',
 				headers: {
@@ -82,10 +87,12 @@
 					shippingAddress: {
 						streetAddress: data.paymentDetail.line1,
 						district: data.paymentDetail.state
-					}
+					},
+					deliveryType: deliveryType
 				})
 			});
 			const result = await response.json();
+			console.log(result);
 			if (result.data) {
 				goto(
 					`/shopping-cart/order-checkout/${$page.params.tokenId}/${stripeResponse.paymentIntent.id}`
