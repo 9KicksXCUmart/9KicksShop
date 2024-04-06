@@ -48,7 +48,7 @@
 	];
 </script>
 
-<div class="flex flex-col w-[210px] h-fit space-y-[20px]">
+<div class="flex flex-col h-fit w-[250px] space-y-[20px]">
 	<!-- Brand -->
 	<div class="flex flex-col">
 		<span class="text-2xl font-bold py-[5px]"> Brand </span>
@@ -82,11 +82,11 @@
 	<!-- Size -->
 	<div class="flex flex-col">
 		<span class="text-2xl font-bold py-[5px] pb-[6px]"> Size </span>
-		<div class="grid grid-cols-4 gap-y-[10px] place-items-center">
+		<div class="grid grid-cols-4 gap-y-[15px] gap-x-[10px] place-items-center">
 			{#each sizes as { size, check }}
 				<button>
 					<div
-						class="group w-[40px] h-[32px] border border-[#ececec] bg-[#ffffff] transition duration-150 hover:bg-[#000000]"
+						class="group w-[45px] h-[36px] border border-[#ececec] bg-[#ffffff] transition duration-150 hover:bg-[#000000]"
 					>
 						<span class="font-xs transition duration-150 group-hover:text-white">{size}</span>
 					</div>
