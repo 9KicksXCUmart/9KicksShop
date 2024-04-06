@@ -19,3 +19,9 @@
 		</Carousel>
 	{/if}
 </div>
+
+<style>
+	.banner-image {
+		transform: translateY(-250px);
+	}
+</style>

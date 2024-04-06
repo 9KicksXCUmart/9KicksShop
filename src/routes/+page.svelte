@@ -3,6 +3,8 @@
 	import SectionHeader from '$lib/components/ui/banner/SectionHeader.svelte';
 	import MainBannerImage1 from '$lib/client/images/reebok_green_shoes_1.jpg';
 	import MainBannerImage2 from '$lib/client/images/reebok_green_shoes_2.jpg';
+	import MainBannerImage4 from '$lib/client/images/reebok_green_shoes_4.jpg';
+	import MainBannerImage5 from '$lib/client/images/reebok_green_shoes_5.jpg';
 	import PreviewItemCarousel from '$lib/components/ui/product/PreviewItemCarousel.svelte';
 	import ProductImage from '$lib/client/images/dunklow_bw_preview.png';
 
@@ -41,5 +43,9 @@
 <style lang="postcss">
 	:global(html) {
 		background-color: theme(colors.white);
+	}
+
+	.banner-image {
+		transform: translateY(-250px);
 	}
 </style>

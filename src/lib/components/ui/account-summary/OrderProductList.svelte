@@ -71,6 +71,7 @@
 
 	async function createReview(productId: string) {
 		const reviewDTO: ReviewDTO = {
+			// hardcoded
 			email: 'locolin99@gmail.com',
 			productId: productId,
 			comment: userReviewMap[productId].comment,
