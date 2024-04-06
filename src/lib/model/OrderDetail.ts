@@ -1,5 +1,5 @@
-import type { Product } from '$lib/model/Product';
 import type { ShippingAddress } from '$lib/model/ShippingAddress';
+import type { OrderItemDetail } from '$lib/model/OrderItemDetail';
 
 export type OrderDetail = {
 	orderId: string;
@@ -7,6 +7,6 @@ export type OrderDetail = {
 	deliveryStatus: string;
 	orderDate: string;
 	totalPrice: string;
-	orderItemDetail: Product[];
+	orderItemDetail: OrderItemDetail[];
 	shippingAddress: ShippingAddress;
 };

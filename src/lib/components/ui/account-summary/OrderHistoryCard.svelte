@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import type { OrderHistoryItem } from '$lib/model/OrderHistoryItem';
 
 	const dispatch = createEventDispatcher();
 
 	export let cardTitle: string;
 	export let subTitleList: string[];
-	export let orderList: any;
+	export let orderList: OrderHistoryItem[];
 
 	function handleClick(orderId: string) {
 		dispatch('routeToOrderDetail', {
@@ -22,7 +23,7 @@
 	<div class="flex flex-col gap-0.5">
 		<div class="flex items-start gap-5">
 			{#each subTitleList as title}
-				<div class="flex w-[16.5rem] flex-col justify-center items-start gap-0.5">
+				<div class="flex w-[18rem] flex-col justify-center items-start gap-0.5">
 					<div class="text-base text-[#7D7D7D]">{title}</div>
 				</div>
 			{/each}
@@ -32,18 +33,18 @@
 				<div class="flex flex-row gap-5 items-baseline">
 					<button
 						on:click={() => handleClick(orderItem.orderId)}
-						class="text-xs w-[16.5rem] inline-block"
+						class="text-lg w-[18rem] inline-block"
 					>
 						<div class="w-max group text-sky-600 transition duration-300 cursor-pointer">
-							{orderItem.orderId.replace('ORDER#', '')}
+							{orderItem.orderId.replace('ORDER#pi_', '').slice(0, 20)}
 							<span
 								class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"
 							></span>
 						</div>
 					</button>
-					<div class="text-lg w-[16.5rem]">{orderItem.orderDate.replace('T', ' ')}</div>
-					<div class="text-lg w-[16.5rem]">{orderItem.orderStatus}</div>
-					<div class="text-lg w-[16.5rem]">{orderItem.totalPrice}</div>
+					<div class="text-lg w-[18rem]">{orderItem.orderDate.replace('T', ' ')}</div>
+					<div class="text-lg w-[18rem]">{orderItem.orderStatus}</div>
+					<div class="text-lg w-[18rem]">{orderItem.totalPrice}</div>
 				</div>
 			{/each}
 		</div>
