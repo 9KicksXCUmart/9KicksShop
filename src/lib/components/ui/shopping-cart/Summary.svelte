@@ -41,7 +41,7 @@
 		<span class="text-xl font-bold"> Estimated Total </span>
 		<span class="text-lg"> US${totalPrice} </span>
 	</div>
-	<div class="flex flex-row w-full place-content-cente r py-[20px]">
+	<div class="flex flex-row w-full place-content-center py-[20px]">
 		{#if buttonType === 'checkout'}
 			<RightArrowButton {buttonType} scale="0.85" on:processChcekOut />
 		{:else if buttonType === 'confirm'}
