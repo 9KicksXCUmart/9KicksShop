@@ -18,7 +18,11 @@
 	<div class="flex flex-col w-full space-y-[15px]">
 		<div class="flex flex-row justify-between w-full">
 			<span class="text-xl font-bold"> {productName} </span>
-			<span class="text-xl font-bold"> {price} </span>
+			{#if price}
+				<span class="text-xl font-bold"> US${price} </span>
+			{:else}
+				<span class="text-xl font-bold"> US$0</span>
+			{/if}
 		</div>
 		<span class="text-lg"> {gender} </span>
 		<div class="flex flex-col">
