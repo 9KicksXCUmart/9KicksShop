@@ -43,7 +43,7 @@
 	</div>
 	<div class="flex flex-row w-full place-content-center py-[20px]">
 		{#if buttonType === 'checkout'}
-			<RightArrowButton {buttonType} scale="0.85" on:processChcekOut />
+			<RightArrowButton {buttonType} scale="0.85" on:processCheckOut />
 		{:else if buttonType === 'confirm'}
 			<RightArrowButton {buttonType} scale="0.85" on:createConfirmToken />
 		{/if}
