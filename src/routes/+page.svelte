@@ -8,7 +8,7 @@
 	import PreviewItemCarousel from '$lib/components/ui/product/PreviewItemCarousel.svelte';
 	import ProductImage from '$lib/client/images/dunklow_bw_preview.png';
 
-	const images = [MainBannerImage1, MainBannerImage2];
+	const images = [MainBannerImage1, MainBannerImage2, MainBannerImage4];
 
 	const products = Array(10).fill({
 		productImage: ProductImage,
@@ -31,7 +31,7 @@
 		</div>
 		<!-- Subsection Image Banner -->
 		<div class="w-full h-[472px] overflow-hidden py-[20px]">
-			<img src={MainBannerImage2} alt="Banner" align="center" class="-mt-[120px]" />
+			<img src={MainBannerImage5} alt="Banner" align="center" class="-mt-[120px] banner-image" />
 		</div>
 		<SectionHeader text="Most Popular" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[50px]">
@@ -44,8 +44,7 @@
 	:global(html) {
 		background-color: theme(colors.white);
 	}
-
-	.banner-image {
+	<<<<<<< HEAD =======>>>>>>>d2b550f4985e46cce3e377c31de7205979bc67b9 .banner-image {
 		transform: translateY(-250px);
 	}
 </style>

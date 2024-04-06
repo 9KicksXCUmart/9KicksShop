@@ -17,7 +17,7 @@
 				slot="next"
 				let:showNextPage
 				on:click={showNextPage}
-				class="group flex place-items-center pl-[5px] custom-arrow custom-arrow-next"
+				class="group flex place-items-center pl-[30px] custom-arrow custom-arrow-next cursor-pointer right-arrow"
 			>
 				<i />
 				<svg
@@ -39,7 +39,7 @@
 				slot="prev"
 				let:showPrevPage
 				on:click={showPrevPage}
-				class="group flex place-items-center pr-[5px] custom-arrow custom-arrow-prev"
+				class="group flex place-items-center pr-[30px] custom-arrow custom-arrow-prev cursor-pointer left-arrow"
 			>
 				<i />
 				<svg
