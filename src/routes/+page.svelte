@@ -44,7 +44,7 @@
 	:global(html) {
 		background-color: theme(colors.white);
 	}
-	<<<<<<< HEAD =======>>>>>>>d2b550f4985e46cce3e377c31de7205979bc67b9 .banner-image {
+	.banner-image {
 		transform: translateY(-250px);
 	}
 </style>
