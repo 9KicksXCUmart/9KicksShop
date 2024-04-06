@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	export let id = 'undefined';
 	export let scale = '1';
 	export let buttonType: string;

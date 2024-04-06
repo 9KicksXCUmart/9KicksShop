@@ -5,7 +5,7 @@
 	import RightArrowButton from '$lib/components/ui/button/RightArrowButton.svelte';
 	import LeftArrowButton from '$lib/components/ui/button/LeftArrowButton.svelte';
 	import { loadStripe } from '@stripe/stripe-js';
-	import { PUBLIC_STRIPE_KEY, PUBLIC_BACKEND_URL } from '$env/static/public';
+	import { PUBLIC_STRIPE_KEY, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
 	import { page } from '$app/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 
@@ -72,25 +72,28 @@
 				price = data.orderSummaryDetail.totalPrice;
 				deliveryType = 'NORMAL';
 			}
-			const response = await fetch(`${PUBLIC_BACKEND_URL}/api/v1/payment/create-order-record`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${data.jwtToken}`
-				},
-				body: JSON.stringify({
-					orderId: stripeResponse.paymentIntent.id,
-					orderStatus: 'INCOMPLETE',
-					deliveryStatus: 'PENDING',
-					totalPrice: price,
-					orderItemDetail: orderItemDetail,
-					shippingAddress: {
-						streetAddress: data.paymentDetail.line1,
-						district: data.paymentDetail.state
+			const response = await fetch(
+				`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/payment/create-order-record`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${data.jwtToken}`
 					},
-					deliveryType: deliveryType
-				})
-			});
+					body: JSON.stringify({
+						orderId: stripeResponse.paymentIntent.id,
+						orderStatus: 'INCOMPLETE',
+						deliveryStatus: 'PENDING',
+						totalPrice: price,
+						orderItemDetail: orderItemDetail,
+						shippingAddress: {
+							streetAddress: data.paymentDetail.line1,
+							district: data.paymentDetail.state
+						},
+						deliveryType: deliveryType
+					})
+				}
+			);
 			const result = await response.json();
 			console.log(result);
 			if (result.data) {

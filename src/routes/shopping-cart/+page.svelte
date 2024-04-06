@@ -3,7 +3,7 @@
 	import TextBanner from '$lib/components/ui/banner/PageHeader.svelte';
 	import CartItem from '$lib/components/ui/shopping-cart/CartItem.svelte';
 	import SummaryPanel from '$lib/components/ui/shopping-cart/Summary.svelte';
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
+	import { PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
 	import { goto, invalidateAll } from '$app/navigation';
 	interface data {
 		jwtToken: string;
@@ -28,7 +28,7 @@
 
 	async function deleteCartItem(e: CustomEvent<{ itemId: string }>) {
 		const response = await fetch(
-			`${PUBLIC_BACKEND_URL}/api/v1/shopping-cart/delete?` +
+			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/delete?` +
 				new URLSearchParams({
 					itemId: e.detail.itemId
 				}).toString(),
@@ -57,7 +57,6 @@
 		>
 			<div class="flex flex-col space-y-[15px] w-[40%] h-[1300px]">
 				{#each Object.entries(data.itemDatas) as [id, itemDetail]}
-
 					<CartItem
 						on:deleteCartItem={deleteCartItem}
 						productImage={itemDetail.imageUrl}
@@ -79,7 +78,6 @@
 				buttonType="checkout"
 				on:processChcekOut={processChcekOut}
 			/>
-
 		</div>
 	</div>
 </div>
