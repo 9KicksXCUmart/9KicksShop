@@ -70,13 +70,16 @@
 	}
 
 	async function createReview(productId: string) {
+		let tokens = jwtToken.split(".");
+		const email = JSON.parse(atob(tokens[1])).email
 		const reviewDTO: ReviewDTO = {
-			email: 'locolin99@gmail.com',
+			email: email,
 			productId: productId,
 			comment: userReviewMap[productId].comment,
 			rating: userReviewMap[productId].rating,
 			anonymous: false
 		};
+		console.log(reviewDTO)
 		userReviewMap[productId].isLoading = true;
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/reviews/create`, {
 			method: 'POST',
@@ -148,7 +151,7 @@
 						</div>
 						<Input
 							bind:value={commentMap[itemDetail.productId]}
-							class="my-[5px]"
+							class="my-[5px] text-base"
 							placeholder="Add a Review..."
 						/>
 						{#if !userReviewMap[itemDetail.productId].isLoading}
