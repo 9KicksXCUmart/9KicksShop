@@ -28,16 +28,6 @@
 	}
 
 	let touchedFields = { firstName: false } as touchedFields;
-	// if (check) {
-	// 	touchedFields = {
-	// 		firstName: true,
-	// 		country: true,
-	// 		lastName: true,
-	// 		state: true,
-	// 		email: true,
-	// 		address: true
-	// 	};
-	// }
 	$: touchedFields;
 	$: errors = validate(
 		touchedFields,
@@ -98,18 +88,18 @@
 	<span class="text-3xl font-bold"> {panelName} </span>
 	<div class="flex flex-row space-x-[60px]">
 		<!-- Short Column 1 -->
-		<div class="flex flex-col space-y-[10px]">
+		<div class="flex flex-col space-y-[10px] w-[100%]">
 			<span class="text-lg font-semibold"> {shortColumnName_1} </span>
 			{#if shortColumnName_1 === 'First Name'}
 				<Input
-					class="w-[250px] h-[35px] text-lg bg-[#f8fbf6]"
+					class="w-[100%] h-[35px] text-lg bg-[#f8fbf6]"
 					bind:value={shortColumnPrefilled_1}
 					on:blur={() => (touchedFields.firstName = true)}
 					error={errors.firstName}
 				/>
 			{:else}
 				<Input
-					class="w-[250px] h-[35px] text-lg bg-[#f8fbf6]"
+					class="w-[100%] h-[35px] text-lg bg-[#f8fbf6]"
 					bind:value={shortColumnPrefilled_1}
 					on:blur={() => (touchedFields.country = true)}
 					error={errors.country}
@@ -117,18 +107,18 @@
 			{/if}
 		</div>
 		<!-- Last Name -->
-		<div class="flex flex-col space-y-[10px]">
+		<div class="flex flex-col space-y-[10px] w-[100%]">
 			<span class="text-lg font-semibold"> {shortColumnName_2} </span>
 			{#if shortColumnName_2 === 'Last Name'}
 				<Input
-					class="w-[250px] h-[35px] text-lg bg-[#f8fbf6]"
+					class="w-[100%] h-[35px] text-lg bg-[#f8fbf6]"
 					bind:value={shortColumnPrefilled_2}
 					on:blur={() => (touchedFields.lastName = true)}
 					error={errors.lastName}
 				/>
 			{:else}
 				<Input
-					class="w-[250px] h-[35px] text-lg bg-[#f8fbf6]"
+					class="w-[100%] h-[35px] text-lg bg-[#f8fbf6]"
 					bind:value={shortColumnPrefilled_2}
 					on:blur={() => (touchedFields.state = true)}
 					error={errors.state}
@@ -141,14 +131,14 @@
 		<span class="text-lg font-semibold"> {longColumnName} </span>
 		{#if longColumnName === 'Email Address'}
 			<Input
-				class="w-[600px] h-[35px] text-lg bg-[#f8fbf6]"
+				class="w-[%100] h-[35px] text-lg bg-[#f8fbf6]"
 				bind:value={longColumnPrefilled}
 				on:blur={() => (touchedFields.email = true)}
 				error={errors.email}
 			/>
 		{:else}
 			<Input
-				class="w-[600px] h-[35px] text-lg bg-[#f8fbf6]"
+				class="w-[%100] h-[35px] text-lg bg-[#f8fbf6]"
 				bind:value={longColumnPrefilled}
 				on:blur={() => (touchedFields.address = true)}
 				error={errors.address}

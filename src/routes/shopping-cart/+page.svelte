@@ -101,7 +101,7 @@
 						shippingFee={data.orderSummaryData.shippingFee}
 						totalItemPrice={data.orderSummaryData.totalPrice}
 						discount={data.orderSummaryData.discount}
-						buttonType="checkout"
+						buttonType="Checkout"
 						on:handleOnClick={processCheckOut}
 					/>
 				</div>
