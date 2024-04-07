@@ -25,7 +25,7 @@
 		<ImageBannerCarousel id="BannerCarousel" bannerImages={images} />
 		<SectionHeader text="New Arrivals" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[20px]">
-			<PreviewItemCarousel {products} />
+			<PreviewItemCarousel products={products} />
 		</div>
 		<!-- Subsection Image Banner -->
 		<div class="w-full h-[472px] overflow-hidden py-[20px]">
@@ -33,7 +33,7 @@
 		</div>
 		<SectionHeader text="Most Popular" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[50px]">
-			<PreviewItemCarousel {products} />
+			<PreviewItemCarousel products={products} />
 		</div>
 	</div>
 </div>

@@ -5,7 +5,6 @@
 	import ProductImage from '$lib/client/images/dunklow_bw_preview.png';
 	import ProductPreviewItem from '$lib/components/ui/product/PreviewItem.svelte';
 
-
 	const menuItems = [
 		'Alphabetical (A to Z)',
 		'Price (Low to High)',
@@ -23,7 +22,6 @@
 		ratingCount: '84',
 		scale: '1.05'
 	});
-
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
@@ -34,11 +32,9 @@
 			<SortOption {menuItems} />
 		</div>
 
-		<div
-			class="flex flex-row items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]"
-		>
+		<div class="flex flex-row items-start w-full h-fit px-[17%] py-[1%] space-x-[6%]">
 			<!-- Product Filters-->
-			<FilterPanel/>
+			<FilterPanel />
 
 			<!-- Display Products -->
 			<div class="grid grid-cols-4 w-full justify-between gap-y-[20px]">

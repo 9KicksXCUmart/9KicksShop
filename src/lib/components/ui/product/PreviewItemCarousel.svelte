@@ -1,5 +1,4 @@
 <script>
-	import ProductImage from '$lib/client/images/dunklow_bw_preview.png';
 	import ProductPreviewItem from '$lib/components/ui/product/PreviewItem.svelte';
 	import Carousel from 'svelte-carousel';
 	import { browser } from '$app/environment';
