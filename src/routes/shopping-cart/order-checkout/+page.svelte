@@ -177,7 +177,7 @@
 					shippingFee={data.orderSummaryData.shippingFee + 15}
 					discount={data.orderSummaryData.discount}
 					buttonType="confirm"
-					on:createConfirmToken={submit}
+					on:handleOnClick={submit}
 				/>
 			{:else}
 				<SummaryPanel
@@ -187,7 +187,7 @@
 					shippingFee={data.orderSummaryData.shippingFee}
 					discount={data.orderSummaryData.discount}
 					buttonType="confirm"
-					on:createConfirmToken={submit}
+					on:handleOnClick={submit}
 				/>
 			{/if}
 		</div>

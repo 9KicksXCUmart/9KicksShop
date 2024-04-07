@@ -102,7 +102,7 @@
 						totalItemPrice={data.orderSummaryData.totalPrice}
 						discount={data.orderSummaryData.discount}
 						buttonType="checkout"
-						on:processCheckOut={processCheckOut}
+						on:handleOnClick={processCheckOut}
 					/>
 				</div>
 			</Motion>

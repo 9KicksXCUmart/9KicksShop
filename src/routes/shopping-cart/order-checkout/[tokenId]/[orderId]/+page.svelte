@@ -64,7 +64,7 @@
 			</div>
 			<!-- Return to Home Page-->
 			<div class="flex flex-row place-content-center w-full py-[20px]">
-				<RightArrowButton buttonType="Home Page" on:handleGoHomePage={handlleGoHomePage} />
+				<RightArrowButton buttonType="Home Page" on:handleOnClick={handlleGoHomePage} />
 			</div>
 		</div>
 	</div>
