@@ -66,8 +66,11 @@
 							</div>
 						</div>
 						<Dialog.Footer class="sm:justify-end">
-							<Button href="/account/create" type="submit" on:click={closeAll}
-								>SEND RESET LINK</Button
+							<Button
+								href="/account/create"
+								class="rounded-none bg-[#D3FFD8] text-black"
+								type="submit"
+								on:click={closeAll}>Send Reset Link</Button
 							>
 						</Dialog.Footer>
 					</Dialog.Content>
@@ -75,10 +78,12 @@
 			</div>
 		</div>
 		<Dialog.Footer class="sm:justify-between">
-			<Button href="/account/create" on:click={close} class="bg-dark_cyan text-fgray my-2 sm:my-0"
-				>Create an account</Button
+			<Button
+				href="/account/create"
+				on:click={close}
+				class="rounded-none bg-[#D3FFD8] text-black my-2 sm:my-0">Create an account</Button
 			>
-			<Button type="submit">Sign in</Button>
+			<Button class="rounded-none bg-[#ECECEC] text-black" type="submit">Sign in</Button>
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>
