@@ -23,7 +23,7 @@
 			client_secret: string;
 		};
 		orderSummaryDetail: {
-			totalPrice: number;
+			actualPrice: number;
 			discount: number;
 		};
 		purchaseItemDetails: {
@@ -67,10 +67,10 @@
 				});
 			}
 			if (data.paymentDetail.line2 === 'Express Delivery') {
-				price = data.orderSummaryDetail.totalPrice + 15;
+				price = data.orderSummaryDetail.actualPrice + 15;
 				deliveryType = 'EXPRESS';
 			} else {
-				price = data.orderSummaryDetail.totalPrice;
+				price = data.orderSummaryDetail.actualPrice;
 				deliveryType = 'NORMAL';
 			}
 			const response = await fetch(
@@ -186,9 +186,11 @@
 					<div class="flex flex-col justify-end">
 						<span class="text-lg"> Total Price </span>
 						{#if data.paymentDetail.line2 === 'Express Delivery'}
-							<span class="text-2xl font-bold"> US${data.orderSummaryDetail.totalPrice + 15} </span>
+							<span class="text-2xl font-bold">
+								US${data.orderSummaryDetail.actualPrice + 15}
+							</span>
 						{:else}
-							<span class="text-2xl font-bold"> US${data.orderSummaryDetail.totalPrice}</span>
+							<span class="text-2xl font-bold"> US${data.orderSummaryDetail.actualPrice}</span>
 						{/if}
 					</div>
 				</div>
