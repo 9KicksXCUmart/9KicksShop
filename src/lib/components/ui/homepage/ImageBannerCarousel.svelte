@@ -13,9 +13,15 @@
 			<!-- Carousel Items -->
 			{#each bannerImages as url}
 				<div class="w-full h-[500px] overflow-hidden">
-					<img src={url} alt={url} align="center" />
+					<img src={url} alt={url} align="center" class="banner-image" />
 				</div>
 			{/each}
 		</Carousel>
 	{/if}
 </div>
+
+<style>
+	.banner-image {
+		transform: translateY(-250px);
+	}
+</style>

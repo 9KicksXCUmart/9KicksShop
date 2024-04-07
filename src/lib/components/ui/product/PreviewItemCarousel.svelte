@@ -16,7 +16,7 @@
 				slot="next"
 				let:showNextPage
 				on:click={showNextPage}
-				class="group flex place-items-center pl-[5px] custom-arrow custom-arrow-next"
+				class="group flex place-items-center pl-[30px] custom-arrow custom-arrow-next cursor-pointer right-arrow"
 			>
 				<i />
 				<svg
@@ -38,7 +38,7 @@
 				slot="prev"
 				let:showPrevPage
 				on:click={showPrevPage}
-				class="group flex place-items-center pr-[5px] custom-arrow custom-arrow-prev"
+				class="group flex place-items-center pr-[30px] custom-arrow custom-arrow-prev cursor-pointer left-arrow"
 			>
 				<i />
 				<svg
@@ -73,3 +73,23 @@
 		</Carousel>
 	{/if}
 </div>
+
+<style>
+	.right-arrow {
+		transition: 0.75s;
+	}
+	.right-arrow:hover {
+		transform: translate(10px, 0px);
+		transition: 0.5s;
+		opacity: 50%;
+	}
+
+	.left-arrow {
+		transition: 0.75s;
+	}
+	.left-arrow:hover {
+		transform: translate(-10px, 0px);
+		opacity: 50%;
+		transition: 0.5s;
+	}
+</style>

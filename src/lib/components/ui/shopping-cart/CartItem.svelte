@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
 	const dispatch = createEventDispatcher();
 	export let productImage: string;
 	export let productName: string;
@@ -8,6 +9,8 @@
 	export let size: string;
 	export let quantity: number;
 	export let id: string;
+
+	export let isLoading: boolean;
 
 	const handleClick = () => {
 		dispatch('deleteCartItem', { itemId: id });
@@ -47,19 +50,25 @@
 		</div>
 	</div>
 	<!-- ShoppingCartItem/DeleteItemButton-->
-	<button class="absolute top-[19px] right-[20px]" on:click={handleClick}>
-		<svg
-			class="hover:stroke-[#6d7d7d]"
-			xmlns="http://www.w3.org/2000/svg"
-			width="33"
-			height="33"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="#000000"
-			stroke-width="1.5"
-			stroke-linecap="square"
-			stroke-linejoin="arcs"
-			><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg
-		>
-	</button>
+	{#if isLoading}
+		<div class="absolute top-[19px] right-[20px]">
+			<LoadingCircle size="33" />
+		</div>
+	{:else}
+		<button class="absolute top-[19px] right-[20px] duration-500" on:click={handleClick}>
+			<svg
+				class="hover:stroke-[#6d7d7d] duration-500"
+				xmlns="http://www.w3.org/2000/svg"
+				width="33"
+				height="33"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="#000000"
+				stroke-width="1.5"
+				stroke-linecap="square"
+				stroke-linejoin="arcs"
+				><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg
+			>
+		</button>
+	{/if}
 </div>
