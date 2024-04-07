@@ -44,6 +44,7 @@
 	let clientSecret: string = data.paymentDetail.client_secret;
 	let price: number;
 	let deliveryType: string;
+
 	async function handlePlaceOrder() {
 		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 		const stripeResponse = await stripe.confirmPayment({
@@ -95,7 +96,6 @@
 				}
 			);
 			const result = await response.json();
-			console.log(result);
 			if (result.data) {
 				goto(
 					`/shopping-cart/order-checkout/${$page.params.tokenId}/${stripeResponse.paymentIntent.id}`
@@ -195,7 +195,7 @@
 			</div>
 			<!-- Place Order -->
 			<div class="flex flex-row justify-end w-full">
-				<RightArrowButton buttonType="Place Order" on:handlePlaceOrder={handlePlaceOrder} />
+				<RightArrowButton buttonType="Place Order" on:handleOnClick={handlePlaceOrder} />
 			</div>
 		</div>
 	</div>

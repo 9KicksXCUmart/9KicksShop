@@ -6,7 +6,18 @@ export const load = (async ({ cookies }) => {
 	async function getOrderSummary() {
 		const response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/payment/order-summary`, {
 			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${jwtToken}`
+			}
+		});
+		const result = await response.json();
+		return result.data;
+	}
 
+	async function getUserDetail() {
+		const response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/account-summary`, {
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${jwtToken}`
@@ -17,6 +28,7 @@ export const load = (async ({ cookies }) => {
 	}
 
 	return {
-		orderSummaryData: await getOrderSummary()
+		orderSummaryData: await getOrderSummary(),
+		userDetailData: await getUserDetail()
 	};
 }) satisfies PageServerLoad;

@@ -9,13 +9,14 @@
 	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import Motion from 'svelte-motion/src/motion/MotionSSR.svelte';
 
-	let firstName: string;
-	let lastName: string;
-	let email: string;
-	let country: string;
-	let district: string;
-	let address: string;
+	let firstName: string = data.userDetailData.firstName;
+	let lastName: string = data.userDetailData.lastName;
+	let email: string = data.userDetailData.email;
+	let country: string = 'Hong Kong';
+	let district: string = data.userDetailData.shippingAddress.district;
+	let address: string = data.userDetailData.shippingAddress.streetAddress;
 	let deliverOpt: string = 'Normal Delivery';
 
 	let stripe: any = null;
@@ -160,7 +161,7 @@
 					<!-- Delivery Option -->
 					<div class="flex flex-col space-y-[15px]">
 						<span class="text-3xl font-bold"> Delivery Option </span>
-						<div class="flex flex-row py-[11px] space-x-[22px]">
+						<div class="flex flex-row py-[11px] space-x-[10px]">
 							<DeliveryOptionButton on:changeValue={onChange} />
 						</div>
 					</div>
@@ -169,27 +170,36 @@
 				</div>
 			</div>
 			<!-- Summary -->
-			{#if deliverOpt === 'Express Delivery'}
-				<SummaryPanel
-					totalItemPrice={data.orderSummaryData.totalPrice}
-					totalPrice={data.orderSummaryData.actualPrice + 15}
-					itemCount={data.orderSummaryData.itemCount}
-					shippingFee={data.orderSummaryData.shippingFee + 15}
-					discount={data.orderSummaryData.discount}
-					buttonType="confirm"
-					on:createConfirmToken={submit}
-				/>
-			{:else}
-				<SummaryPanel
-					totalItemPrice={data.orderSummaryData.totalPrice}
-					totalPrice={data.orderSummaryData.actualPrice}
-					itemCount={data.orderSummaryData.itemCount}
-					shippingFee={data.orderSummaryData.shippingFee}
-					discount={data.orderSummaryData.discount}
-					buttonType="confirm"
-					on:createConfirmToken={submit}
-				/>
-			{/if}
+			<Motion
+				initial={{ y: 20, opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ delay: 0, duration: 1, ease: 'easeInOut' }}
+				let:motion
+			>
+				{#if deliverOpt === 'Express Delivery'}
+					<SummaryPanel
+						totalItemPrice={data.orderSummaryData.totalPrice}
+						totalPrice={data.orderSummaryData.actualPrice + 15}
+						itemCount={data.orderSummaryData.itemCount}
+						shippingFee={data.orderSummaryData.shippingFee + 15}
+						discount={data.orderSummaryData.discount}
+						buttonType="Confirm"
+						on:handleOnClick={submit}
+					/>
+				{:else}
+					<div use:motion>
+						<SummaryPanel
+							totalItemPrice={data.orderSummaryData.totalPrice}
+							totalPrice={data.orderSummaryData.actualPrice}
+							itemCount={data.orderSummaryData.itemCount}
+							shippingFee={data.orderSummaryData.shippingFee}
+							discount={data.orderSummaryData.discount}
+							buttonType="Confirm"
+							on:handleOnClick={submit}
+						/>
+					</div>
+				{/if}
+			</Motion>
 		</div>
 	</div>
 </div>
