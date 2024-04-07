@@ -8,10 +8,6 @@
 	const updateButtonText = (newText) => {
 		return (buttonText = newText);
 	};
-
-	
-
-
 </script>
 
 <!-- Dropdown Menu-->
@@ -40,7 +36,12 @@
 		</div>
 	</button>
 
-	<div class:show={menuOpen} class="absolute hidden focus:outline-none max-h-[159px] overflow-scroll" role="menu" tabindex="-1">
+	<div
+		class:show={menuOpen}
+		class="absolute hidden focus:outline-none max-h-[159px] overflow-scroll"
+		role="menu"
+		tabindex="-1"
+	>
 		<div>
 			{#each menuItems as quantity}
 				<button id="menu-button" type="button" on:click={updateButtonText(quantity)}>

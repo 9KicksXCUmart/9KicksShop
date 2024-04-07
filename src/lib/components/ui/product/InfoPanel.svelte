@@ -13,7 +13,7 @@
 <div class="flex flex-col w-[400px] h-[360px] space-y-[12px] p-[20px] bg-[#f8fbf6]">
 	<!-- InfoPanel/Price -->
 	<span style="font-size:40px"> US ${price}</span>
-	<!-- InfoPanel/Rating -->	
+	<!-- InfoPanel/Rating -->
 	<div class="flex flex-row place-items-center space-x-[2px]">
 		{#each { length: rating } as _, i}
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20">
@@ -38,10 +38,10 @@
 	</div>
 	<!-- InfoPanel/Quantity -->
 	<div class="z-10">
-		<QuantityOption id="quantity" menuItems={quantitys}/>
+		<QuantityOption id="quantity" menuItems={quantitys} />
 	</div>
 	<!-- InfoPanel/AddtoCartButton-->
 	<div class="flex flex-row place-content-center w-full pt-[20px] pb-[30px]">
-		<RightArrowButton text="Add To Cart" scale="0.9"/>
+		<RightArrowButton text="Add To Cart" scale="0.9" />
 	</div>
 </div>
