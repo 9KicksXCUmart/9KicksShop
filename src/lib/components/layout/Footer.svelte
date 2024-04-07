@@ -2,7 +2,7 @@
 	import { Instagram } from 'lucide-svelte';
 </script>
 
-<footer class="bg-fgray text-black py-6">
+<footer class="bg-fgray text-black py-6 min-h-dvh">
 	<div class="container mx-auto flex flex-wrap justify-center">
 		<!-- Navigation -->
 		<div class="w-full sm:w-1/2 md:w-1/4 mb-4 sm:mb-0">
