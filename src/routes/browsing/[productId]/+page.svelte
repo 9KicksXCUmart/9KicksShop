@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import ProductHeader from '$lib/components/ui/banner/ProductHeader.svelte';
 	import SectionHeader from '$lib/components/ui/banner/SectionHeader.svelte';
 	import LeftArrowButton from '$lib/components/ui/button/LeftArrowButton.svelte';
@@ -14,6 +14,11 @@
 	import RatingBox from '$lib/components/ui/review/RatingBox.svelte';
 	import SortOption from '$lib/components/ui/dropdown/SortOption.svelte';
 
+	import { page } from '$app/stores';
+	import type { PageData } from './$types';
+	export let data: PageData;
+
+	const productId: string = $page.params.productId;
 	const sortBy = ['Time (New to Old)', 'Time (Old to New)'];
 
 	let sizeStock = [
@@ -80,6 +85,7 @@
 				<LeftArrowButton text="Previous Page" />
 			</div>
 		</div>
+		{productId}
 
 		<ProductHeader productName="Nike Dunk Low BW" gender="Men's" />
 
