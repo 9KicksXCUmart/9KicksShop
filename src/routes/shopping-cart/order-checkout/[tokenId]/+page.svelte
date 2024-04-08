@@ -185,7 +185,7 @@
 				{/each}
 				<!-- Totoal Price -->
 				<div class="flex flex-row justify-end w-full">
-					<div class="flex flex-col justify-end">
+					<div class="flex flex-col items-end">
 						<span class="text-lg"> Total Price </span>
 						{#if data.paymentDetail.line2 === 'Express Delivery'}
 							<span class="text-2xl font-bold">

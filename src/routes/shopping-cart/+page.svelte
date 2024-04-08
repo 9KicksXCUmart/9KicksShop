@@ -31,12 +31,9 @@
 		};
 	}
 
-	// let isLoading: string = ""
-
 	let isLoading: Record<string, boolean> = {};
 
 	async function deleteCartItem(e: CustomEvent<{ itemId: string }>) {
-		// isLoading = e.detail.itemId
 		isLoading[e.detail.itemId] = true;
 		const response = await fetch(
 			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/delete?` +
@@ -71,7 +68,7 @@
 <div class="flex flex-col items-center w-full h-fit">
 	<div class="flex flex-col items-center w-[1920px] h-fit">
 		<TextBanner text="Shopping Cart" />
-		<div class="flex flex-row justify-between items-start w-full h-fit px-[17%] space-x-[6%]">
+		<div class="flex flex-row justify-between items-start w-full h-fit px-[17%] pb-[1%]">
 			<div class="flex flex-col space-y-[15px]">
 				{#each Object.entries(data.itemDatas) as [id, itemDetail], index}
 					<Motion
