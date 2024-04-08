@@ -8,8 +8,8 @@
 </script>
 
 <!-- Top NavBar -->
-<nav class="flex justify-center bg-fgray">
-	<div class="flex items-center justify-between px-2 py-3 max-w-[1500px] w-full">
+<nav class="flex justify-center bg-[#f8fbf6]">
+	<div class="flex items-center justify-between px-[17%] py-[1%] w-full">
 		<a href="/"
 			><img
 				src={Logo}

@@ -1,56 +1,46 @@
 <script>
+	import { ShoppingBag } from 'lucide-svelte';
 </script>
 
 <!-- Bottom NavBar -->
-<nav class="flex justify-center bg-fgray">
-	<div class="flex items-center justify-between text-sm px-4 max-w-[1500px] w-full">
-		<ul class="flex flex-row items-center justify-center font-semibold">
-			<li class="relative px-3 py-2">
-				<button class="hover:opacity-50">New Arrivals</button>
+<nav class="flex justify-center bg-[#f8fbf6]">
+	<div class="flex items-center justify-between text-lg px-[17%] pb-[0.5%] w-full">
+		<ul class="flex flex-row items-center justify-center font-semibold gap-5">
+			<li class="relative pr-3 py-2">
+				<div class="w-max group transition duration-300 cursor-pointer">
+					<button>New Arrivals</button>
+					<span
+						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
+					></span>
+				</div>
 			</li>
-			<li class="relative px-3 py-2">
-				<button class="hover:opacity-50">Men's</button>
+			<li class="relative pr-3 py-2">
+				<div class="w-max group transition duration-300 cursor-pointer">
+					<button>Mens'</button>
+					<span
+						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
+					></span>
+				</div>
 			</li>
-			<li class="relative px-3 py-2">
-				<button class="hover:opacity-50">Women's</button>
+			<li class="relative pr-3 py-2">
+				<div class="w-max group transition duration-300 cursor-pointer">
+					<button>Womens'</button>
+					<span
+						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
+					></span>
+				</div>
 			</li>
-			<li class="relative px-3 py-2">
-				<button class="hover:opacity-50">Kids'</button>
-			</li>
-			<li class="relative px-3 py-2">
-				<button class="hover:opacity-50">Brands</button>
-			</li>
-		</ul>
-
-		<ul class="flex items-center justify-center font-semibold">
-			<li class="relative px-2">
-				<svg
-					class="w-5 h-5"
-					viewBox="0 0 1024 1024"
-					version="1.1"
-					xmlns="http://www.w3.org/2000/svg"
-					width="200"
-					height="200"
-					><path
-						d="M502.538 793.068L810.045 485.58a176.476 176.476 0 1 0-249.569-249.57l-57.938 57.918-57.917-57.917A176.476 176.476 0 0 0 195.05 485.58l307.487 307.487z m28.98 86.896a40.96 40.96 0 0 1-57.938 0L137.114 543.498C36.209 442.593 36.209 279 137.114 178.074c100.925-100.905 264.52-100.905 365.424 0 100.926-100.905 264.52-100.905 365.425 0 100.925 100.925 100.925 264.52 0 365.424L531.517 879.985z"
-						fill="#2c2c2c"
-					></path></svg
-				>
-			</li>
-			<li class="relative px-2">
-				<svg
-					class="w-5 h-5"
-					viewBox="0 0 1024 1024"
-					version="1.1"
-					xmlns="http://www.w3.org/2000/svg"
-					width="200"
-					height="200"
-					><path
-						d="M354.778212 821.104987c-34.091446 0-61.703317 27.611871-61.703317 61.703317 0 34.091446 27.611871 61.703317 61.703317 61.703317s61.703317-27.611871 61.703317-61.703317C416.48153 848.716858 388.868635 821.104987 354.778212 821.104987L354.778212 821.104987zM786.701432 821.104987c-34.091446 0-61.703317 27.611871-61.703317 61.703317 0 34.091446 27.611871 61.703317 61.703317 61.703317s61.703317-27.611871 61.703317-61.703317C848.40475 848.716858 820.792878 821.104987 786.701432 821.104987L786.701432 821.104987zM847.911516 790.253328l-501.123278 0c-44.457538 0-83.546811-35.171034-88.976474-80.060407l-52.324716-368.368742-29.772071-172.151825c-1.851161-15.025205-15.549138-27.303856-28.939099-27.303856l-39.305191 0c-17.029862 0-30.851659-13.821797-30.851659-30.851659s13.821797-30.851659 30.851659-30.851659l39.305191 0c45.01217 0 84.533278 35.171034 89.994664 80.060407l29.709649 171.504072 52.540633 369.942587c1.727341 14.31503 14.685467 26.377764 27.76639 26.377764l501.123278 0c17.060561 0 30.851659 13.791098 30.851659 30.851659C878.763175 776.462231 864.972077 790.253328 847.911516 790.253328zM385.351532 666.846694c-16.011672 0-29.556153-12.341073-30.727839-28.599362-1.264806-16.999163 11.508102-31.776727 28.476565-33.010835l418.533258-30.851659c15.363919-0.092098 28.322046-12.155854 30.018687-25.88453l48.591695-278.035364c1.234107-10.366092-1.635243-21.719674-7.836479-28.753881-3.979638-4.504594-8.977465-6.78759-14.809287-6.78759l-534.165836 0c-17.029862 0-30.851659-13.821797-30.851659-30.851659s13.821797-30.851659 30.851659-30.851659l534.165836 0c23.570835 0 45.228087 9.779737 60.994166 27.581172 18.017352 20.331048 26.285666 48.992831 22.676465 78.70248l-48.622394 278.066063c-5.244444 43.25413-44.303019 78.425164-88.760556 78.425164l-416.250262 30.759561C386.863978 666.815995 386.092405 666.846694 385.351532 666.846694z"
-						fill="#272636"
-					></path></svg
-				>
+			<li class="relative pr-3 py-2">
+				<div class="w-max group transition duration-300 cursor-pointer">
+					<button>Kids'</button>
+					<span
+						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
+					></span>
+				</div>
 			</li>
 		</ul>
+		<a href="/shopping-cart" class="duration-200">
+			<ShoppingBag strokeWidth={1.75} class="hover:opacity-50 hover:scale-105 duration-300" />
+		</a>
 	</div>
 </nav>

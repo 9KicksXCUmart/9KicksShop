@@ -5,7 +5,10 @@
 	import '../app.css';
 </script>
 
-<div class="min-h-screen">
+<svelte:head>
+	<title>9Kicks</title>
+</svelte:head>
+<div class="min-h-[90vh]">
 	<UpperNavBar />
 	<LowerNavBar />
 	<slot />
