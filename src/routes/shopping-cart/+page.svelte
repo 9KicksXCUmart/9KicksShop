@@ -26,6 +26,7 @@
 				price: number;
 				productSize: string;
 				productQuantity: number;
+				originalPrice: number;
 			};
 		};
 	}
@@ -54,7 +55,15 @@
 		invalidateAll();
 	}
 
-	function processCheckOut() {
+	async function processCheckOut() {
+		// const response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/validCheck`, {
+		// 	method: 'GET',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 		Authorization: `Bearer ${data.jwtToken}`
+		// 	}
+		// });
+		// console.log(response.body);
 		goto('shopping-cart/order-checkout');
 	}
 </script>
@@ -82,6 +91,7 @@
 								size={itemDetail.productSize}
 								quantity={itemDetail.productQuantity}
 								{id}
+								originalPrice={itemDetail.originalPrice}
 							/>
 						</div>
 					</Motion>

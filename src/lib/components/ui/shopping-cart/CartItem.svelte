@@ -9,6 +9,7 @@
 	export let size: string;
 	export let quantity: number;
 	export let id: string;
+	export let originalPrice: number;
 
 	export let isLoading: boolean;
 
@@ -30,12 +31,20 @@
 	<div class="flex flex-col w-[370px] space-y-[16px]">
 		<div class="flex flex-row w-[304px] place-content-between">
 			<div class="flex flex-col space-y-[8px]">
-				<span class="max-w-[200px] text-xl font-bold whitespace-nowrap truncate">
+				<span class="max-w-[200px] text-xl font-bold whitespace-nowrap">
 					{productName}
 				</span>
 				<span class="text-lg"> {productCategory} </span>
 			</div>
-			<span class="text-lg">US${price}</span>
+			{#if price === originalPrice}
+				<span class="text-lg">US${price}</span>
+			{:else}
+				<div class="flex flex-col">
+					<span class="text-lg text-orange-600">US${price}</span>
+
+					<span class="text-lg line-through text-gray-400">US${originalPrice}</span>
+				</div>
+			{/if}
 		</div>
 		<div class="flex flex-col h-[75px] space-y-[8px] py-[8px]">
 			<div class="flex flex-row space-x-[25px]">

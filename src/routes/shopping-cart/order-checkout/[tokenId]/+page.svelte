@@ -33,6 +33,7 @@
 				productName: string;
 				productCategory: string;
 				price: number;
+				originalPrice: number;
 				productSize: string;
 				productQuantity: string;
 			};
@@ -151,21 +152,21 @@
 				<div class="flex flex-row justify-between w-full">
 					<span class="text-lg font-bold"> {data.paymentDetail.line2}</span>
 					{#if data.paymentDetail.line2 === 'Express Delivery'}
-						<span class="text-lg font-bold"> US$15 </span>
+						<span class="text-xl font-bold"> US$15 </span>
 					{:else}
-						<span class="text-lg font-bold"> FREE </span>
+						<span class="text-xl font-bold"> FREE </span>
 					{/if}
 				</div>
 			</div>
 
 			<!-- Discount -->
-			<div class="flex flex-col justify-start w-full p-[20px] space-y-[15px] bg-[#f8fbf6]">
+			<!-- <div class="flex flex-col justify-start w-full p-[20px] space-y-[15px] bg-[#f8fbf6]">
 				<span class="text-2xl font-bold"> Discount </span>
 				<hr />
 				<div class="flex flex-row justify-end w-full">
 					<span class="text-lg font-bold"> US$ {data.orderSummaryDetail.discount}</span>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="flex flex-col justify-start w-full p-[20px] space-y-[15px] bg-[#f8fbf6]">
 				<span class="text-2xl font-bold"> Purchased Items </span>
@@ -178,6 +179,7 @@
 						price={purchaseItemDetail.price}
 						size={purchaseItemDetail.productSize}
 						quantity={purchaseItemDetail.productQuantity}
+						originalPrice={purchaseItemDetail.originalPrice}
 					/>
 					<hr />
 				{/each}

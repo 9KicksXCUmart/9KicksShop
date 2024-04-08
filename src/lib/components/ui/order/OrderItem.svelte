@@ -6,6 +6,7 @@
 	export let price;
 	export let size;
 	export let quantity;
+	export let originalPrice;
 </script>
 
 <!-- OrderItem -->
@@ -18,8 +19,13 @@
 	<div class="flex flex-col w-full space-y-[15px]">
 		<div class="flex flex-row justify-between w-full">
 			<span class="text-xl font-bold"> {productName} </span>
-			{#if price}
+			{#if price === originalPrice || originalPrice === -1}
 				<span class="text-xl font-bold"> US${price} </span>
+			{:else if originalPrice !== 0 && price !== originalPrice}
+				<div class="flex gap-3 items-end">
+					<span class="text-xl font-bold"> US${price} </span>
+					<span class="text-gl line-through text-gray-400"> US${originalPrice} </span>
+				</div>
 			{:else}
 				<span class="text-xl font-bold"> US$0</span>
 			{/if}
