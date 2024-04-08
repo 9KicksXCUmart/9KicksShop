@@ -2,8 +2,7 @@
 	// export let data: data;
 	async function getOrderSummary() {
 		const login = {
-			email: 'locolin99@gmail.com',
-			password: 'colin123'
+		
 		};
 		const response = await fetch(`v1/auth/login`, {
 			method: 'POST',
