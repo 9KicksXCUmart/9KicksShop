@@ -5,7 +5,7 @@
 			email: 'locolin99@gmail.com',
 			password: 'colin123'
 		};
-		const response = await fetch(`/v1/auth/login`, {
+		const response = await fetch(`v1/auth/login`, {
 			method: 'POST',
 			credentials: 'include',
 			body: JSON.stringify(login)
