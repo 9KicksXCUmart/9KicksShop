@@ -12,13 +12,13 @@
 </script>
 
 <!-- Product Preview Item-->
-<div {id} class="flex flex-col" style={styling}>
+<div {id} class="flex flex-col place-items-center w-[210px]" style={styling}>
 	<!-- Product Image -->
-	<div class="flex flex-col place-content-center h-[200px] w-[210px] bg-[#ffffff]">
+	<div class="flex flex-col h-[200px] w-full bg-[#ffffff]">
 		<img src={productImage} alt="Dunk Low" />
 	</div>
 	<div
-		class="flex flex-col place-items-start space-y-[6px] pt-[8px] pb-[20px] px-[10px] bg-[#f8fbf6]"
+		class="flex flex-col w-full place-items-start space-y-[6px] pt-[8px] pb-[20px] px-[10px] bg-[#f8fbf6]"
 	>
 		<!-- Product Name -->
 		<span class="text-sm font-bold max-w-[200px] whitespace-nowrap truncate"> {productName} </span>

@@ -43,7 +43,7 @@
 
 	const paymentOptions = {
 		mode: 'payment',
-		amount: data.orderSummaryData.actualPrice,
+		amount: Math.round(data.orderSummaryData.actualPrice),
 		currency: 'usd',
 		paymentMethodCreation: 'manual',
 		locale: 'en',
@@ -73,7 +73,7 @@
 
 	async function submit() {
 		if (deliverOpt === 'Express Delivery')
-			await elements.update({ amount: data.orderSummaryData.actualPrice + 15 });
+			await elements.update({ amount: Math.round(data.orderSummaryData.actualPrice) + 15 });
 		await elements.submit();
 		const { error, confirmationToken } = await stripe.createConfirmationToken({
 			elements,
