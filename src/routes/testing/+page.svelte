@@ -1,9 +1,7 @@
 <script lang="ts">
 	// export let data: data;
 	async function getOrderSummary() {
-		const login = {
-		
-		};
+		const login = {};
 		const response = await fetch(`v1/auth/login`, {
 			method: 'POST',
 			credentials: 'include',
