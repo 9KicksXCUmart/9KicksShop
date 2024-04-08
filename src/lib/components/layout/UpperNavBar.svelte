@@ -1,10 +1,56 @@
-<script>
+<script lang="ts">
 	import Logo from '$lib/client/images/logo.png';
 	import MobileLogo from '$lib/client/images/mobile_logo.png';
 	import { Input } from '$lib/components/ui/input';
 	import SignInDialog from './account-dialog/SignInDialog.svelte';
+	import { UserRound } from 'lucide-svelte';
+	import { loggedIn, userFirstName } from '$store/loginStore';
+	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
 
+	export let jwtToken: string;
 	let SignInOpen = false;
+
+	$: loggedIn.subscribe(async ($loggedIn) => {
+		if (!$loggedIn) {
+			const isValidToken = await validateToken();
+			if (isValidToken) {
+				const firstName = await getUserFirstName(jwtToken);
+				loggedIn.set(true);
+				userFirstName.set(firstName);
+			} else {
+				loggedIn.set(false);
+			}
+		}
+	});
+
+	async function validateToken() {
+		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/auth/validate-token`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${jwtToken}`
+			}
+		});
+		const result = await response.json();
+		return result.success;
+	}
+
+	async function getUserFirstName(jwtToken: string) {
+		const response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/account-summary`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${jwtToken}`
+			}
+		});
+		const result = await response.json();
+		return result.data.firstName;
+	}
+
+	function logout() {
+		document.cookie = 'jwt=';
+		loggedIn.set(false);
+	}
 </script>
 
 <!-- Top NavBar -->
@@ -48,7 +94,26 @@
 				/>
 			</div>
 		</form>
-
-		<SignInDialog open={SignInOpen} />
+		{#if $loggedIn}
+			<div class="flex flex-col items-end">
+				<div class="flex flex-row gap-1">
+					<a href="/account-summary">
+						<UserRound
+							class="transition hover:opacity-50 hover:scale-105 duration-300 cursor-pointer"
+							strokeWidth={1.75}
+						/>
+					</a>
+					<div class="w-max font-semibold">Hello, {$userFirstName}</div>
+				</div>
+				<button
+					class="whitespace-nowrap pl-2 pr-1 font-normal hover:opacity-50 duration-300"
+					on:click={() => {
+						logout();
+					}}>Logout</button
+				>
+			</div>
+		{:else}
+			<SignInDialog open={SignInOpen} />
+		{/if}
 	</div>
 </nav>
