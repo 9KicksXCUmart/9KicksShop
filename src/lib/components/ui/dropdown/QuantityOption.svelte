@@ -16,11 +16,7 @@
 <!-- Dropdown Menu-->
 <div class="relative">
 	<!-- Control Button -->
-	<button 
-		id="menu-button" 
-		type="button" 
-		on:click={() => (menuOpen = !menuOpen)} {menuOpen}
-	>
+	<button id="menu-button" type="button" on:click={() => (menuOpen = !menuOpen)} {menuOpen}>
 		<div
 			class="flex flex-row justify-between items-center px-[20px] py-[10px] w-[349px] h-[53px] bg-[#ececec]"
 		>
