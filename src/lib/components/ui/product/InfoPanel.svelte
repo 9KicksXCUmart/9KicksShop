@@ -7,12 +7,26 @@
 	export let quantitys;
 	export let rating;
 	export let price;
+	export let isDiscount;
+	export let discountPrice;
+
+	export let selectedSize;
+	export let selectedQuantity;
+
 </script>
 
 <!-- InfoPanel-->
-<div class="flex flex-col w-[400px] h-[360px] space-y-[12px] p-[20px] bg-[#f8fbf6]">
-	<!-- InfoPanel/Price -->
-	<span style="font-size:40px"> US ${price}</span>
+<div class="flex flex-col w-[400px] h-fit space-y-[12px] p-[20px] bg-[#f8fbf6]">
+	{#if isDiscount}
+		<!-- InfoPanel/DiscountPrice -->
+		<div class="flex flex-col">
+			<span style="font-size:40px"> US ${discountPrice}</span>
+			<span class="line-through text-gray-400" style="font-size:36px"> US ${price}</span>
+		</div>
+	{:else}
+		<!-- InfoPanel/Price -->
+		<span style="font-size:40px"> US ${price}</span>
+	{/if}
 	<!-- InfoPanel/Rating -->
 	<div class="flex flex-row place-items-center space-x-[2px]">
 		{#each { length: rating } as _, i}
@@ -34,14 +48,14 @@
 	</div>
 	<!-- InfoPanel/SizeMenu -->
 	<div class="z-20">
-		<SizeOption id="size" menuItems={sizeStock} />
+		<SizeOption id="size" menuItems={sizeStock} bind:selectedSize={selectedSize}/>
 	</div>
 	<!-- InfoPanel/Quantity -->
 	<div class="z-10">
-		<QuantityOption id="quantity" menuItems={quantitys} />
+		<QuantityOption id="quantity" menuItems={quantitys} bind:selectedQuantity={selectedQuantity}/>
 	</div>
 	<!-- InfoPanel/AddtoCartButton-->
-	<div class="flex flex-row place-content-center w-full pt-[20px] pb-[30px]">
-		<RightArrowButton text="Add To Cart" scale="0.9" />
+	<div class="flex flex-row justify-center content-start w-full pt-[20px] pb-[30px]">
+		<RightArrowButton buttonType="Add To Cart" scale="0.9" on:handleOnClick />
 	</div>
 </div>

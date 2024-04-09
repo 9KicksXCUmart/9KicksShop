@@ -1,11 +1,14 @@
 <script>
 	export let menuItems;
+	export let selectedSize = 10.0;
 
 	let category = 'Size';
 	let buttonText = 'US 10';
 	let menuOpen = false;
 
 	const updateButtonText = (newText) => {
+		selectedSize = newText;
+		menuOpen = false;
 		return (buttonText = `US ${newText}`);
 	};
 </script>
@@ -46,7 +49,7 @@
 			{#each menuItems as { size, quantity }}
 				<button id="menu-button" type="button" on:click={updateButtonText(size)}>
 					<div
-						class="flex flex-row block justify-between items-center px-[20px] py-[10px] w-[349px] h-[53px] bg-[#ececec]"
+						class="flex flex-row block justify-between items-center px-[20px] py-[10px] w-[349px] h-[53px] bg-[#ececec] hover:bg-[#a6a6a6]"
 					>
 						<span class="text-xl"> US {size} </span>
 					</div>
