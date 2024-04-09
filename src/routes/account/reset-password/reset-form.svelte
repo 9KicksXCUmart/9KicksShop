@@ -19,14 +19,14 @@
 		<Form.Field {form} name="password">
 			<Form.Control let:attrs>
 				<Form.Label>Password</Form.Label>
-				<Input {...attrs} bind:value={$formData.password} />
+				<Input {...attrs} bind:value={$formData.password} class="bg-gray-100" />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
 		<Form.Field {form} name="newPassword">
 			<Form.Control let:attrs>
 				<Form.Label>New Password</Form.Label>
-				<Input {...attrs} bind:value={$formData.newPassword} />
+				<Input {...attrs} bind:value={$formData.newPassword} class="bg-gray-100" />
 			</Form.Control>
 			<Form.Description>The length of password must be at least 8</Form.Description>
 			<Form.FieldErrors />
@@ -34,12 +34,14 @@
 		<Form.Field {form} name="confirmNewPassword">
 			<Form.Control let:attrs>
 				<Form.Label>Confirm New Password</Form.Label>
-				<Input {...attrs} bind:value={$formData.confirmNewPassword} />
+				<Input {...attrs} bind:value={$formData.confirmNewPassword} class="bg-gray-100" />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
 		<div class="max-w-xl my-4 sm:flex sm:justify-end">
-			<Form.Button class="w-full sm:w-auto">Done</Form.Button>
+			<Form.Button class="w-full sm:w-auto text-black bg-[#ebffdb] hover:bg-[#e6f8d8]"
+				>Done</Form.Button
+			>
 		</div>
 	</div>
 </form>

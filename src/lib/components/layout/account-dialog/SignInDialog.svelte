@@ -7,6 +7,7 @@
 	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
 	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
 	import { loggedIn, userFirstName } from '$store/loginStore';
+	import { goto } from '$app/navigation';
 
 	export let open: boolean;
 	const close = () => {
@@ -23,6 +24,7 @@
 	let emailInput: string = '';
 	let passwordInput: string = '';
 	let isLoadingSignIn: boolean = false;
+	let forgotPasswordEmail: string;
 
 	let isFailedLogin: boolean;
 	let failedMessage: string;
@@ -61,6 +63,28 @@
 		});
 		const result = await response.json();
 		return result.data.firstName;
+	}
+
+	async function forgotPassword() {
+		const response = await fetch(
+			`${PUBLIC_GO_BACKEND_URL}/v1/auth/forgot-password?` +
+				new URLSearchParams({ email: forgotPasswordEmail.toString() }).toString(),
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}
+		);
+		const result = await response.json();
+		console.log(result);
+		return result.data;
+	}
+
+	async function handleForgotPassword() {
+		await forgotPassword();
+		closeAll();
+		// await goto("/account/reset-password")
 	}
 </script>
 
@@ -114,15 +138,16 @@
 						<div class="grid py-4">
 							<div class="grid grid-cols-4 items-center">
 								<Label for="email" class="text-center">Email</Label>
-								<Input id="email" value="" class="col-span-3 bg-gray-500-important" />
+								<Input id="email" bind:value={forgotPasswordEmail} class="col-span-3 bg-gray-100" />
 							</div>
 						</div>
 						<Dialog.Footer class="sm:justify-end">
 							<Button
-								href="/account/create"
-								class="rounded-none bg-[#D3FFD8] text-black"
+								class="rounded-none bg-[#ebffdb] text-black hover:bg-[#e6f8d8]"
 								type="submit"
-								on:click={closeAll}>Send Reset Link</Button
+								on:click={() => {
+									handleForgotPassword();
+								}}>Send Reset Link</Button
 							>
 						</Dialog.Footer>
 					</Dialog.Content>
