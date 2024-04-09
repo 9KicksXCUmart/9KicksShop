@@ -114,8 +114,8 @@
 			alert("Added to shopping cart.");
 		} else {
 			alert("Action failed.");
-		};
-	};
+		}
+	}
 
 	const sortBy = ['Time (New to Old)', 'Time (Old to New)'];
 

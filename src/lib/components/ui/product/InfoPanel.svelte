@@ -16,16 +16,18 @@
 </script>
 
 <!-- InfoPanel-->
-<div class="flex flex-col w-[400px] h-fit space-y-[12px] p-[20px] bg-[#f8fbf6]">
-	{#if isDiscount}
+<div class="flex flex-col w-[400px] h-fit space-y-[12px] p-6 bg-[#f8fbf6] items-center pt-10 pb-20">
+
+	<div class="flex flex-col items-start w-full">
+	{#if !isDiscount}
 		<!-- InfoPanel/DiscountPrice -->
 		<div class="flex flex-col">
-			<span style="font-size:40px"> US ${discountPrice}</span>
-			<span class="line-through text-gray-400" style="font-size:36px"> US ${price}</span>
+			<span class="text-4xl"> US ${200}</span>
+			<span class="line-through text-gray-400 text-2xl"> US ${price}</span>
 		</div>
 	{:else}
 		<!-- InfoPanel/Price -->
-		<span style="font-size:40px"> US ${price}</span>
+		<span class="text-4xl"> US ${price}</span>
 	{/if}
 	<!-- InfoPanel/Rating -->
 	<div class="flex flex-row place-items-center space-x-[2px]">
@@ -46,6 +48,7 @@
 			</svg>
 		{/each}
 	</div>
+	</div>
 	<!-- InfoPanel/SizeMenu -->
 	<div class="z-20">
 		<SizeOption id="size" menuItems={sizeStock} bind:selectedSize={selectedSize}/>
@@ -55,7 +58,7 @@
 		<QuantityOption id="quantity" menuItems={quantitys} bind:selectedQuantity={selectedQuantity}/>
 	</div>
 	<!-- InfoPanel/AddtoCartButton-->
-	<div class="flex flex-row justify-center content-start w-full pt-[20px] pb-[30px]">
+	<div class="flex flex-row justify-center content-start w-full pt-[20px]">
 		<RightArrowButton buttonType="Add To Cart" scale="0.9" on:handleOnClick />
 	</div>
 </div>
