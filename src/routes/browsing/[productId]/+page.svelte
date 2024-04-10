@@ -62,14 +62,14 @@
 		}
 
 		simProduct = await searchSimProduct();
-		console.log("simProduct", simProduct)
-		console.log("simProduct.products", simProduct.products)
+		console.log('simProduct', simProduct);
+		console.log('simProduct.products', simProduct.products);
 		const tempProductList = [];
-		for (var i of simProduct.products){
+		for (var i of simProduct.products) {
 			let simProductRatingData = null;
-			console.log("i[id]", i["id"])
-			simProductRatingData = await getReviewByProduct(i["id"]);
-			console.log("finish await")
+			console.log('i[id]', i['id']);
+			simProductRatingData = await getReviewByProduct(i['id']);
+			console.log('finish await');
 			let simProductRating = 0;
 			let simProductRatingCount = 0;
 			if (simProductRatingData !== null) {
@@ -77,28 +77,27 @@
 				simProductRatingCount = simProductRatingData.reviews.length;
 			}
 			tempProductList.push({
-				brand: i["brand"],
-				buyCount: i["buyCount"],
-				category: i["category"],
-				detailedImageUrl: i["detailedImageUrl"],
-				discountPrice: i["discountPrice"],
-				id: i["id"],
-				imageUrl: i["imageUrl"],
-				productName: i["name"],
-				price: i["price"],
-				publishDate: i["publishDate"],
-				reviewIdList: i["reviewIdList"],
-				size: i["size"],
+				brand: i['brand'],
+				buyCount: i['buyCount'],
+				category: i['category'],
+				detailedImageUrl: i['detailedImageUrl'],
+				discountPrice: i['discountPrice'],
+				id: i['id'],
+				imageUrl: i['imageUrl'],
+				productName: i['name'],
+				price: i['price'],
+				publishDate: i['publishDate'],
+				reviewIdList: i['reviewIdList'],
+				size: i['size'],
 				rating: simProductRating,
 				ratingCount: simProductRatingCount,
-				scale: "0.97"
+				scale: '0.97'
 			});
 		}
-		simProductList = tempProductList
+		simProductList = tempProductList;
 	});
 
 	onMount(async () => {
-
 		reviewData = await getReviewByProduct(productId);
 		rating = reviewData.averageRating.toString();
 		ratingDistri = Object.values(reviewData.ratingPercentage)
@@ -106,7 +105,6 @@
 			.reverse();
 		reviewList = reviewData.reviews;
 		ratingCount = reviewData.reviews.length;
-
 	});
 
 	async function getProductDetail() {
@@ -114,53 +112,53 @@
 			method: 'GET'
 		});
 		const result = await response.json();
-		console.log(response)
+		console.log(response);
 
 		return result.data;
-	};
+	}
 
 	let testReview = 'd0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c';
 
 	async function getReviewByProduct(pId: string) {
 		const paramsObj = {
-			"productId": pId
+			productId: pId
 		};
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/reviews?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
 		);
 
-		console.log(response)
-		try{
+		console.log(response);
+		try {
 			const result = await response.json();
 			return result.data;
-		}catch (e){
-			console.log("failed")
-			console.log(e)
+		} catch (e) {
+			console.log('failed');
+			console.log(e);
 		}
-		return null
+		return null;
 	}
 
 	async function searchSimProduct() {
-		isRecommendProductLoaded = false
+		isRecommendProductLoaded = false;
 		const paramsObj = {
-			"keyword": productBrand,
-			"pageNum": 1,
-			"category": productCat
+			keyword: productBrand,
+			pageNum: 1,
+			category: productCat
 		};
 
-		console.log("product Brand")
-		console.log(productBrand)
-		console.log("product Cat")
-		console.log(productCat)
+		console.log('product Brand');
+		console.log(productBrand);
+		console.log('product Cat');
+		console.log(productCat);
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
 		);
 		const result = await response.json();
-		console.log("searchSimProduct")
+		console.log('searchSimProduct');
 		console.log(result.data.products);
-		isRecommendProductLoaded = true
+		isRecommendProductLoaded = true;
 		return result.data;
 	}
 
@@ -256,10 +254,10 @@
 
 			<SectionHeader text="Similar Items" />
 			{#if simProductList.length !== 0}
-			<div class="flex flex-col items-start w-full h-fit px-[17%]">
-				<PreviewItemCarousel id="Similar Items" products={simProductList} />
-			</div>
-				{/if}
+				<div class="flex flex-col items-start w-full h-fit px-[17%]">
+					<PreviewItemCarousel id="Similar Items" products={simProductList} />
+				</div>
+			{/if}
 			<SectionHeader text="Reviews" />
 			{#if reviewData !== undefined && reviewData != null}
 				<div class="flex flex-row items-center w-full justify-between px-[17%]">

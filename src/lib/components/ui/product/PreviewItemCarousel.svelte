@@ -5,7 +5,6 @@
 
 	export let id = 'undefined';
 	export let products;
-
 </script>
 
 <!-- Product Preview Carousel -->
