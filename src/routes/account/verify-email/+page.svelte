@@ -20,14 +20,12 @@
 		isLoading = true;
 		const result = await verifyEmail();
 		isLoading = false;
-		console.log(result.success);
 		isVerified = result.success;
 		failedMessage = result.message;
 
 		if (isVerified) {
 			countDown = 3;
 			const intervalId = setInterval(() => {
-				console.log(countDown);
 				countDown -= 1;
 				if (countDown == 0) {
 					clearInterval(intervalId);

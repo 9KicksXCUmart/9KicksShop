@@ -150,7 +150,6 @@
 		console.log('clicked');
 		goto(`/browsing/${productId}`);
 	}
-
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">

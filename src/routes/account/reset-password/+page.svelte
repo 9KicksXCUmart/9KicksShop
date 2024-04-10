@@ -44,7 +44,6 @@
 		if (result.success) {
 			countDown = 3;
 			const intervalId = setInterval(() => {
-				console.log(countDown);
 				countDown -= 1;
 				if (countDown == 0) {
 					clearInterval(intervalId);
