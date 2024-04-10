@@ -165,6 +165,7 @@
 			alert('Please sign in to add cart item!');
 			return 1;
 		}
+
 		let response;
 		if (productDiscount) {
 			response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/update`, {
@@ -251,6 +252,7 @@
 			</div>
 
 			<SectionHeader text="Similar Items" />
+    
 			{#if simProductList.length !== 0}
 				<div class="flex flex-col items-start w-full h-fit px-[17%]">
 					<PreviewItemCarousel id="Similar Items" products={simProductList} />

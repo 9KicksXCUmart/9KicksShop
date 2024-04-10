@@ -9,6 +9,7 @@
 	export let size: string;
 	export let quantity: number;
 	export let id: string;
+	export let originalPrice: number;
 
 	export let isLoading: boolean;
 
@@ -20,22 +21,30 @@
 <!-- ShoppingCartItem -->
 <div
 	{id}
-	class="relative flex flex-row items-center w-[775px] px-[17px] space-x-[75px] bg-[#f8fbf6]"
+	class="relative flex flex-row items-center w-[52rem] px-3 pr-16 space-x-[2rem] bg-[#f8fbf6]"
 >
 	<!-- ShoppingCartItem/Image -->
 	<div>
-		<img src={productImage} alt="Product" class="w-[290px] h-[270px]" />
+		<img src={productImage} alt="Product" class="object-contain w-80 h-64" />
+		<!--		<img src={productImage} alt="Product" class="w-[290px] h-[270px]" />-->
 	</div>
 	<!-- ShoppingCartItem/CartInfo -->
-	<div class="flex flex-col w-[370px] space-y-[16px]">
-		<div class="flex flex-row w-[304px] place-content-between">
+	<div class="flex flex-col w-full space-y-[16px]">
+		<div class="flex flex-row place-content-between">
 			<div class="flex flex-col space-y-[8px]">
-				<span class="max-w-[200px] text-xl font-bold whitespace-nowrap truncate">
+				<span class="w-full text-xl font-bold">
 					{productName}
 				</span>
 				<span class="text-lg"> {productCategory} </span>
 			</div>
-			<span class="text-lg">US${price}</span>
+			{#if price === originalPrice}
+				<span class="text-lg">US${price}</span>
+			{:else}
+				<div class="flex flex-col">
+					<span class="text-lg text-orange-600">US${price}</span>
+					<span class="text-lg line-through text-gray-400">US${originalPrice}</span>
+				</div>
+			{/if}
 		</div>
 		<div class="flex flex-col h-[75px] space-y-[8px] py-[8px]">
 			<div class="flex flex-row space-x-[25px]">

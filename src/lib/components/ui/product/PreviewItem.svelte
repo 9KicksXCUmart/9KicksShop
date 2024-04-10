@@ -1,5 +1,5 @@
 <script>
-	export let id = 'undefined';
+	export let id;
 	export let productImage;
 	export let productName;
 	export let category;
