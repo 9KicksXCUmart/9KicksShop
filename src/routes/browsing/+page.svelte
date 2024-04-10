@@ -16,6 +16,7 @@
 		'Rating (Low to High)',
 		'Rating (High to Low)'
 	];
+
 	let genders = [
 		{ gender: "Men's", check: false },
 		{ gender: "Women's", check: false },
@@ -149,6 +150,7 @@
 		console.log('clicked');
 		goto(`/browsing/${productId}`);
 	}
+
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">

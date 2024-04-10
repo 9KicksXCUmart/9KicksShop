@@ -12,7 +12,7 @@
 	{#if browser}
 		<Carousel particlesToShow={5} particlesToScroll={1}>
 			<!-- Custom Next Arrow-->
-			<div
+			<button
 				slot="next"
 				let:showNextPage
 				on:click={showNextPage}
@@ -31,10 +31,10 @@
 					stroke-linecap="square"
 					stroke-linejoin="arcs"><path d="M13 17l5-5-5-5M6 17l5-5-5-5" /></svg
 				>
-			</div>
+			</button>
 
 			<!-- Custom Prev Arrow-->
-			<div
+			<button
 				slot="prev"
 				let:showPrevPage
 				on:click={showPrevPage}
@@ -53,7 +53,7 @@
 					stroke-linecap="square"
 					stroke-linejoin="arcs"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" /></svg
 				>
-			</div>
+			</button>
 
 			<!-- Remove Dot -->
 			<div slot="dots" class="custom-dots"></div>
