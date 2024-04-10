@@ -181,7 +181,7 @@
 				<div class="w-full text-3xl text-center">No Results</div>
 			{:else}
 				<div class="grid grid-cols-4 w-full justify-between gap-y-[20px]">
-					{#each products as { id, imageUrl, name, category, price, isDiscount, discountPrice }}n
+					{#each products as { id, imageUrl, name, category, price, isDiscount, discountPrice }}
 						<button
 							on:click={() => {
 								routeToProductDetail(id);
