@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import ProductPreviewItem from '$lib/components/ui/product/PreviewItem.svelte';
 	import Carousel from 'svelte-carousel';
 	import { browser } from '$app/environment';
