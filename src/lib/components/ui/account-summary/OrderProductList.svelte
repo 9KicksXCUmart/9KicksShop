@@ -15,6 +15,7 @@
 	export let orderItemDetails: OrderItemDetail[];
 	export let reviewList: Record<string, ReviewResponse>;
 	export let jwtToken: string;
+	export let totalPrice: string;
 
 	let config = {
 		readOnly: false,
@@ -176,7 +177,7 @@
 
 	<div class="flex flex-col w-full text-right items-end pt-[1rem]">
 		<div>Total Price</div>
-		<div class="text-xl font-medium">$999.8</div>
+		<div class="text-xl font-medium">{totalPrice}</div>
 	</div>
 </div>
 

@@ -6,8 +6,9 @@
 	import { UserRound } from 'lucide-svelte';
 	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
 	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
-	import { loggedIn, userFirstName } from '$store/loginStore';
-	import { goto } from '$app/navigation';
+	import { userFirstName } from '$store/loginStore';
+	import { createEventDispatcher } from 'svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	export let open: boolean;
 	const close = () => {
@@ -30,6 +31,8 @@
 	let isFailedLogin: boolean;
 	let failedMessage: string;
 
+	const dispatch = createEventDispatcher();
+
 	async function signIn() {
 		isLoadingSignIn = true;
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/auth/login`, {
@@ -41,9 +44,9 @@
 		});
 		const result = await response.json();
 		if (result.success) {
+			dispatch('isLogin');
 			document.cookie = `jwt=${result.token};SameSite=None;Secure;path=/;`;
 			const firstName = await getUserFirstName(result.token);
-			loggedIn.set(true);
 			userFirstName.set(firstName);
 			close();
 		} else {
@@ -78,7 +81,6 @@
 			}
 		);
 		const result = await response.json();
-		console.log(result);
 		return result.data;
 	}
 

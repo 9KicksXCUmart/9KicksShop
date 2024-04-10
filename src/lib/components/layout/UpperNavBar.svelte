@@ -4,28 +4,17 @@
 	import { Input } from '$lib/components/ui/input';
 	import SignInDialog from './account-dialog/SignInDialog.svelte';
 	import { UserRound } from 'lucide-svelte';
-	import { loggedIn, userFirstName } from '$store/loginStore';
+	import { loggedOut, loggedIn, userFirstName } from '$store/loginStore';
 	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
+	import { ShoppingBag, X } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { searchKeywordStore } from '$store/searchKeywordStore';
 
+  export let isLogin: boolean;  
 	export let jwtToken: string;
+	export let user: string;
 	let SignInOpen = false;
-
-	//
-	// $: loggedIn.subscribe(async ($loggedIn) => {
-	// 	console.log("LOGGED IN", $loggedIn)
-	// 	if (!$loggedIn) {
-	// 		const isValidToken = await validateToken();
-	// 		if (isValidToken) {
-	// 			const firstName = await getUserFirstName(jwtToken);
-	// 			loggedIn.set(true);
-	// 			userFirstName.set(firstName);
-	// 		} else {
-	// 			loggedIn.set(false);
-	// 		}
-	// 	}
-	// });
+	let triggerLogin = false;
 
 	async function validateToken() {
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/auth/validate-token`, {
@@ -52,8 +41,18 @@
 	}
 
 	function logout() {
+		$loggedOut = true;
+		triggerLogin = false;
 		document.cookie = 'jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-		loggedIn.set(false);
+		goto('/');
+	}
+	function handleLogin() {
+		triggerLogin = true;
+	}
+
+	$: if (user) {
+		userFirstName.set('');
+		triggerLogin = false;
 	}
 
 	let searchKeyword: string;
@@ -90,7 +89,6 @@
 				class="h-[73px] w-[214px] min-h-[73px] min-w-[214px] hidden sm:flex"
 			/><img src={MobileLogo} alt="9Kicks" class="h-[30px] sm:hidden flex" /></a
 		>
-
 		<form class="w-full ml-8 mr-5">
 			<div
 				class="relative flex flex-row items-center justify-between text-gray-400 focus-within:text-gray-600"
@@ -124,7 +122,7 @@
 				/>
 			</div>
 		</form>
-		{#if $loggedIn}
+		{#if (isLogin && !$loggedOut) || triggerLogin}
 			<div class="flex flex-col items-end">
 				<div class="flex flex-row gap-1">
 					<a href="/account-summary">
@@ -133,7 +131,11 @@
 							strokeWidth={1.75}
 						/>
 					</a>
-					<div class="w-max font-semibold">Hello, {$userFirstName}</div>
+					{#if user === ''}
+						<div class="w-max font-semibold">Hello,{$userFirstName}</div>
+					{:else}
+						<div class="w-max font-semibold">Hello,{user}</div>
+					{/if}
 				</div>
 				<button
 					class="whitespace-nowrap pl-2 pr-1 font-normal hover:opacity-50 duration-300"
@@ -143,8 +145,15 @@
 					>Logout
 				</button>
 			</div>
-		{:else if $loggedIn === false}
-			<SignInDialog open={SignInOpen} />
+			<a href="/shopping-cart" class="duration-200 pl-5">
+				<ShoppingBag strokeWidth={1.75} class="hover:opacity-50 hover:scale-105 duration-300" />
+			</a>
+		{:else}
+			<SignInDialog open={SignInOpen} on:isLogin={handleLogin} />
+			<div class="duration-200 pl-5">
+				<X strokeWidth={1.75} class="absolute text-red-400" />
+				<ShoppingBag strokeWidth={1.75} />
+			</div>
 		{/if}
 	</div>
 </nav>

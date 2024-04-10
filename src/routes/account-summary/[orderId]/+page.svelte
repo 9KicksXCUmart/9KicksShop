@@ -127,6 +127,7 @@
 					<div class="w-full" use:motion>
 						<OrderProductList
 							jwtToken={data.jwtToken || ''}
+							totalPrice={orderDetails.totalPrice}
 							{reviewList}
 							orderItemDetails={orderDetails.orderItemDetail}
 						/>

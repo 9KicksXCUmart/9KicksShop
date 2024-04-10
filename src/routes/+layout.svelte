@@ -3,7 +3,6 @@
 	import UpperNavBar from '$lib/components/layout/UpperNavBar.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import '../app.css';
-
 	export let data;
 </script>
 
@@ -11,8 +10,8 @@
 	<title>9Kicks</title>
 </svelte:head>
 <div class="min-h-[90vh]">
-	<UpperNavBar jwtToken={data.jwtToken || ''} />
-	<LowerNavBar />
+	<UpperNavBar isLogin={data.isLoginedIn} user={data.user} jwtToken={data.jwtToken || ''} />
+	<LowerNavBar isLogin={data.isLoginedIn} />
 	<slot />
 </div>
 <Footer />
