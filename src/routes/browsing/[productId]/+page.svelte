@@ -15,6 +15,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -46,6 +47,8 @@
 	let simProductList = [];
 
 	let isRecommendProductLoaded = false;
+
+	let addCartMessage = '';
 
 	onMount(async () => {
 		productDetail = await getProductDetail();
@@ -161,7 +164,8 @@
 
 	async function addToCart() {
 		if (data.jwtToken === undefined) {
-			alert('Please sign in to add cart item!');
+			addCartMessage = 'Please sign in to add cart item!';
+			// alert('Please sign in to add cart item!');
 			return 1;
 		}
 		let response;
@@ -205,9 +209,11 @@
 
 		const result = await response.json();
 		if (result.data) {
-			alert('Added to shopping cart.');
+			addCartMessage = 'Added to shopping cart.';
+			// alert('Added to shopping cart.');
 		} else {
-			alert('Action failed.');
+			addCartMessage = 'Action failed.';
+			// alert('Action failed.');
 		}
 	}
 
@@ -217,6 +223,10 @@
 
 	let selectedSize;
 	let selectedQuantity;
+
+	function handleBackPage() {
+		goto('/browsing');
+	}
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
@@ -225,7 +235,7 @@
 			<!-- Return to Previous Page-->
 			<div class="flex w-full h-fit px-[17%] pt-[10px]">
 				<div class="flex flex-row justify-start w-full -py-[30px]">
-					<LeftArrowButton buttonType="Previous Page" />
+					<LeftArrowButton buttonType="Previous Page" on:handleBackPage={handleBackPage} />
 				</div>
 			</div>
 			<ProductHeader {productName} gender={productCat} />
@@ -235,6 +245,7 @@
 					<ProductImageCarousel {productImages} />
 					<!-- InfoPanel-->
 					<InfoPanel
+						bind:addCartMessage
 						{sizeStock}
 						productSize={productDetail.size}
 						{quantitys}

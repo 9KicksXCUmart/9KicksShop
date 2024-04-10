@@ -45,7 +45,7 @@
 		const result = await response.json();
 		if (result.success) {
 			dispatch('isLogin');
-			document.cookie = `jwt=${result.token};SameSite=None;Secure`;
+			document.cookie = `jwt=${result.token};SameSite=None;Secure;path=/;`;
 			const firstName = await getUserFirstName(result.token);
 			userFirstName.set(firstName);
 			close();

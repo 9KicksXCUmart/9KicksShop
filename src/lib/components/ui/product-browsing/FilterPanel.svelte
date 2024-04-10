@@ -71,5 +71,8 @@
 				<div class="text-sm">Max Price</div>
 			</div>
 		</div>
+		<div class="flex flex-col items-center p-5">
+			<button class="bg-gray-100 px-3 py-1 text-sm" on:click={filterProducts}>Set Price</button>
+		</div>
 	</div>
 </div>

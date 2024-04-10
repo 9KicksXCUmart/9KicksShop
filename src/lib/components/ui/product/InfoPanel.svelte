@@ -13,20 +13,21 @@
 
 	export let selectedSize;
 	export let selectedQuantity;
+	export let addCartMessage;
 </script>
 
 <!-- InfoPanel-->
 <div class="flex flex-col w-[400px] h-fit space-y-[12px] p-6 bg-[#f8fbf6] items-center pt-10 pb-20">
 	<div class="flex flex-col items-start w-full">
-		{#if !isDiscount}
+		{#if isDiscount}
 			<!-- InfoPanel/DiscountPrice -->
-			<div class="flex flex-col">
-				<span class="text-4xl"> US ${200}</span>
-				<span class="line-through text-gray-400 text-2xl"> US ${price}</span>
+			<div class="flex flex-col gap-2 pb-2">
+				<span class="text-4xl text-orange-600"> US${discountPrice}</span>
+				<span class="line-through text-gray-400 text-2xl"> US${price}</span>
 			</div>
 		{:else}
 			<!-- InfoPanel/Price -->
-			<span class="text-4xl"> US ${price}</span>
+			<span class="text-4xl"> US${price}</span>
 		{/if}
 		<!-- InfoPanel/Rating -->
 		<div class="flex flex-row place-items-center space-x-[2px]">
@@ -69,4 +70,10 @@
 			</div>
 		{/if}
 	</div>
+
+	{#if addCartMessage !== '' || addCartMessage !== typeof undefined}
+		<div class="text-xl flex flex-row items-center justify-center">
+			<div class="mt-3 p-3 text-sm bg-white">{addCartMessage}</div>
+		</div>
+	{/if}
 </div>

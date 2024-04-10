@@ -8,7 +8,9 @@
 	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
 	import { ShoppingBag, X } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
-	export let isLogin: boolean;
+	import { searchKeywordStore } from '$store/searchKeywordStore';
+
+  export let isLogin: boolean;  
 	export let jwtToken: string;
 	export let user: string;
 	let SignInOpen = false;
@@ -52,6 +54,29 @@
 		userFirstName.set('');
 		triggerLogin = false;
 	}
+
+	let searchKeyword: string;
+
+	$: {
+		console.log(searchKeyword);
+	}
+
+	function handleEnterPress(event) {
+		if (event.key === 'Enter') {
+			console.log('ENTER PRESSED');
+			handleSearchKeyword();
+		}
+	}
+	function handleSearchKeyword() {
+		searchKeywordStore.set(searchKeyword);
+		console.log($searchKeywordStore);
+		setTimeout(() => goto('/browsing'), 0);
+	}
+
+	function handleOnBlur() {
+		searchKeywordStore.set('');
+		searchKeyword = '';
+	}
 </script>
 
 <!-- Top NavBar -->
@@ -91,6 +116,9 @@
 				<Input
 					placeholder="Search"
 					class="pl-10 pr-3 font-semibold placeholder-gray-500 text-black"
+					bind:value={searchKeyword}
+					on:keydown={handleEnterPress}
+					on:blur={handleOnBlur}
 				/>
 			</div>
 		</form>
@@ -113,8 +141,9 @@
 					class="whitespace-nowrap pl-2 pr-1 font-normal hover:opacity-50 duration-300"
 					on:click={() => {
 						logout();
-					}}>Logout</button
-				>
+					}}
+					>Logout
+				</button>
 			</div>
 			<a href="/shopping-cart" class="duration-200 pl-5">
 				<ShoppingBag strokeWidth={1.75} class="hover:opacity-50 hover:scale-105 duration-300" />
