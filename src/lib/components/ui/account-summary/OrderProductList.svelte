@@ -177,7 +177,7 @@
 
 	<div class="flex flex-col w-full text-right items-end pt-[1rem]">
 		<div>Total Price</div>
-		<div class="text-xl font-medium">{totalPrice}</div>
+		<div class="text-xl font-medium">US${totalPrice}</div>
 	</div>
 </div>
 
