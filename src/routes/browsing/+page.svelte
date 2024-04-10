@@ -10,6 +10,7 @@
 	import { goto } from '$app/navigation';
 	import { categoryStore, searchKeywordStore } from '$store/searchKeywordStore';
 	import { paymentMethodId } from '$store/paymentStore';
+	import { Input } from '$lib/components/ui/input';
 
 	const menuItems = [
 		'Alphabetical (A to Z)',
@@ -68,6 +69,7 @@
 
 	let products = [];
 	let isLoading = true;
+	let searchKeyword: string;
 
 	onMount(async () => {
 		await handleFilterProducts();
@@ -115,20 +117,21 @@
 		return filter;
 	}
 
-	$: {
-		tempKw;
-		handleFilterProducts();
-	}
+	// $: {
+	// 	handleFilterProducts();
+	// 	tempKw;
+	// }
 
-	let tempKw: string;
-	searchKeywordStore.subscribe((keyword) => (tempKw = keyword));
+	// let tempKw: string;
+	// searchKeywordStore.subscribe((keyword) => (tempKw = keyword));
 	let tempCategory: string;
 	categoryStore.subscribe((cat) => (tempCategory = cat));
 
 	async function searchProducts() {
 		const filter = checkFilter();
 
-		filter.keyword = tempKw;
+		filter.keyword = searchKeyword;
+		console.log('filter');
 		console.log(filter);
 		if (!filter.keyword) delete filter.keyword;
 		const url = new URL(`${PUBLIC_GO_BACKEND_URL}/v1/products`);
@@ -147,14 +150,39 @@
 	}
 
 	function routeToProductDetail(productId: string) {
-		goto(`/browsing/${productId}`);
+		setTimeout(() => goto(`/browsing/${productId}`), 0);
+	}
+
+	function handleEnterPress(event) {
+		if (event.key === 'Enter') {
+			console.log('ENTER PRESSED');
+			// handleSearchKeyword();
+			handleFilterProducts();
+		}
+	}
+	// function handleSearchKeyword() {
+	// 	// searchKeywordStore.set(searchKeyword);
+	// 	console.log("search keyword", $searchKeywordStore);
+	// }
+
+	function handleOnBlur() {
+		searchKeywordStore.set('');
+		searchKeyword = '';
 	}
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
 	<div class="flex flex-col items-center w-[1920px] h-fit">
 		<PageHeader text="Sneakers" />
-
+		<div class="">
+			<Input
+				placeholder="Search"
+				class="font-semibold placeholder-gray-500 text-black bg-gray-100 w-96"
+				bind:value={searchKeyword}
+				on:keydown={handleEnterPress}
+				on:blur={handleOnBlur}
+			/>
+		</div>
 		<div class="flex flex-row justify-end w-full h-fit z-10 px-[17%]">
 			<SortOption {menuItems} />
 		</div>
