@@ -182,7 +182,7 @@
 						totalPrice={data.orderSummaryData.actualPrice + 15}
 						itemCount={data.orderSummaryData.itemCount}
 						shippingFee={data.orderSummaryData.shippingFee + 15}
-						discount={data.orderSummaryData.discount}
+						discount={Number(data.orderSummaryData.discount.toFixed(2))}
 						buttonType="Confirm"
 						on:handleOnClick={submit}
 					/>
@@ -193,7 +193,7 @@
 							totalPrice={data.orderSummaryData.actualPrice}
 							itemCount={data.orderSummaryData.itemCount}
 							shippingFee={data.orderSummaryData.shippingFee}
-							discount={data.orderSummaryData.discount}
+							discount={Number(data.orderSummaryData.discount.toFixed(2))}
 							buttonType="Confirm"
 							on:handleOnClick={submit}
 						/>

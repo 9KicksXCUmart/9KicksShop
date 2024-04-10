@@ -107,7 +107,7 @@
 						itemCount={data.orderSummaryData.itemCount}
 						shippingFee={data.orderSummaryData.shippingFee}
 						totalItemPrice={data.orderSummaryData.totalPrice}
-						discount={data.orderSummaryData.discount}
+						discount={data.orderSummaryData.discount.toFixed(2)}
 						buttonType="Checkout"
 						on:handleOnClick={processCheckOut}
 					/>
