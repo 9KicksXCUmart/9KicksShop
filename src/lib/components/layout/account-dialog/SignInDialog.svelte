@@ -25,6 +25,7 @@
 	let passwordInput: string = '';
 	let isLoadingSignIn: boolean = false;
 	let forgotPasswordEmail: string;
+	let isLoadingFp: boolean = false;
 
 	let isFailedLogin: boolean;
 	let failedMessage: string;
@@ -82,7 +83,9 @@
 	}
 
 	async function handleForgotPassword() {
+		isLoadingFp = true;
 		await forgotPassword();
+		isLoadingFp = false;
 		closeAll();
 		// await goto("/account/reset-password")
 	}
@@ -142,13 +145,17 @@
 							</div>
 						</div>
 						<Dialog.Footer class="sm:justify-end">
-							<Button
-								class="rounded-none bg-[#ebffdb] text-black hover:bg-[#e6f8d8]"
-								type="submit"
-								on:click={() => {
+							{#if isLoadingFp}
+								<LoadingCircle size="30" />
+							{:else}
+								<Button
+									class="rounded-none bg-[#ebffdb] text-black hover:bg-[#e6f8d8]"
+									type="submit"
+									on:click={() => {
 									handleForgotPassword();
-								}}>Send Reset Link</Button
-							>
+								}}>Send Reset Link
+								</Button>
+							{/if}
 						</Dialog.Footer>
 					</Dialog.Content>
 				</Dialog.Root>

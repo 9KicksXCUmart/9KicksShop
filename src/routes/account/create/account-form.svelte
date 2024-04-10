@@ -20,9 +20,6 @@
 	let isLoading: boolean = false;
 	let failedMessage: string = '';
 
-	// $formData.password = "colin123"
-	// $formData.email = "bcheng8798@gmail.com"
-
 	async function signUp() {
 		isLoading = true;
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/auth/signup`, {

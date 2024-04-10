@@ -1,5 +1,7 @@
 <script>
-	import { ShoppingBag } from 'lucide-svelte';
+	import { ShoppingBag, X } from 'lucide-svelte';
+	import { loggedIn } from '$store/loginStore';
+
 </script>
 
 <!-- Bottom NavBar -->
@@ -39,8 +41,15 @@
 				</div>
 			</li>
 		</ul>
-		<a href="/shopping-cart" class="duration-200">
-			<ShoppingBag strokeWidth={1.75} class="hover:opacity-50 hover:scale-105 duration-300" />
-		</a>
+		{#if $loggedIn}
+			<a href="/shopping-cart" class="duration-200">
+				<ShoppingBag strokeWidth={1.75} class="hover:opacity-50 hover:scale-105 duration-300" />
+			</a>
+		{:else}
+			<div class="duration-200">
+				<X strokeWidth={1.75} class="absolute text-red-400" />
+				<ShoppingBag strokeWidth={1.75}/>
+			</div>
+		{/if}
 	</div>
 </nav>

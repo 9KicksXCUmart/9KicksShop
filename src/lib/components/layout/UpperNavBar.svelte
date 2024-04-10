@@ -10,18 +10,20 @@
 	export let jwtToken: string;
 	let SignInOpen = false;
 
-	$: loggedIn.subscribe(async ($loggedIn) => {
-		if (!$loggedIn) {
-			const isValidToken = await validateToken();
-			if (isValidToken) {
-				const firstName = await getUserFirstName(jwtToken);
-				loggedIn.set(true);
-				userFirstName.set(firstName);
-			} else {
-				loggedIn.set(false);
-			}
-		}
-	});
+	//
+	// $: loggedIn.subscribe(async ($loggedIn) => {
+	// 	console.log("LOGGED IN", $loggedIn)
+	// 	if (!$loggedIn) {
+	// 		const isValidToken = await validateToken();
+	// 		if (isValidToken) {
+	// 			const firstName = await getUserFirstName(jwtToken);
+	// 			loggedIn.set(true);
+	// 			userFirstName.set(firstName);
+	// 		} else {
+	// 			loggedIn.set(false);
+	// 		}
+	// 	}
+	// });
 
 	async function validateToken() {
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/auth/validate-token`, {
@@ -48,9 +50,10 @@
 	}
 
 	function logout() {
-		document.cookie = 'jwt=';
+		document.cookie = 'jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		loggedIn.set(false);
 	}
+
 </script>
 
 <!-- Top NavBar -->
@@ -112,7 +115,7 @@
 					}}>Logout</button
 				>
 			</div>
-		{:else}
+		{:else if $loggedIn === false}
 			<SignInDialog open={SignInOpen} />
 		{/if}
 	</div>
