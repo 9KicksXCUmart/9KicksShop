@@ -147,17 +147,12 @@
 			category: productCat
 		};
 
-		console.log('product Brand');
-		console.log(productBrand);
-		console.log('product Cat');
-		console.log(productCat);
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
 		);
 		const result = await response.json();
-		console.log('searchSimProduct');
-		console.log(result.data.products);
+
 		isRecommendProductLoaded = true;
 		return result.data;
 	}
@@ -256,6 +251,12 @@
 			{#if simProductList.length !== 0}
 				<div class="flex flex-col items-start w-full h-fit px-[17%]">
 					<PreviewItemCarousel id="Similar Items" products={simProductList} />
+				</div>
+			{:else}
+				<div class="flex flex-col w-full px-[17%]">
+					<div class="flex flex-col w-full items-center py-[5%]">
+						<span class="text-3xl font-bold"> No similar items </span>
+					</div>
 				</div>
 			{/if}
 			<SectionHeader text="Reviews" />
