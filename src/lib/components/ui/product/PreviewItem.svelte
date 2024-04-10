@@ -28,7 +28,7 @@
 		<!-- Product Price -->
 		{#if isDiscount}
 			<div class="flex flex-row gap-1 items-baseline">
-				<span class="text-sm  text-orange-600"> US${discountPrice} </span>
+				<span class="text-sm text-orange-600"> US${discountPrice} </span>
 				<span class="text-xs line-through"> US${price} </span>
 			</div>
 		{:else}

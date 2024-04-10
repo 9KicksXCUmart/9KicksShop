@@ -62,34 +62,33 @@
 		console.log(searchKeyword);
 	}
 
-	function handleEnterPress(event){
+	function handleEnterPress(event) {
 		if (event.key === 'Enter') {
-			console.log("ENTER PRESSED")
-			handleSearchKeyword()
+			console.log('ENTER PRESSED');
+			handleSearchKeyword();
 		}
 	}
 	function handleSearchKeyword() {
 		searchKeywordStore.set(searchKeyword);
-		console.log($searchKeywordStore)
+		console.log($searchKeywordStore);
 		setTimeout(() => goto('/browsing'), 0);
 	}
 
-	function handleOnBlur(){
-		searchKeywordStore.set("");
-		searchKeyword = ""
+	function handleOnBlur() {
+		searchKeywordStore.set('');
+		searchKeyword = '';
 	}
-
 </script>
 
 <!-- Top NavBar -->
 <nav class="flex justify-center bg-[#f8fbf6]">
 	<div class="flex items-center justify-between px-[17%] py-[1%] w-full">
 		<a href="/"
-		><img
-			src={Logo}
-			alt="9Kicks"
-			class="h-[73px] w-[214px] min-h-[73px] min-w-[214px] hidden sm:flex"
-		/><img src={MobileLogo} alt="9Kicks" class="h-[30px] sm:hidden flex" /></a
+			><img
+				src={Logo}
+				alt="9Kicks"
+				class="h-[73px] w-[214px] min-h-[73px] min-w-[214px] hidden sm:flex"
+			/><img src={MobileLogo} alt="9Kicks" class="h-[30px] sm:hidden flex" /></a
 		>
 
 		<form class="w-full ml-8 mr-5">
@@ -140,9 +139,9 @@
 					class="whitespace-nowrap pl-2 pr-1 font-normal hover:opacity-50 duration-300"
 					on:click={() => {
 						logout();
-					}}>Logout
-				</button
-				>
+					}}
+					>Logout
+				</button>
 			</div>
 		{:else if $loggedIn === false}
 			<SignInDialog open={SignInOpen} />

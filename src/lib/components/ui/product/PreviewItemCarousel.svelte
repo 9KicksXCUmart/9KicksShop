@@ -10,7 +10,6 @@
 	function routeToProductDetail(productId: string) {
 		goto(`/browsing/${productId}`);
 	}
-
 </script>
 
 <!-- Product Preview Carousel -->
@@ -68,19 +67,19 @@
 			{#each products as product}
 				<button
 					on:click={() => {
-								routeToProductDetail(product.id);
-							}}
+						routeToProductDetail(product.id);
+					}}
 					class="hover:scale-105 duration-300"
 				>
-				<ProductPreviewItem
-					productImage={product.imageUrl}
-					productName={product.productName}
-					category={product.category}
-					price={product.price}
-					rating={product.rating}
-					ratingCount={product.ratingCount}
-					scale={product.scale}
-				/>
+					<ProductPreviewItem
+						productImage={product.imageUrl}
+						productName={product.productName}
+						category={product.category}
+						price={product.price}
+						rating={product.rating}
+						ratingCount={product.ratingCount}
+						scale={product.scale}
+					/>
 				</button>
 			{/each}
 		</Carousel>

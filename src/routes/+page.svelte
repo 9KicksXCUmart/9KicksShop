@@ -59,7 +59,7 @@
 			});
 		});
 		mostPopularProducts = mostPopularExtract;
-		console.log(mostPopularProducts)
+		console.log(mostPopularProducts);
 
 		// carouselProducts = products;
 	});

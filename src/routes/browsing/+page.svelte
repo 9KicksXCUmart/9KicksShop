@@ -103,7 +103,7 @@
 				selectedGender = gender.gender;
 			}
 		});
-		filter.category = tempCategory
+		filter.category = tempCategory;
 		if (selectedGender !== '') filter.category = selectedGender;
 
 		// categoryStore
@@ -115,8 +115,8 @@
 	}
 
 	$: {
-		tempKw
-		handleFilterProducts()
+		tempKw;
+		handleFilterProducts();
 	}
 
 	let tempKw: string;
@@ -127,9 +127,9 @@
 	async function searchProducts() {
 		const filter = checkFilter();
 
-		filter.keyword = tempKw
+		filter.keyword = tempKw;
 		console.log(filter);
-		if(!filter.keyword) delete filter.keyword
+		if (!filter.keyword) delete filter.keyword;
 
 		const url = new URL(`${PUBLIC_GO_BACKEND_URL}/v1/products`);
 		url.search = new URLSearchParams(filter).toString();
@@ -149,7 +149,6 @@
 	function routeToProductDetail(productId: string) {
 		goto(`/browsing/${productId}`);
 	}
-
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">

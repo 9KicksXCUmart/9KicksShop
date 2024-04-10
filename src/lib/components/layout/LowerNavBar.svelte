@@ -4,11 +4,10 @@
 	import { categoryStore } from '$store/searchKeywordStore.js';
 	import { goto } from '$app/navigation';
 
-	function handleOnClick(keyword: string){
-		categoryStore.set(keyword)
-		goto("/browsing")
+	function handleOnClick(keyword: string) {
+		categoryStore.set(keyword);
+		goto('/browsing');
 	}
-
 </script>
 
 <!-- Bottom NavBar -->
@@ -25,7 +24,11 @@
 			</li>
 			<li class="relative pr-3 py-2">
 				<div class="w-max group transition duration-300 cursor-pointer">
-					<button on:click={()=>{handleOnClick("Men's")}}>Men's</button>
+					<button
+						on:click={() => {
+							handleOnClick("Men's");
+						}}>Men's</button
+					>
 					<span
 						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
 					></span>
@@ -33,7 +36,11 @@
 			</li>
 			<li class="relative pr-3 py-2">
 				<div class="w-max group transition duration-300 cursor-pointer">
-					<button on:click={()=>{handleOnClick("Women's")}}>Women's</button>
+					<button
+						on:click={() => {
+							handleOnClick("Women's");
+						}}>Women's</button
+					>
 					<span
 						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
 					></span>
@@ -41,7 +48,11 @@
 			</li>
 			<li class="relative pr-3 py-2">
 				<div class="w-max group transition duration-300 cursor-pointer">
-					<button on:click={()=>{handleOnClick("Kid's")}}>Kid's</button>
+					<button
+						on:click={() => {
+							handleOnClick("Kid's");
+						}}>Kid's</button
+					>
 					<span
 						class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[0.15rem] bg-black"
 					></span>

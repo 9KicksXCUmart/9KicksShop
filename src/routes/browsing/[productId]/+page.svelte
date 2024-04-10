@@ -48,7 +48,7 @@
 
 	let isRecommendProductLoaded = false;
 
-	let addCartMessage = ""
+	let addCartMessage = '';
 
 	onMount(async () => {
 		productDetail = await getProductDetail();
@@ -147,7 +147,7 @@
 			pageNum: 1,
 			category: productCat
 		};
-    
+
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
@@ -164,7 +164,7 @@
 
 	async function addToCart() {
 		if (data.jwtToken === undefined) {
-			addCartMessage = "Please sign in to add cart item!"
+			addCartMessage = 'Please sign in to add cart item!';
 			// alert('Please sign in to add cart item!');
 			return 1;
 		}
@@ -209,10 +209,10 @@
 
 		const result = await response.json();
 		if (result.data) {
-			addCartMessage = "Added to shopping cart."
+			addCartMessage = 'Added to shopping cart.';
 			// alert('Added to shopping cart.');
 		} else {
-			addCartMessage = "Action failed."
+			addCartMessage = 'Action failed.';
 			// alert('Action failed.');
 		}
 	}

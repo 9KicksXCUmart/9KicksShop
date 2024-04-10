@@ -62,17 +62,17 @@
 		<span class="text-2xl font-bold py-[5px]"> Price </span>
 		<div class="flex flex-row gap-3">
 			<div class="flex flex-col items-center">
-				<Input class="bg-gray-100 box-border h-8" bind:value={minPrice}/>
+				<Input class="bg-gray-100 box-border h-8" bind:value={minPrice} />
 				<div class="text-sm">Min Price</div>
 			</div>
 			<div>-</div>
 			<div class="flex flex-col items-center">
-				<Input class="bg-gray-100 box-border h-8" bind:value={maxPrice}/>
+				<Input class="bg-gray-100 box-border h-8" bind:value={maxPrice} />
 				<div class="text-sm">Max Price</div>
 			</div>
 		</div>
 		<div class="flex flex-col items-center p-5">
-		<button class="bg-gray-100 px-3 py-1 text-sm" on:click={filterProducts}>Set Price</button>
+			<button class="bg-gray-100 px-3 py-1 text-sm" on:click={filterProducts}>Set Price</button>
 		</div>
 	</div>
 </div>
