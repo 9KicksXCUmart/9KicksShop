@@ -9,6 +9,7 @@
 	import DisChart from '$lib/components/ui/review/DistributionChart.svelte';
 	import RatingBox from '$lib/components/ui/review/RatingBox.svelte';
 	import SortOption from '$lib/components/ui/dropdown/SortOption.svelte';
+	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
 
 	import { PUBLIC_KOTLIN_BACKEND_URL, PUBLIC_GO_BACKEND_URL } from '$env/static/public';
 	import { page } from '$app/stores';
@@ -66,9 +67,7 @@
 		if (simProduct !== null && simProduct.products !== null) {
 			for (var i of simProduct.products) {
 				let simProductRatingData = null;
-				console.log('i[id]', i['id']);
 				simProductRatingData = await getReviewByProduct(i['id']);
-				console.log('finish await');
 				let simProductRating = 0;
 				let simProductRatingCount = 0;
 				if (simProductRatingData !== null) {
@@ -252,7 +251,6 @@
 			</div>
 
 			<SectionHeader text="Similar Items" />
-    
 			{#if simProductList.length !== 0}
 				<div class="flex flex-col items-start w-full h-fit px-[17%]">
 					<PreviewItemCarousel id="Similar Items" products={simProductList} />
@@ -260,7 +258,7 @@
 			{:else}
 				<div class="flex flex-col w-full px-[17%]">
 					<div class="flex flex-col w-full items-center py-[5%]">
-						<span class="text-3xl font-bold"> No similar items </span>
+						<LoadingCircle />
 					</div>
 				</div>
 			{/if}
