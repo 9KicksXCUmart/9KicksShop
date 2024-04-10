@@ -62,49 +62,51 @@
 		}
 
 		simProduct = await searchSimProduct();
-		console.log('simProduct', simProduct);
-		console.log('simProduct.products', simProduct.products);
 		const tempProductList = [];
-		for (var i of simProduct.products) {
-			let simProductRatingData = null;
-			console.log('i[id]', i['id']);
-			simProductRatingData = await getReviewByProduct(i['id']);
-			console.log('finish await');
-			let simProductRating = 0;
-			let simProductRatingCount = 0;
-			if (simProductRatingData !== null) {
-				simProductRating = simProductRatingData.averageRating;
-				simProductRatingCount = simProductRatingData.reviews.length;
+		if (simProduct !== null && simProduct.products !== null) {
+			for (var i of simProduct.products) {
+				let simProductRatingData = null;
+				console.log('i[id]', i['id']);
+				simProductRatingData = await getReviewByProduct(i['id']);
+				console.log('finish await');
+				let simProductRating = 0;
+				let simProductRatingCount = 0;
+				if (simProductRatingData !== null) {
+					simProductRating = simProductRatingData.averageRating;
+					simProductRatingCount = simProductRatingData.reviews.length;
+				}
+				tempProductList.push({
+					brand: i['brand'],
+					buyCount: i['buyCount'],
+					category: i['category'],
+					detailedImageUrl: i['detailedImageUrl'],
+					discountPrice: i['discountPrice'],
+					id: i['id'],
+					imageUrl: i['imageUrl'],
+					productName: i['name'],
+					price: i['price'],
+					publishDate: i['publishDate'],
+					reviewIdList: i['reviewIdList'],
+					size: i['size'],
+					rating: simProductRating,
+					ratingCount: simProductRatingCount,
+					scale: '0.97'
+				});
 			}
-			tempProductList.push({
-				brand: i['brand'],
-				buyCount: i['buyCount'],
-				category: i['category'],
-				detailedImageUrl: i['detailedImageUrl'],
-				discountPrice: i['discountPrice'],
-				id: i['id'],
-				imageUrl: i['imageUrl'],
-				productName: i['name'],
-				price: i['price'],
-				publishDate: i['publishDate'],
-				reviewIdList: i['reviewIdList'],
-				size: i['size'],
-				rating: simProductRating,
-				ratingCount: simProductRatingCount,
-				scale: '0.97'
-			});
 		}
 		simProductList = tempProductList;
 	});
 
 	onMount(async () => {
 		reviewData = await getReviewByProduct(productId);
-		rating = reviewData.averageRating.toString();
-		ratingDistri = Object.values(reviewData.ratingPercentage)
-			.map((x) => x.toString() + '%')
-			.reverse();
-		reviewList = reviewData.reviews;
-		ratingCount = reviewData.reviews.length;
+		if (reviewData !== null) {
+			rating = reviewData.averageRating.toString();
+			ratingDistri = Object.values(reviewData.ratingPercentage)
+				.map((x) => x.toString() + '%')
+				.reverse();
+			reviewList = reviewData.reviews;
+			ratingCount = reviewData.reviews.length;
+		}
 	});
 
 	async function getProductDetail() {
@@ -112,7 +114,6 @@
 			method: 'GET'
 		});
 		const result = await response.json();
-		console.log(response);
 
 		return result.data;
 	}
@@ -128,13 +129,11 @@
 			{ method: 'GET' }
 		);
 
-		console.log(response);
 		try {
 			const result = await response.json();
 			return result.data;
 		} catch (e) {
-			console.log('failed');
-			console.log(e);
+			console.log('failed to retrieve review data.');
 		}
 		return null;
 	}
@@ -151,10 +150,14 @@
 			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
 		);
-		const result = await response.json();
-
-		isRecommendProductLoaded = true;
-		return result.data;
+		try {
+			const result = await response.json();
+			isRecommendProductLoaded = true;
+			return result.data;
+		} catch (e) {
+			console.log('failed to retrieve similar product');
+		}
+		return null;
 	}
 
 	async function addToCart() {
