@@ -5,12 +5,13 @@
 
 	export let id = 'undefined';
 	export let products;
+
 </script>
 
 <!-- Product Preview Carousel -->
 <div {id} class="flex items-center w-full">
 	{#if browser}
-		<Carousel particlesToShow={5} particlesToScroll={3}>
+		<Carousel particlesToShow={5} particlesToScroll={1}>
 			<!-- Custom Next Arrow-->
 			<div
 				slot="next"
@@ -59,15 +60,15 @@
 			<div slot="dots" class="custom-dots"></div>
 
 			<!-- Carousel Items -->
-			{#each products as { productImage, productName, gender, price, rating, ratingCount, scale }}
+			{#each products as product}
 				<ProductPreviewItem
-					{productImage}
-					{productName}
-					{gender}
-					{price}
-					{rating}
-					{ratingCount}
-					{scale}
+					productImage={product.imageUrl}
+					productName={product.productName}
+					category={product.category}
+					price={product.price}
+					rating={product.rating}
+					ratingCount={product.ratingCount}
+					scale={product.scale}
 				/>
 			{/each}
 		</Carousel>

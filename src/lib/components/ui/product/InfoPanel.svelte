@@ -61,7 +61,10 @@
 		{#if productSize[selectedSize] != 0}
 			<RightArrowButton buttonType="Add To Cart" scale="0.9" on:handleOnClick />
 		{:else}
-			<div class="flex flex-row place-content-center items-center w-[200px] h-[60px] bg-[#a6a6a6]" style="transform: scale(0.9)">
+			<div
+				class="flex flex-row place-content-center items-center w-[200px] h-[60px] bg-[#a6a6a6]"
+				style="transform: scale(0.9)"
+			>
 				<span class="text-xl font-semibold text-white"> Sold Out </span>
 			</div>
 		{/if}

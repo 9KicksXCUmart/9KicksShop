@@ -23,9 +23,10 @@
 
 	let productId = $page.params.productId;
 
-	let productDetail;
+	let productDetail: any;
 	let productImages = [ProductImage1];
 	let productName;
+	let productBrand;
 	let productCat;
 	let productPrice;
 	let productDiscount;
@@ -33,18 +34,22 @@
 	let productSize;
 	let sizeStock = [];
 
-	let reviewData;
+	let reviewData: any;
 	let rating = 0;
 	let ratingPercent;
 	let ratingDistri;
 	let reviewList;
 	let ratingCount;
 
+	let simProduct: any;
+	let simProductList = [];
+
 	onMount(async () => {
 		productDetail = await getProductDetail();
 		productImages = [productDetail.imageUrl];
 		productSize = productDetail.size;
 		productName = productDetail.name.toUpperCase();
+		productBrand = productDetail.brand;
 		productCat = productDetail.category;
 		productPrice = productDetail.price.toString();
 		productDiscount = productDetail.isDiscount;
@@ -54,13 +59,47 @@
 			sizeStock.push({ size: i, quantity: productSize[i] });
 		}
 
-		reviewData = await getReviewByProduct();
+		simProduct = await searchSimProduct();
+		for (var i of simProduct.products){
+			let simProductRatingData = null;
+			simProductRatingData = await getReviewByProduct(i["id"]);
+			let simProductRating = 0;
+			let simProductRatingCount = 0;
+			if (simProductRatinData !== null) {
+				simProductRating = simProductRatingData.averageRating;
+				simProductRatingCount = simProductRatingData.reviews.length;
+			}
+		
+			simProductList.push({
+				brand: i["brand"],
+				buyCount: i["buyCount"],
+				category: i["category"],
+				detailedImageUrl: i["detailedImageUrl"],
+				discountPrice: i["discountPrice"],
+				id: i["id"],
+				imageUrl: i["imageUrl"],
+				productName: i["name"],
+				price: i["price"],
+				publishDate: i["publishDate"],
+				reviewIdList: i["reviewIdList"],
+				size: i["size"],
+				rating: simProductRating,
+				ratingCount: simProductRatingCount,
+				scale: "0.97"
+			});
+		}
+	});
+
+	onMount(async () => {
+
+		reviewData = await getReviewByProduct(productId);
 		rating = reviewData.averageRating.toString();
 		ratingDistri = Object.values(reviewData.ratingPercentage)
 			.map((x) => x.toString() + '%')
 			.reverse();
 		reviewList = reviewData.reviews;
 		ratingCount = reviewData.reviews.length;
+
 	});
 
 	async function getProductDetail() {
@@ -68,19 +107,35 @@
 			method: 'GET'
 		});
 		const result = await response.json();
-		console.log(result.data);
 		return result.data;
-	}
+	};
 
 	let testReview = 'd0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c';
 
-	async function getReviewByProduct() {
+	async function getReviewByProduct(pId) {
+		const paramsObj = {
+			"productId": pId
+		};
 		const response = await fetch(
-			`${PUBLIC_GO_BACKEND_URL}/v1/reviews?` +
-				new URLSearchParams({ productId: productId }).toString(),
+			`${PUBLIC_GO_BACKEND_URL}/v1/reviews?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
 		);
 		const result = await response.json();
+		return result.data;
+	}
+
+	async function searchSimProduct() {
+		const paramsObj = {
+			"keyword": productBrand,
+			"pageNum": 1,
+			"category": productCat
+		};
+		const response = await fetch(
+			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
+			{ method: 'GET' }
+		);
+		const result = await response.json();
+		console.log(result.data);
 		return result.data;
 	}
 
@@ -140,24 +195,6 @@
 
 	const quantitys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-	const products = Array(10).fill({
-		productImage: ProductImage1,
-		productName: 'Dunk Low B/W',
-		gender: "Men's",
-		price: 'US$115',
-		rating: 4,
-		ratingCount: '84',
-		scale: '0.97'
-	});
-
-	const reviews = Array(10).fill({
-		email: '3452345@gmail.com',
-		rating: 4,
-		reviewDateTime: '2024-04-06',
-		comment:
-			'I recently got my hands on the Nike Dunk Low "Panda", and it\'s safe to say, I\'m in love! Right out of the box!'
-	});
-
 	let selectedSize;
 	let selectedQuantity;
 </script>
@@ -172,16 +209,17 @@
 				</div>
 			</div>
 			<ProductHeader {productName} gender={productCat} />
+			<p> {simProductList} </p>
 
 			<div class="flex flex-col items-start w-full h-fit px-[17%] py-[1%]">
 				<div class="flex flex-row w-full justify-between items-center px-[20px]">
 					<ProductImageCarousel {productImages} />
 					<!-- InfoPanel-->
 					<InfoPanel
-						sizeStock={sizeStock}
+						{sizeStock}
 						productSize={productDetail.size}
-						quantitys={quantitys}
-						rating={rating}
+						{quantitys}
+						{rating}
 						price={productPrice}
 						isDiscount={productDiscount}
 						discountPrice={productDisPrice}
@@ -194,7 +232,7 @@
 
 			<SectionHeader text="Similar Items" />
 			<div class="flex flex-col items-start w-full h-fit px-[17%]">
-				<PreviewItemCarousel {products} />
+				<PreviewItemCarousel id="Similar Items" products={simProductList} />
 			</div>
 
 			<SectionHeader text="Reviews" />

@@ -2,10 +2,10 @@
 	export let id = 'undefined';
 	export let productImage;
 	export let productName;
-	export let gender;
+	export let category;
 	export let price;
-	export let rating;
-	export let ratingCount;
+	export let rating = 0;
+	export let ratingCount = 0;
 	export let scale;
 
 	let styling = `transform:scale(${scale})`;
@@ -22,10 +22,10 @@
 	>
 		<!-- Product Name -->
 		<span class="text-sm font-bold max-w-[200px] whitespace-nowrap truncate"> {productName} </span>
-		<!-- Product Gender -->
-		<span class="text-xs"> {gender} </span>
+		<!-- Product category -->
+		<span class="text-xs"> {category} </span>
 		<!-- Product Price -->
-		<span class="text-sm"> {price} </span>
+		<span class="text-sm"> US ${price} </span>
 		<!-- Product Rating & Rating Count -->
 		<div class="flex flex-row justify-start space-x-[2px]">
 			<!-- Product Rating -->
