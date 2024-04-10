@@ -72,7 +72,7 @@
 		return result.data;
 	}
 
-	let asd = 'd0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c';
+	let testReview = 'd0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c';
 
 	async function getReviewByProduct() {
 		const response = await fetch(
@@ -178,9 +178,10 @@
 					<ProductImageCarousel {productImages} />
 					<!-- InfoPanel-->
 					<InfoPanel
-						{sizeStock}
-						{quantitys}
-						{rating}
+						sizeStock={sizeStock}
+						productSize={productDetail.size}
+						quantitys={quantitys}
+						rating={rating}
 						price={productPrice}
 						isDiscount={productDiscount}
 						discountPrice={productDisPrice}

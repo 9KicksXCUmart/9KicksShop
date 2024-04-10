@@ -3,7 +3,7 @@
 	export let selectedSize = 10.0;
 
 	let category = 'Size';
-	let buttonText = 'US 10';
+	let buttonText = 'US 10.0';
 	let menuOpen = false;
 
 	const updateButtonText = (newText) => {

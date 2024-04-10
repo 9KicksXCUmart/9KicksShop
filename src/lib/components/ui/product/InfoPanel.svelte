@@ -4,6 +4,7 @@
 	import RightArrowButton from '$lib/components/ui/button/RightArrowButton.svelte';
 
 	export let sizeStock;
+	export let productSize;
 	export let quantitys;
 	export let rating;
 	export let price;
@@ -57,6 +58,12 @@
 	</div>
 	<!-- InfoPanel/AddtoCartButton-->
 	<div class="flex flex-row justify-center content-start w-full pt-[20px]">
-		<RightArrowButton buttonType="Add To Cart" scale="0.9" on:handleOnClick />
+		{#if productSize[selectedSize] != 0}
+			<RightArrowButton buttonType="Add To Cart" scale="0.9" on:handleOnClick />
+		{:else}
+			<div class="flex flex-row place-content-center items-center w-[200px] h-[60px] bg-[#a6a6a6]" style="transform: scale(0.9)">
+				<span class="text-xl font-semibold text-white"> Sold Out </span>
+			</div>
+		{/if}
 	</div>
 </div>
