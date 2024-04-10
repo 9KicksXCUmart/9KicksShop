@@ -5,7 +5,7 @@
 	import { userFirstName, loggedOut } from '$store/loginStore';
 	import { invalidateAll } from '$app/navigation';
 
-  export let isLogin: boolean;
+	export let isLogin: boolean;
 	let show: boolean = false;
 	$: if (isLogin === true) {
 		show = true;
@@ -17,7 +17,6 @@
 		categoryStore.set(keyword);
 		goto('/browsing');
 	}
-
 </script>
 
 <!-- Bottom NavBar -->

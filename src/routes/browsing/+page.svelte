@@ -125,7 +125,6 @@
 	let tempCategory: string;
 	categoryStore.subscribe((cat) => (tempCategory = cat));
 
-
 	async function searchProducts() {
 		const filter = checkFilter();
 

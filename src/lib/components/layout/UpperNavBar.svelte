@@ -10,7 +10,7 @@
 	import { goto } from '$app/navigation';
 	import { searchKeywordStore } from '$store/searchKeywordStore';
 
-  export let isLogin: boolean;  
+	export let isLogin: boolean;
 	export let jwtToken: string;
 	export let user: string;
 	let SignInOpen = false;
