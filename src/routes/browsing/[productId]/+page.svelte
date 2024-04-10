@@ -125,7 +125,7 @@
 					productQuantity: selectedQuantity,
 					productSize: selectedSize
 				})
-			});	
+			});
 		}
 
 		const result = await response.json();
