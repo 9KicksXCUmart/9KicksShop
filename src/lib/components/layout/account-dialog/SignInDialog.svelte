@@ -152,8 +152,9 @@
 									class="rounded-none bg-[#ebffdb] text-black hover:bg-[#e6f8d8]"
 									type="submit"
 									on:click={() => {
-									handleForgotPassword();
-								}}>Send Reset Link
+										handleForgotPassword();
+									}}
+									>Send Reset Link
 								</Button>
 							{/if}
 						</Dialog.Footer>

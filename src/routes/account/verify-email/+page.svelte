@@ -5,7 +5,6 @@
 	import { page } from '$app/stores';
 	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
 
-
 	$: token = $page.url.searchParams.get('token');
 	$: email = $page.url.searchParams.get('email');
 	let countDown: number;
@@ -14,15 +13,14 @@
 	let failedMessage: string;
 
 	onMount(() => {
-			handleVerifyEmail()
-		}
-	);
+		handleVerifyEmail();
+	});
 
 	async function handleVerifyEmail() {
 		isLoading = true;
 		const result = await verifyEmail();
 		isLoading = false;
-		console.log(result.success)
+		console.log(result.success);
 		isVerified = result.success;
 		failedMessage = result.message;
 
@@ -52,7 +50,6 @@
 		});
 		return await response.json();
 	}
-
 </script>
 
 <div class="flex flex-col items-center justify-center gap-5 my-5">
@@ -63,19 +60,16 @@
 	{#if isLoading}
 		<div>Verifying Email...</div>
 		<LoadingCircle />
-	{:else}
-		{#if isVerified === true}
-			<div class="flex flex-col gap-5 items-center">
-				<div class="text-xl text-green-600">Email Successfully Verified!</div>
-				<div class="text-2xl">Redirect to Home Page in {countDown}...</div>
+	{:else if isVerified === true}
+		<div class="flex flex-col gap-5 items-center">
+			<div class="text-xl text-green-600">Email Successfully Verified!</div>
+			<div class="text-2xl">Redirect to Home Page in {countDown}...</div>
+		</div>
+	{:else if isVerified === false}
+		{#if failedMessage}
+			<div class="pt-5 text-2xl text-red-500">
+				{failedMessage}
 			</div>
-		{:else if isVerified === false }
-			{#if failedMessage}
-				<div class="pt-5 text-2xl text-red-500">
-					{failedMessage}
-				</div>
-			{/if}
 		{/if}
 	{/if}
-
 </div>

@@ -1,7 +1,6 @@
 <script>
 	import { ShoppingBag, X } from 'lucide-svelte';
 	import { loggedIn } from '$store/loginStore';
-
 </script>
 
 <!-- Bottom NavBar -->
@@ -48,7 +47,7 @@
 		{:else}
 			<div class="duration-200">
 				<X strokeWidth={1.75} class="absolute text-red-400" />
-				<ShoppingBag strokeWidth={1.75}/>
+				<ShoppingBag strokeWidth={1.75} />
 			</div>
 		{/if}
 	</div>

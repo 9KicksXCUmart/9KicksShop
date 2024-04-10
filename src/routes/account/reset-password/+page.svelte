@@ -10,7 +10,7 @@
 	export let data: PageData;
 
 	let isResetFailed: boolean;
-	let failedMessage = "";
+	let failedMessage = '';
 	let isLoading = false;
 	let countDown: number;
 
@@ -18,7 +18,7 @@
 		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/auth/reset-password`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				email: email,
@@ -27,32 +27,31 @@
 			})
 		});
 		const result = await response.json();
-		if(result.success) {
-			isResetFailed = false
+		if (result.success) {
+			isResetFailed = false;
 		} else {
-			isResetFailed = true
-			failedMessage = result.message
+			isResetFailed = true;
+			failedMessage = result.message;
 		}
 		return result;
 	}
 
-	async function handleResetPassword(e: CustomEvent<{ newPassword: string }>){
-		isLoading = true
-		const result = await resetPassword(e.detail.newPassword)
-		isLoading = false
+	async function handleResetPassword(e: CustomEvent<{ newPassword: string }>) {
+		isLoading = true;
+		const result = await resetPassword(e.detail.newPassword);
+		isLoading = false;
 
-		if(result.success){
-			countDown = 3
+		if (result.success) {
+			countDown = 3;
 			const intervalId = setInterval(() => {
 				console.log(countDown);
 				countDown -= 1;
 				if (countDown == 0) {
 					clearInterval(intervalId);
-					goto("/")
+					goto('/');
 				}
 			}, 1000);
 		}
-
 	}
 </script>
 
@@ -68,7 +67,7 @@
 
 	{#if isResetFailed || isResetFailed === undefined}
 		<div class="flex justify-center mt-4 w-full">
-			<ResetForm isLoading={isLoading} data={data.form} on:resetPassword={handleResetPassword} />
+			<ResetForm {isLoading} data={data.form} on:resetPassword={handleResetPassword} />
 		</div>
 	{/if}
 
@@ -78,5 +77,4 @@
 			<div class="text-2xl">Redirect to Home Page in {countDown}...</div>
 		</div>
 	{/if}
-
 </div>
