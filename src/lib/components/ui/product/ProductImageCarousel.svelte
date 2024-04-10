@@ -7,9 +7,9 @@
 </script>
 
 <!-- Product Preview Carousel -->
-<div {id} class="flex items-center w-[620px] h-fit">
+<div {id} class="flex items-center w-[620px] h-96">
 	{#if browser}
-		<Carousel autoplay autoplayDuration={5000} particlesToShow={1}>
+		<Carousel particlesToShow={1}>
 			<!-- Remove Dot -->
 			<div slot="dots" class="custom-dots"></div>
 
@@ -58,8 +58,8 @@
 
 			<!-- Carousel Items -->
 			{#each productImages as productImage}
-				<div class="w-full overflow-hidden">
-					<img src={productImage} alt={productImage} align="w-[540px] h-[450px] center" />
+				<div class="w-full h-full overflow-hidden flex flex-col items-center">
+					<img src={productImage} alt={productImage} class="object-contain w-96 h-96 center" />
 				</div>
 			{/each}
 		</Carousel>
