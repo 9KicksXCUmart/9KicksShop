@@ -8,7 +8,7 @@
 	export let products;
 
 	function routeToProductDetail(productId: string) {
-		goto(`/browsing/${productId}`);
+		setTimeout(() => goto(`/browsing/${productId}`), 0);
 	}
 </script>
 
