@@ -144,7 +144,7 @@
 			pageNum: 1,
 			category: productCat
 		};
-
+    
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }
@@ -164,7 +164,6 @@
 			alert('Please sign in to add cart item!');
 			return 1;
 		}
-
 		let response;
 		if (productDiscount) {
 			response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/update`, {
