@@ -2,9 +2,15 @@
 	import ProductPreviewItem from '$lib/components/ui/product/PreviewItem.svelte';
 	import Carousel from 'svelte-carousel';
 	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 
 	export let id = 'undefined';
 	export let products;
+
+	function routeToProductDetail(productId: string) {
+		goto(`/browsing/${productId}`);
+	}
+
 </script>
 
 <!-- Product Preview Carousel -->
@@ -60,6 +66,12 @@
 
 			<!-- Carousel Items -->
 			{#each products as product}
+				<button
+					on:click={() => {
+								routeToProductDetail(product.id);
+							}}
+					class="hover:scale-105 duration-300"
+				>
 				<ProductPreviewItem
 					productImage={product.imageUrl}
 					productName={product.productName}
@@ -69,6 +81,7 @@
 					ratingCount={product.ratingCount}
 					scale={product.scale}
 				/>
+				</button>
 			{/each}
 		</Carousel>
 	{/if}

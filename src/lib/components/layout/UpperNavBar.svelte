@@ -6,6 +6,8 @@
 	import { UserRound } from 'lucide-svelte';
 	import { loggedIn, userFirstName } from '$store/loginStore';
 	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
+	import { goto } from '$app/navigation';
+	import { searchKeywordStore } from '$store/searchKeywordStore';
 
 	export let jwtToken: string;
 	let SignInOpen = false;
@@ -53,17 +55,41 @@
 		document.cookie = 'jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		loggedIn.set(false);
 	}
+
+	let searchKeyword: string;
+
+	$: {
+		console.log(searchKeyword);
+	}
+
+	function handleEnterPress(event){
+		if (event.key === 'Enter') {
+			console.log("ENTER PRESSED")
+			handleSearchKeyword()
+		}
+	}
+	function handleSearchKeyword() {
+		searchKeywordStore.set(searchKeyword);
+		console.log($searchKeywordStore)
+		setTimeout(() => goto('/browsing'), 0);
+	}
+
+	function handleOnBlur(){
+		searchKeywordStore.set("");
+		searchKeyword = ""
+	}
+
 </script>
 
 <!-- Top NavBar -->
 <nav class="flex justify-center bg-[#f8fbf6]">
 	<div class="flex items-center justify-between px-[17%] py-[1%] w-full">
 		<a href="/"
-			><img
-				src={Logo}
-				alt="9Kicks"
-				class="h-[73px] w-[214px] min-h-[73px] min-w-[214px] hidden sm:flex"
-			/><img src={MobileLogo} alt="9Kicks" class="h-[30px] sm:hidden flex" /></a
+		><img
+			src={Logo}
+			alt="9Kicks"
+			class="h-[73px] w-[214px] min-h-[73px] min-w-[214px] hidden sm:flex"
+		/><img src={MobileLogo} alt="9Kicks" class="h-[30px] sm:hidden flex" /></a
 		>
 
 		<form class="w-full ml-8 mr-5">
@@ -93,6 +119,9 @@
 				<Input
 					placeholder="Search"
 					class="pl-10 pr-3 font-semibold placeholder-gray-500 text-black"
+					bind:value={searchKeyword}
+					on:keydown={handleEnterPress}
+					on:blur={handleOnBlur}
 				/>
 			</div>
 		</form>
@@ -111,7 +140,8 @@
 					class="whitespace-nowrap pl-2 pr-1 font-normal hover:opacity-50 duration-300"
 					on:click={() => {
 						logout();
-					}}>Logout</button
+					}}>Logout
+				</button
 				>
 			</div>
 		{:else if $loggedIn === false}

@@ -7,7 +7,8 @@
 	export let rating = 0;
 	export let ratingCount = 0;
 	export let scale;
-
+	export let isDiscount;
+	export let discountPrice;
 	let styling = `transform:scale(${scale})`;
 </script>
 
@@ -25,7 +26,14 @@
 		<!-- Product category -->
 		<span class="text-xs"> {category} </span>
 		<!-- Product Price -->
-		<span class="text-sm"> US ${price} </span>
+		{#if isDiscount}
+			<div class="flex flex-row gap-1 items-baseline">
+				<span class="text-sm  text-orange-600"> US${discountPrice} </span>
+				<span class="text-xs line-through"> US${price} </span>
+			</div>
+		{:else}
+			<span class="text-sm"> US${price} </span>
+		{/if}
 		<!-- Product Rating & Rating Count -->
 		<div class="flex flex-row justify-start space-x-[2px]">
 			<!-- Product Rating -->

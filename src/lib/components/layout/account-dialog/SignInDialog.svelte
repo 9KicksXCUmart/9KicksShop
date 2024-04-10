@@ -41,7 +41,7 @@
 		});
 		const result = await response.json();
 		if (result.success) {
-			document.cookie = `jwt=${result.token};SameSite=None;Secure`;
+			document.cookie = `jwt=${result.token};SameSite=None;Secure;path=/;`;
 			const firstName = await getUserFirstName(result.token);
 			loggedIn.set(true);
 			userFirstName.set(firstName);
