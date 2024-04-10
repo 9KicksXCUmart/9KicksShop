@@ -10,7 +10,7 @@
 <!-- Product Preview Carousel -->
 <div {id} class="flex items-center w-full">
 	{#if browser}
-		<Carousel particlesToShow={5} particlesToScroll={3}>
+		<Carousel particlesToShow={5} particlesToScroll={1}>
 			<!-- Custom Next Arrow-->
 			<button
 				slot="next"
@@ -59,16 +59,15 @@
 			<div slot="dots" class="custom-dots"></div>
 
 			<!-- Carousel Items -->
-			{#each products as { id, productImage, productName, productCategory, price, rating, ratingCount, scale }}
+			{#each products as product}
 				<ProductPreviewItem
-					{id}
-					{productImage}
-					{productName}
-					{productCategory}
-					{price}
-					{rating}
-					{ratingCount}
-					{scale}
+					productImage={product.imageUrl}
+					productName={product.productName}
+					category={product.category}
+					price={product.price}
+					rating={product.rating}
+					ratingCount={product.ratingCount}
+					scale={product.scale}
 				/>
 			{/each}
 		</Carousel>
