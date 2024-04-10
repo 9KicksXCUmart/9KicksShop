@@ -147,7 +147,7 @@
 			pageNum: 1,
 			category: productCat
 		};
-
+    
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/products?` + new URLSearchParams(paramsObj).toString(),
 			{ method: 'GET' }

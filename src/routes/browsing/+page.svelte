@@ -103,6 +103,7 @@
 				selectedGender = gender.gender;
 			}
 		});
+
 		filter.category = tempCategory;
 		if (selectedGender !== '') filter.category = selectedGender;
 
@@ -124,13 +125,13 @@
 	let tempCategory: string;
 	categoryStore.subscribe((cat) => (tempCategory = cat));
 
+
 	async function searchProducts() {
 		const filter = checkFilter();
 
 		filter.keyword = tempKw;
 		console.log(filter);
 		if (!filter.keyword) delete filter.keyword;
-
 		const url = new URL(`${PUBLIC_GO_BACKEND_URL}/v1/products`);
 		url.search = new URLSearchParams(filter).toString();
 
@@ -180,7 +181,7 @@
 				<div class="w-full text-3xl text-center">No Results</div>
 			{:else}
 				<div class="grid grid-cols-4 w-full justify-between gap-y-[20px]">
-					{#each products as { id, imageUrl, name, category, price, isDiscount, discountPrice }}
+					{#each products as { id, imageUrl, name, category, price, isDiscount, discountPrice }}n
 						<button
 							on:click={() => {
 								routeToProductDetail(id);
