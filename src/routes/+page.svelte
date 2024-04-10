@@ -34,9 +34,9 @@
 		newArrivalData.forEach((product: any) => {
 			newArrivalExtract.push({
 				id: product.id,
-				productImage: product.imageUrl,
+				imageUrl: product.imageUrl,
 				productName: product.name,
-				productCategory: product.category,
+				category: product.category,
 				price: product.price,
 				rating: Math.floor(Math.random() * 5) + 1,
 				ratingCount: Math.floor(Math.random() * 100) + 5,
@@ -49,9 +49,9 @@
 		mostPopularData.forEach((product: any) => {
 			mostPopularExtract.push({
 				id: product.id,
-				productImage: product.imageUrl,
+				imageUrl: product.imageUrl,
 				productName: product.name,
-				productCategory: product.category,
+				category: product.category,
 				price: product.price,
 				rating: Math.floor(Math.random() * 5) + 1,
 				ratingCount: Math.floor(Math.random() * 100) + 5,
@@ -59,7 +59,9 @@
 			});
 		});
 		mostPopularProducts = mostPopularExtract;
-		carouselProducts = products;
+		console.log(mostPopularProducts);
+
+		// carouselProducts = products;
 	});
 
 	async function getProductForCarousel(pageNum: number) {
@@ -77,15 +79,15 @@
 		return result.data.products;
 	}
 
-	const products = Array(10).fill({
-		productImage: ProductImage,
-		productName: 'Dunk Low B/W',
-		gender: "Men's",
-		price: 'US$115',
-		rating: 4,
-		ratingCount: '84',
-		scale: '0.97'
-	});
+	// const products = Array(10).fill({
+	// 	productImage: ProductImage,
+	// 	productName: 'Dunk Low B/W',
+	// 	gender: "Men's",
+	// 	price: 'US$115',
+	// 	rating: 4,
+	// 	ratingCount: '84',
+	// 	scale: '0.97'
+	// });
 </script>
 
 <div class="flex flex-col items-center w-full h-full">
@@ -94,7 +96,7 @@
 		<ImageBannerCarousel id="BannerCarousel" bannerImages={images} />
 		<SectionHeader text="New Arrivals" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[20px]">
-			{#if carouselProducts.length !== 0}
+			{#if newArrivalProducts.length !== 0}
 				<PreviewItemCarousel products={newArrivalProducts} />
 			{:else}
 				<LoadingCircle />
@@ -106,7 +108,7 @@
 		</div>
 		<SectionHeader text="Most Popular" />
 		<div class="flex flex-col items-center w-full px-[17%] pb-[50px]">
-			{#if carouselProducts.length !== 0}
+			{#if mostPopularProducts.length !== 0}
 				<PreviewItemCarousel products={mostPopularProducts} />
 			{:else}
 				<LoadingCircle />

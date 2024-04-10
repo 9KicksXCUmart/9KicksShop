@@ -6,6 +6,8 @@
 	import { UserRound } from 'lucide-svelte';
 	import { loggedIn, userFirstName } from '$store/loginStore';
 	import { PUBLIC_GO_BACKEND_URL, PUBLIC_KOTLIN_BACKEND_URL } from '$env/static/public';
+	import { goto } from '$app/navigation';
+	import { searchKeywordStore } from '$store/searchKeywordStore';
 
 	export let jwtToken: string;
 	let SignInOpen = false;
@@ -53,6 +55,29 @@
 		document.cookie = 'jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		loggedIn.set(false);
 	}
+
+	let searchKeyword: string;
+
+	$: {
+		console.log(searchKeyword);
+	}
+
+	function handleEnterPress(event) {
+		if (event.key === 'Enter') {
+			console.log('ENTER PRESSED');
+			handleSearchKeyword();
+		}
+	}
+	function handleSearchKeyword() {
+		searchKeywordStore.set(searchKeyword);
+		console.log($searchKeywordStore);
+		setTimeout(() => goto('/browsing'), 0);
+	}
+
+	function handleOnBlur() {
+		searchKeywordStore.set('');
+		searchKeyword = '';
+	}
 </script>
 
 <!-- Top NavBar -->
@@ -93,6 +118,9 @@
 				<Input
 					placeholder="Search"
 					class="pl-10 pr-3 font-semibold placeholder-gray-500 text-black"
+					bind:value={searchKeyword}
+					on:keydown={handleEnterPress}
+					on:blur={handleOnBlur}
 				/>
 			</div>
 		</form>
@@ -111,8 +139,9 @@
 					class="whitespace-nowrap pl-2 pr-1 font-normal hover:opacity-50 duration-300"
 					on:click={() => {
 						logout();
-					}}>Logout</button
-				>
+					}}
+					>Logout
+				</button>
 			</div>
 		{:else if $loggedIn === false}
 			<SignInDialog open={SignInOpen} />

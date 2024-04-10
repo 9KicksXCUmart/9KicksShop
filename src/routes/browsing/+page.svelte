@@ -8,6 +8,8 @@
 	import { PUBLIC_GO_BACKEND_URL } from '$env/static/public';
 	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
 	import { goto } from '$app/navigation';
+	import { categoryStore, searchKeywordStore } from '$store/searchKeywordStore';
+	import { paymentMethodId } from '$store/paymentStore';
 
 	const menuItems = [
 		'Alphabetical (A to Z)',
@@ -101,36 +103,35 @@
 				selectedGender = gender.gender;
 			}
 		});
+
+		filter.category = tempCategory;
 		if (selectedGender !== '') filter.category = selectedGender;
 
-		let selectedMinPrice: string = '';
-		if (minPrice !== '') {
-			selectedMinPrice = minPrice;
-		} else {
-			selectedMinPrice = '';
+		// categoryStore
+		if (minPrice && maxPrice) {
+			filter.minPrice = minPrice;
+			filter.maxPrice = maxPrice;
 		}
-
-		let selectedMaxPrice: string = '';
-		if (maxPrice !== '') {
-			selectedMaxPrice = minPrice;
-		} else {
-			selectedMaxPrice = '';
-		}
-
-		// return {
-		// 	selectedBrand,
-		// 	selectedSize,
-		// 	selectedGender,
-		// 	selectedMinPrice,
-		// 	selectedMaxPrice
-		// };
 		return filter;
 	}
+
+	$: {
+		tempKw;
+		handleFilterProducts();
+	}
+
+	let tempKw: string;
+	searchKeywordStore.subscribe((keyword) => (tempKw = keyword));
+	let tempCategory: string;
+	categoryStore.subscribe((cat) => (tempCategory = cat));
+
 
 	async function searchProducts() {
 		const filter = checkFilter();
 
+		filter.keyword = tempKw;
 		console.log(filter);
+		if (!filter.keyword) delete filter.keyword;
 		const url = new URL(`${PUBLIC_GO_BACKEND_URL}/v1/products`);
 		url.search = new URLSearchParams(filter).toString();
 
@@ -147,10 +148,8 @@
 	}
 
 	function routeToProductDetail(productId: string) {
-		console.log('clicked');
 		goto(`/browsing/${productId}`);
 	}
-
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
@@ -168,8 +167,8 @@
 				{brands}
 				{prices}
 				{genders}
-				{minPrice}
-				{maxPrice}
+				bind:minPrice
+				bind:maxPrice
 				filterProducts={handleFilterProducts}
 			/>
 
@@ -182,7 +181,7 @@
 				<div class="w-full text-3xl text-center">No Results</div>
 			{:else}
 				<div class="grid grid-cols-4 w-full justify-between gap-y-[20px]">
-					{#each products as { id, imageUrl, name, category, price }}
+					{#each products as { id, imageUrl, name, category, price, isDiscount, discountPrice }}n
 						<button
 							on:click={() => {
 								routeToProductDetail(id);
@@ -190,6 +189,8 @@
 							class="hover:scale-105 duration-300"
 						>
 							<ProductPreviewItem
+								{isDiscount}
+								{discountPrice}
 								productImage={imageUrl}
 								productName={name}
 								{category}
