@@ -2,10 +2,13 @@
 	export let menuItems;
 	export let buttonCategory = 'Quantity';
 	export let buttonText = '1';
+	export let selectedQuantity = 1;
 
 	let menuOpen = false;
 
 	const updateButtonText = (newText) => {
+		selectedQuantity = Number(newText);
+		menuOpen = false;
 		return (buttonText = newText);
 	};
 </script>
@@ -46,7 +49,7 @@
 			{#each menuItems as quantity}
 				<button id="menu-button" type="button" on:click={updateButtonText(quantity)}>
 					<div
-						class="flex flex-row block justify-between items-center px-[20px] py-[10px] w-[349px] h-[53px] bg-[#ececec]"
+						class="flex flex-row block justify-between items-center px-[20px] py-[10px] w-[349px] h-[53px] bg-[#ececec] hover:bg-[#a6a6a6]"
 					>
 						<span class="text-xl"> {quantity} </span>
 					</div>

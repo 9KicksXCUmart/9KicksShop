@@ -9,7 +9,7 @@
 </script>
 
 <!-- ShoppingCartSummary -->
-<div class="relative flex flex-col w-[411px] h-fit p-[20px] space-y-[15px] bg-[#f8fbf6]">
+<div class="relative flex flex-col w-[25rem] h-fit p-[2rem] space-y-[15px] bg-[#f8fbf6]">
 	<div class="flex pb-[10px]">
 		<span class="text-3xl font-extrabold"> Order Summary </span>
 	</div>

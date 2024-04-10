@@ -13,11 +13,11 @@
 <!-- LeftArrowButton -->
 <button {id} style={styling} on:click={handleBackPage}>
 	<div
-		class="group flex flex-row place-content-center items-center transition duration-200"
+		class="group flex flex-row place-content-center items-center transition duration-300 gap-2"
 		style={styling}
 	>
 		<svg
-			class="flex place-items-center group-hover:stroke-grey"
+			class="flex place-items-center group-hover:stroke-grey group-hover:translate-x-[-1rem] duration-200"
 			xmlns="http://www.w3.org/2000/svg"
 			width="40"
 			height="40"

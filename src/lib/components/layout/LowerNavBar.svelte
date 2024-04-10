@@ -40,6 +40,7 @@
 				</div>
 			</li>
 		</ul>
+
 		{#if $loggedIn}
 			<a href="/shopping-cart" class="duration-200">
 				<ShoppingBag strokeWidth={1.75} class="hover:opacity-50 hover:scale-105 duration-300" />

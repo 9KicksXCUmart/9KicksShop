@@ -5,6 +5,7 @@
 	let buttonText = 'Default';
 
 	const updateButtonText = (newText) => {
+		menuOpen = false;
 		return (buttonText = newText);
 	};
 </script>
@@ -37,7 +38,7 @@
 			{#each menuItems as item}
 				<button id="menu-button" type="button" on:click={updateButtonText(item)}>
 					<div
-						class="flex flex-row block justify-between items-center px-[10px] w-[210px] h-[45px] bg-[#ececec]"
+						class="flex flex-row block justify-between items-center px-[10px] w-[210px] h-[45px] bg-[#ececec] hover:bg-[#a6a6a6]"
 					>
 						<span class="text-sm"> {item} </span>
 					</div>

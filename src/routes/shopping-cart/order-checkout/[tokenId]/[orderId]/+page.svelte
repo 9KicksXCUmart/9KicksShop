@@ -13,8 +13,8 @@
 <div class="flex flex-col items-center w-full h-full">
 	<!-- 1920x1080 Container -->
 	<div class="flex flex-col items-center w-[1920px] h-fit">
-		<div class="flex flex-col place-items-center w-full h-fit px-[17%] py-[12px]">
-			<span class="text-7xl font-extrabold"> Order Confirmed </span>
+		<div class="flex flex-col place-items-center w-full h-fit px-[17%] py-[12px] pt-[1%]">
+			<span class="text-5xl font-extrabold"> Order Confirmed </span>
 		</div>
 		<div class="flex flex-col w-full h-fit px-[17%] py-[1%] space-y-[30px]">
 			<!-- Purchased Items -->
@@ -46,7 +46,11 @@
 					</div>
 					<div class="flex flex-col justify-start w-[300px] space-y-[10px]">
 						<span class="text-xl font-bold"> Delivery Type </span>
-						<span class="text-lg text-[#7d7d7d]"> {data.orderDetailData.deliveryType}</span>
+						{#if data.orderDetailData.deliveryType === 'EXPRESS'}
+							<span class="text-lg text-[#7d7d7d]"> {data.orderDetailData.deliveryType} ($15)</span>
+						{:else}
+							<span class="text-lg text-[#7d7d7d]"> {data.orderDetailData.deliveryType}</span>
+						{/if}
 					</div>
 				</div>
 
@@ -59,6 +63,7 @@
 						price={item.productPrice}
 						size={item.productSize}
 						quantity={item.productQuantity}
+						originalPrice={-1}
 					/>
 				{/each}
 			</div>

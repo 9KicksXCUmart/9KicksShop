@@ -47,10 +47,17 @@
 </div>
 
 <style>
+	input[type='radio'] + label {
+		transition-duration: 300ms;
+	}
+
 	input[type='radio']:checked + label {
 		background-color: #d3ffd8;
-		box-shadow:
-			0 10px 15px -3px rgba(0, 0, 0, 0.1),
-			0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	}
+
+	input[type='radio']:hover + label {
+		transition-duration: 200ms;
+		background-color: #e9feea;
+		scale: 1.05;
 	}
 </style>
