@@ -12,7 +12,6 @@
 
 	export let selectedSize;
 	export let selectedQuantity;
-
 </script>
 
 <!-- InfoPanel-->
@@ -48,11 +47,11 @@
 	</div>
 	<!-- InfoPanel/SizeMenu -->
 	<div class="z-20">
-		<SizeOption id="size" menuItems={sizeStock} bind:selectedSize={selectedSize}/>
+		<SizeOption id="size" menuItems={sizeStock} bind:selectedSize />
 	</div>
 	<!-- InfoPanel/Quantity -->
 	<div class="z-10">
-		<QuantityOption id="quantity" menuItems={quantitys} bind:selectedQuantity={selectedQuantity}/>
+		<QuantityOption id="quantity" menuItems={quantitys} bind:selectedQuantity />
 	</div>
 	<!-- InfoPanel/AddtoCartButton-->
 	<div class="flex flex-row justify-center content-start w-full pt-[20px] pb-[30px]">

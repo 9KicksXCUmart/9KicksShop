@@ -9,7 +9,7 @@
 	import DisChart from '$lib/components/ui/review/DistributionChart.svelte';
 	import RatingBox from '$lib/components/ui/review/RatingBox.svelte';
 	import SortOption from '$lib/components/ui/dropdown/SortOption.svelte';
-	
+
 	import { PUBLIC_KOTLIN_BACKEND_URL, PUBLIC_GO_BACKEND_URL } from '$env/static/public';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -32,14 +32,14 @@
 	let productDisPrice;
 	let productSize;
 	let sizeStock = [];
-	
+
 	let reviewData;
 	let rating = 0;
 	let ratingPercent;
 	let ratingDistri;
 	let reviewList;
 	let ratingCount;
-	
+
 	onMount(async () => {
 		productDetail = await getProductDetail();
 		productImages = [productDetail.imageUrl];
@@ -51,46 +51,47 @@
 		productDisPrice = productDetail.discountPrice.toString();
 
 		for (var i of Object.keys(productSize)) {
-			sizeStock.push({size: i, quantity: productSize[i]});
+			sizeStock.push({ size: i, quantity: productSize[i] });
 		}
 
 		reviewData = await getReviewByProduct();
 		rating = reviewData.averageRating.toString();
-		ratingDistri = Object.values(reviewData.ratingPercentage).map(x => x.toString() + "%").reverse();
+		ratingDistri = Object.values(reviewData.ratingPercentage)
+			.map((x) => x.toString() + '%')
+			.reverse();
 		reviewList = reviewData.reviews;
 		ratingCount = reviewData.reviews.length;
 	});
 
-	
 	async function getProductDetail() {
-		const response = await fetch(
-			`${PUBLIC_GO_BACKEND_URL}/v1/products/${productId}`,
-			{method: "GET"}
-		);
+		const response = await fetch(`${PUBLIC_GO_BACKEND_URL}/v1/products/${productId}`, {
+			method: 'GET'
+		});
 		const result = await response.json();
-		console.log(result.data)
+		console.log(result.data);
 		return result.data;
-	};
+	}
 
-	let asd = "d0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c";
+	let asd = 'd0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c';
 
 	async function getReviewByProduct() {
 		const response = await fetch(
-			`${PUBLIC_GO_BACKEND_URL}/v1/reviews?`+new URLSearchParams({productId: productId}).toString(),
-			{method: "GET"}
+			`${PUBLIC_GO_BACKEND_URL}/v1/reviews?` +
+				new URLSearchParams({ productId: productId }).toString(),
+			{ method: 'GET' }
 		);
 		const result = await response.json();
 		return result.data;
-	};
+	}
 
 	async function addToCart() {
 		if (data.jwtToken === undefined) {
-			alert("Please sign in to add cart item!");
+			alert('Please sign in to add cart item!');
 			return 1;
 		}
-		const response = await fetch(
-			`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/update`,
-			{
+		let response;
+		if (productDiscount) {
+			response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/update`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
@@ -98,7 +99,7 @@
 				},
 				body: JSON.stringify({
 					imageUrl: productDetail.imageUrl,
-					price: 	Number(productDisPrice),
+					price: Number(productDisPrice),
 					originalPrice: Number(productPrice),
 					productCategory: productCat,
 					productId: productId,
@@ -106,16 +107,34 @@
 					productQuantity: selectedQuantity,
 					productSize: selectedSize
 				})
-			}
-		);
+			});
+		} else {
+			response = await fetch(`${PUBLIC_KOTLIN_BACKEND_URL}/api/v1/shopping-cart/update`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${data.jwtToken}`
+				},
+				body: JSON.stringify({
+					imageUrl: productDetail.imageUrl,
+					price: Number(productPrice),
+					originalPrice: Number(productPrice),
+					productCategory: productCat,
+					productId: productId,
+					productName: productName,
+					productQuantity: selectedQuantity,
+					productSize: selectedSize
+				})
+			});	
+		}
 
 		const result = await response.json();
 		if (result.data) {
-			alert("Added to shopping cart.");
+			alert('Added to shopping cart.');
 		} else {
-			alert("Action failed.");
-		};
-	};
+			alert('Action failed.');
+		}
+	}
 
 	const sortBy = ['Time (New to Old)', 'Time (Old to New)'];
 
@@ -141,34 +160,33 @@
 
 	let selectedSize;
 	let selectedQuantity;
-
 </script>
 
 <div class="flex flex-col items-center w-full h-fit">
 	<div class="flex flex-col items-center w-[1920px] h-fit">
-		{#if (productDetail != undefined)}	
+		{#if productDetail != undefined}
 			<!-- Return to Previous Page-->
 			<div class="flex w-full h-fit px-[17%] pt-[10px]">
 				<div class="flex flex-row justify-start w-full -py-[30px]">
 					<LeftArrowButton buttonType="Previous Page" />
 				</div>
 			</div>
-			<ProductHeader productName={productName} gender={productCat} />
+			<ProductHeader {productName} gender={productCat} />
 
 			<div class="flex flex-col items-start w-full h-fit px-[17%] py-[1%]">
 				<div class="flex flex-row w-full justify-between items-center px-[20px]">
-					<ProductImageCarousel productImages={productImages} />
+					<ProductImageCarousel {productImages} />
 					<!-- InfoPanel-->
-					<InfoPanel 
-						sizeStock={sizeStock} 
-						quantitys={quantitys} 
-						rating={rating} 
-						price={productPrice} 
+					<InfoPanel
+						{sizeStock}
+						{quantitys}
+						{rating}
+						price={productPrice}
 						isDiscount={productDiscount}
 						discountPrice={productDisPrice}
-						bind:selectedSize={selectedSize} 
-						bind:selectedQuantity={selectedQuantity} 
-						on:handleOnClick={addToCart} 
+						bind:selectedSize
+						bind:selectedQuantity
+						on:handleOnClick={addToCart}
 					/>
 				</div>
 			</div>
@@ -179,9 +197,9 @@
 			</div>
 
 			<SectionHeader text="Reviews" />
-			{#if (reviewData != undefined) && (reviewData != null)}
+			{#if reviewData != undefined && reviewData != null}
 				<div class="flex flex-row items-center w-full justify-between px-[17%]">
-					<RatingBox averageRating={rating} ratingCount={ratingCount} />
+					<RatingBox averageRating={rating} {ratingCount} />
 					<DisChart {ratingDistri} />
 				</div>
 
@@ -199,7 +217,12 @@
 								<span class="text-base"> {email} </span>
 								<div class="flex flex-row place-items-center space-x-[2px]">
 									{#each { length: rating } as _, j}
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+											width="20"
+											height="20"
+										>
 											<path
 												d="M10 0l2.47 7.55h8.02l-6.47 4.7 2.47 7.55L10 15.1l-6.47 4.7 2.47-7.55L0 7.55h8.02L10 0z"
 												fill="#a6a6a6"
@@ -207,7 +230,12 @@
 										</svg>
 									{/each}
 									{#each { length: 5 - rating } as _, j}
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+											width="20"
+											height="20"
+										>
 											<path
 												d="M10 0l2.47 7.55h8.02l-6.47 4.7 2.47 7.55L10 15.1l-6.47 4.7 2.47-7.55L0 7.55h8.02L10 0z"
 												fill="#d9d9d9"
