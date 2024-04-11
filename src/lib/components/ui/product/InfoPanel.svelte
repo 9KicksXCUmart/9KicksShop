@@ -73,7 +73,7 @@
 
 	{#if addCartMessage !== '' || addCartMessage !== typeof undefined}
 		<div class="text-xl flex flex-row items-center justify-center">
-			<div class="mt-3 p-3 text-sm bg-white">{addCartMessage}</div>
+			<div class="mt-3 p-3 text-base font-semibold">{addCartMessage}</div>
 		</div>
 	{/if}
 </div>
