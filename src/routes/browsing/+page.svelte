@@ -12,6 +12,7 @@
 	import { paymentMethodId } from '$store/paymentStore';
 	import { Input } from '$lib/components/ui/input';
 
+	//Sort Options for Products
 	const menuItems = [
 		'Alphabetical (A to Z)',
 		'Price (Low to High)',
@@ -20,12 +21,14 @@
 		'Rating (High to Low)'
 	];
 
+	//Gender Filter Options
 	let genders = [
 		{ gender: "Men's", check: false },
 		{ gender: "Women's", check: false },
 		{ gender: "Kid's", check: false }
 	];
 
+	//Size Filter Options 
 	let sizes = [
 		{ size: 5, check: false },
 		{ size: 5.5, check: false },
@@ -49,6 +52,7 @@
 		{ size: 14.5, check: false }
 	];
 
+	//Price Filter Options (Deprecated)
 	let prices = [
 		{ price: 'Under $100', check: false },
 		{ price: '$100 - $200', check: false },
@@ -58,12 +62,14 @@
 		{ price: 'Over $500', check: false }
 	];
 
+	//Brand Filter Options
 	let brands = [
 		{ brand: 'Nike', check: false },
 		{ brand: 'Adidas', check: false },
 		{ brand: 'New Balance', check: false }
 	];
 
+	//Price Thresholds for Filtering
 	let minPrice: string;
 	let maxPrice: string;
 
@@ -75,8 +81,10 @@
 		await handleFilterProducts();
 	});
 
+	//Get Filtered Products
 	async function handleFilterProducts() {
 		isLoading = true;
+		//Search Product By Related Filters
 		const result = await searchProducts();
 		if (result.amount === 0) {
 			products = [];
@@ -85,12 +93,13 @@
 		}
 		isLoading = false;
 	}
-
+	
+	//Obtain Current Active Filters
 	function checkFilter() {
 		let filter: any = {};
 
 		filter.pageNum = 1;
-
+		//Get Brand Active Filters
 		let selectedBrand: string = '';
 		brands.forEach((brand) => {
 			if (brand.check === true) {
@@ -99,6 +108,7 @@
 		});
 		if (selectedBrand !== '') filter.brand = selectedBrand;
 
+		//Get Gender Active Filters
 		let selectedGender: string = '';
 		genders.forEach((gender) => {
 			if (gender.check === true) {
@@ -106,10 +116,11 @@
 			}
 		});
 
+		//Get Category Active Filters
 		filter.category = tempCategory;
 		if (selectedGender !== '') filter.category = selectedGender;
 
-		// categoryStore
+		//Get Price Active Filters
 		if (minPrice && maxPrice) {
 			filter.minPrice = minPrice;
 			filter.maxPrice = maxPrice;
@@ -127,6 +138,7 @@
 	let tempCategory: string;
 	categoryStore.subscribe((cat) => (tempCategory = cat));
 
+	//Search For Products
 	async function searchProducts() {
 		const filter = checkFilter();
 
@@ -149,10 +161,12 @@
 		return result.data;
 	}
 
+	//Dynamic Routing
 	function routeToProductDetail(productId: string) {
 		setTimeout(() => goto(`/browsing/${productId}`), 0);
 	}
 
+	//Update Active Filters
 	function handleEnterPress(event) {
 		if (event.key === 'Enter') {
 			console.log('ENTER PRESSED');

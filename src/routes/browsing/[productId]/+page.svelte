@@ -51,7 +51,10 @@
 	let addCartMessage = '';
 
 	onMount(async () => {
+		//get product detail information in json response
 		productDetail = await getProductDetail();
+
+		//unwrap the response
 		productImages = [productDetail.imageUrl];
 		productSize = productDetail.size;
 		productName = productDetail.name.toUpperCase();
@@ -60,12 +63,14 @@
 		productPrice = productDetail.price.toString();
 		productDiscount = productDetail.isDiscount;
 		productDisPrice = productDetail.discountPrice.toString();
-
 		for (var i of Object.keys(productSize)) {
 			sizeStock.push({ size: i, quantity: productSize[i] });
 		}
 
+		//get similar product list for this product in json response
 		simProduct = await searchSimProduct();
+
+		//unwrap the response
 		const tempProductList = [];
 		if (simProduct !== null && simProduct.products !== null) {
 			for (var i of simProduct.products) {
@@ -100,7 +105,10 @@
 	});
 
 	onMount(async () => {
+		//get product review data for this product in json response
 		reviewData = await getReviewByProduct(productId);
+
+		//unwrap the response
 		if (reviewData !== null) {
 			rating = reviewData.averageRating.toString();
 			ratingDistri = Object.values(reviewData.ratingPercentage)
@@ -120,6 +128,7 @@
 		return result.data;
 	}
 
+	//For review related API testing purpose (Deprecated)
 	let testReview = 'd0dfc9f3-8dfc-4c26-aa6a-6f81b4a7d52c';
 
 	async function getReviewByProduct(pId: string) {
@@ -162,6 +171,7 @@
 		return null;
 	}
 
+	//Add this product to shopping cart
 	async function addToCart() {
 		if (data.jwtToken === undefined) {
 			addCartMessage = 'Please sign in to add cart item!';
@@ -217,13 +227,16 @@
 		}
 	}
 
+	//sort options for product reviews
 	const sortBy = ['Time (New to Old)', 'Time (Old to New)'];
 
+	//menu options for purchase quantity
 	const quantitys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 	let selectedSize;
 	let selectedQuantity;
 
+	//return to previous page
 	function handleBackPage() {
 		goto('/browsing');
 	}
