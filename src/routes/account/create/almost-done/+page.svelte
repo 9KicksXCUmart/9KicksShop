@@ -9,6 +9,8 @@
 
 	async function resendLink() {
 		isLoading = true;
+
+		// call api to get resend verification email
 		const response = await fetch(
 			`${PUBLIC_GO_BACKEND_URL}/v1/auth/resend-email?` +
 				new URLSearchParams({ email: $emailStore.toString() }).toString(),

@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import LoadingCircle from '$lib/components/ui/loading/LoadingCircle.svelte';
 
+	// get token and email address from url parameter
 	$: token = $page.url.searchParams.get('token');
 	$: email = $page.url.searchParams.get('email');
 	let countDown: number;
@@ -23,6 +24,7 @@
 		isVerified = result.success;
 		failedMessage = result.message;
 
+		// if success, count down 3 seconds to redirect back to home page
 		if (isVerified) {
 			countDown = 3;
 			const intervalId = setInterval(() => {

@@ -20,6 +20,7 @@
 
 	let isLoaded = false;
 
+	// get user details and order history from API on load
 	onMount(async () => {
 		const result = await Promise.all([getUserProfileDetails(), getOrderHistory()]);
 		userProfile = result[0];
@@ -91,6 +92,7 @@
 		}
 	}
 
+	// helper function to remove fields of object from use update DTO if the value of the key-value pair is empty
 	function removeEmptyFields(obj: any) {
 		Object.keys(obj).forEach((key) => {
 			if (obj[key] === '') {

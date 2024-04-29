@@ -41,6 +41,7 @@
 		const result = await resetPassword(e.detail.newPassword);
 		isLoading = false;
 
+		// if success, count down 3 seconds to redirect back to home page
 		if (result.success) {
 			countDown = 3;
 			const intervalId = setInterval(() => {

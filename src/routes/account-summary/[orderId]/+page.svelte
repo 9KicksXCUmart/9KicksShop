@@ -16,6 +16,7 @@
 	let orderDetails: OrderDetail;
 	let reviewList: Record<string, ReviewResponse> = {};
 
+	// get order details and review details from API on load
 	onMount(async () => {
 		orderDetails = await getOrderDetails();
 		const reviewData = await getReviewData();
