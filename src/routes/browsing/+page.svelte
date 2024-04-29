@@ -28,7 +28,7 @@
 		{ gender: "Kid's", check: false }
 	];
 
-	//Size Filter Options 
+	//Size Filter Options
 	let sizes = [
 		{ size: 5, check: false },
 		{ size: 5.5, check: false },
@@ -93,7 +93,7 @@
 		}
 		isLoading = false;
 	}
-	
+
 	//Obtain Current Active Filters
 	function checkFilter() {
 		let filter: any = {};

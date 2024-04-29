@@ -11,6 +11,7 @@ make setup
 # Start the development server
 make
 ```
+
 # 9Kicks Shop
 
 This the Frontend of Online Shopping for the 9Kicks project. It is written in `Svelte` and `TypeScript` and uses the `SvelteKit` framework.
